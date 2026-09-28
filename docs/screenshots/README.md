@@ -6,10 +6,22 @@ debug panel leaking a local address, and a text-overflow bug).
 
 | File | Page |
 | --- | --- |
-| `06-plant-form.png` | Add a plant — species search, pot/soil/light fields |
-| `05b-chat.png` | AI gardener chat — advice, plus a system bubble echoing an executed schedule change |
+| `plant-detail.png` | Plant record with daily reminders and the journal entry point |
+| `add-plant.png` | Add a plant — species search, pot/soil/light fields |
+| `diagnosis.png` | Photo-based pest & disease diagnosis |
+| `chat-opener.png` | AI gardener opening with the plant's context |
+| `chat-executed-change.png` | Advice, plus a system bubble echoing an executed schedule change |
+| `care-report.png` | Care report entry |
 
-The remaining tour pages (garden, plant detail, reminder detail with the generated
-operating plan, diagnosis, care report) are being re-captured with a realistic demo plant
-instead of the placeholder fixture used during development, so that the screenshots read as
-product documentation rather than as test output.
+## How these were captured
+
+`tools/uitest/art-check.js` creates a temporary plant, drives the Mini Program through
+WeChat DevTools, screenshots each page and deletes the plant afterwards. The fixture is a
+fully-filled-in plant (name, cultivar, pot, substrate, light, location, dates) rather than
+a placeholder, so the shots read as product documentation. The profile screen is captured
+with the development-only debug block switched off.
+
+## Deliberately not published
+
+The garden screen contains real user data, and the reminder-detail screen is being checked
+for bottom-edge clipping before it goes in. Both are excluded rather than cropped.

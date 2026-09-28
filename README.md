@@ -24,13 +24,14 @@ self-hosted Node backend (no cloud dependency other than the LLM + weather APIs)
 
 ## Screenshots
 
-| Add a plant | AI gardener chat |
-| --- | --- |
-| ![Add a plant](docs/screenshots/06-plant-form.png) | ![AI gardener chat](docs/screenshots/05b-chat.png) |
+| Plant record & daily reminders | Add a plant | AI diagnosis |
+| --- | --- | --- |
+| ![Plant detail](docs/screenshots/plant-detail.png) | ![Add a plant](docs/screenshots/add-plant.png) | ![Diagnosis](docs/screenshots/diagnosis.png) |
+| **AI gardener opens with context** | **Advice + executed change** | **Care report** |
+| ![Chat opener](docs/screenshots/chat-opener.png) | ![Chat](docs/screenshots/chat-executed-change.png) | ![Care report](docs/screenshots/care-report.png) |
 
-More screenshots (garden, plant detail, reminder detail with operating plan, diagnosis,
-care report) are being re-captured against a clean demo dataset — see
-[docs/screenshots/README.md](docs/screenshots/README.md).
+Captured with `miniprogram-automator` against a live backend and screened before
+publication — see [docs/screenshots/README.md](docs/screenshots/README.md).
 
 ## Features
 

@@ -18,6 +18,17 @@
 
 **当前状态：** 0.1.0，开发中，准备微信提审；后端自建（除大模型与天气接口外无云依赖）。
 
+## 界面
+
+| 植物档案与每日提醒 | 添加植物 | AI 病虫害诊断 |
+| --- | --- | --- |
+| ![植物详情](docs/screenshots/plant-detail.png) | ![添加植物](docs/screenshots/add-plant.png) | ![诊断](docs/screenshots/diagnosis.png) |
+| **AI 花农带着这盆植物的上下文开场** | **给建议，并回显已执行的改动** | **一键养护报告** |
+| ![对话开场](docs/screenshots/chat-opener.png) | ![对话](docs/screenshots/chat-executed-change.png) | ![养护报告](docs/screenshots/care-report.png) |
+
+截图由 `miniprogram-automator` 驱动真机模拟器拍摄，发布前逐张做过视觉复核（见
+[docs/screenshots/README.md](docs/screenshots/README.md)）。
+
 ## 功能
 
 **植物档案**

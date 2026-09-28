@@ -3,9 +3,32 @@
 const path = require('node:path')
 const fs = require('node:fs')
 const automator = require('miniprogram-automator')
-const { getToken, api, createTempPlant, deletePlant } = require('./lib')
+const { getToken, api, deletePlant } = require('./lib')
 
 const SHOT_DIR = path.resolve(__dirname, 'shots-art')
+
+// 截图用的样例植物：字段填全、名字贴近真实场景。
+// 早先这里用的是「插画验证」这种占位名，截出来的图既不像产品文档，
+// 也会把测试残留带进公开材料里。
+const FIXTURE = {
+  name: '果汁阳台',
+  species: '月季',
+  variety: '果汁阳台',
+  pot_size: '15cm 口径陶盆',
+  soil_type: '泥炭 + 珍珠岩',
+  location: '南向阳台',
+  light_environment: '全日照',
+  planting_date: '2026-08-15',
+  growth_stage: '开花期',
+  plant_source: '花市购买',
+  pot_diameter_mm: 150,
+  pot_depth_mm: 140
+}
+
+async function createFixturePlant(token) {
+  const created = await api('/plants', { method: 'POST', body: FIXTURE }, token)
+  return created.plant.id
+}
 
 async function shoot(miniProgram, name) {
   await miniProgram.screenshot({ path: path.join(SHOT_DIR, name + '.png') })
@@ -20,7 +43,7 @@ async function main() {
   let miniProgram = null
 
   try {
-    plantId = await createTempPlant(token, '插画验证', '月季')
+    plantId = await createFixturePlant(token)
 
     // 让这盆植物带上一条浇水提醒，方便截提醒详情页
     let reminderId = null
@@ -39,6 +62,11 @@ async function main() {
 
     await miniProgram.switchTab('/pages/profile/profile')
     await (await miniProgram.currentPage()).waitFor(2500)
+    // 「我的」页底部有一块只在开发版出现的调试入口，会把本机后端地址一起截进去，
+    // 所以截图前先关掉它（不改页面代码，只改这一帧的数据）。
+    const profilePage = await miniProgram.currentPage()
+    await profilePage.setData({ devMode: false })
+    await profilePage.waitFor(400)
     await shoot(miniProgram, '02-profile')
 
     await miniProgram.navigateTo('/pages/plant-detail/plant-detail?id=' + plantId)
@@ -47,7 +75,8 @@ async function main() {
 
     if (reminderId) {
       await miniProgram.navigateTo('/pages/reminder-detail/reminder-detail?id=' + reminderId)
-      await (await miniProgram.currentPage()).waitFor(4000)
+      // 提醒详情里的「完整操作方案」是 AI 生成后异步填进来的，等久一点让它落定
+      await (await miniProgram.currentPage()).waitFor(9000)
       await shoot(miniProgram, '04-reminder-detail')
     }
 
@@ -72,11 +101,11 @@ async function main() {
     await (await miniProgram.currentPage()).waitFor(2500)
     await shoot(miniProgram, '06-plant-form')
 
-    await miniProgram.navigateTo('/pages/diagnosis/diagnosis?plant_id=' + plantId + '&plant_name=' + encodeURIComponent('插画验证'))
+    await miniProgram.navigateTo('/pages/diagnosis/diagnosis?plant_id=' + plantId + '&plant_name=' + encodeURIComponent(FIXTURE.name))
     await (await miniProgram.currentPage()).waitFor(2500)
     await shoot(miniProgram, '07-diagnosis')
 
-    await miniProgram.navigateTo('/pages/report/report?plant_id=' + plantId + '&plant_name=' + encodeURIComponent('插画验证'))
+    await miniProgram.navigateTo('/pages/report/report?plant_id=' + plantId + '&plant_name=' + encodeURIComponent(FIXTURE.name))
     await (await miniProgram.currentPage()).waitFor(2500)
     await shoot(miniProgram, '08-report')
   } finally {
