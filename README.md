@@ -24,11 +24,15 @@ self-hosted Node backend (no cloud dependency other than the LLM + weather APIs)
 
 ## Screenshots
 
-| Plant record & daily reminders | Add a plant | AI diagnosis |
-| --- | --- | --- |
-| ![Plant detail](docs/screenshots/plant-detail.png) | ![Add a plant](docs/screenshots/add-plant.png) | ![Diagnosis](docs/screenshots/diagnosis.png) |
-| **AI gardener opens with context** | **Advice + executed change** | **Care report** |
-| ![Chat opener](docs/screenshots/chat-opener.png) | ![Chat](docs/screenshots/chat-executed-change.png) | ![Care report](docs/screenshots/care-report.png) |
+| My garden | Plant record & daily reminders |
+| --- | --- |
+| ![Garden](docs/screenshots/garden.png) | ![Plant detail](docs/screenshots/plant-detail.png) |
+| **Reminder detail — weather-adjusted plan** | **Add a plant** |
+| ![Reminder detail](docs/screenshots/reminder-detail.png) | ![Add a plant](docs/screenshots/add-plant.png) |
+| **AI pest & disease diagnosis** | **Care report** |
+| ![Diagnosis](docs/screenshots/diagnosis.png) | ![Care report](docs/screenshots/care-report.png) |
+| **AI gardener opens with context** | **Advice + an executed schedule change** |
+| ![Chat opener](docs/screenshots/chat-opener.png) | ![Chat](docs/screenshots/chat-executed-change.png) |
 
 Captured with `miniprogram-automator` against a live backend and screened before
 publication — see [docs/screenshots/README.md](docs/screenshots/README.md).

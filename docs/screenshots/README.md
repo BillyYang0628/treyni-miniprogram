@@ -6,7 +6,9 @@ debug panel leaking a local address, and a text-overflow bug).
 
 | File | Page |
 | --- | --- |
+| `garden.png` | Garden overview — the "what needs doing next" aggregation |
 | `plant-detail.png` | Plant record with daily reminders and the journal entry point |
+| `reminder-detail.png` | Reminder detail: weather-adjusted plan, soil-water estimate |
 | `add-plant.png` | Add a plant — species search, pot/soil/light fields |
 | `diagnosis.png` | Photo-based pest & disease diagnosis |
 | `chat-opener.png` | AI gardener opening with the plant's context |
@@ -15,13 +17,22 @@ debug panel leaking a local address, and a text-overflow bug).
 
 ## How these were captured
 
-`tools/uitest/art-check.js` creates a temporary plant, drives the Mini Program through
-WeChat DevTools, screenshots each page and deletes the plant afterwards. The fixture is a
-fully-filled-in plant (name, cultivar, pot, substrate, light, location, dates) rather than
-a placeholder, so the shots read as product documentation. The profile screen is captured
-with the development-only debug block switched off.
+Two scripts drive WeChat DevTools via `miniprogram-automator`:
 
-## Deliberately not published
+- `tools/uitest/art-check.js` walks the product with a temporary plant and deletes it
+  afterwards. The fixture is fully filled in (name, cultivar, pot, substrate, light,
+  location, dates) rather than a placeholder, and the profile screen is captured with the
+  development-only debug block switched off.
+- `tools/uitest/shots-portfolio.js` switches the client to a throwaway demo account whose
+  garden holds three complete sample plants, so the garden screen shows product data
+  instead of the accumulated test plants of a development account. The account and its
+  plants are deleted at the end of the run.
 
-The garden screen contains real user data, and the reminder-detail screen is being checked
-for bottom-edge clipping before it goes in. Both are excluded rather than cropped.
+Plant photos are the built-in default illustration (the sample plants have no photo
+uploaded); the app ships this as its placeholder image.
+
+## Note on the reminder-detail screen
+
+An earlier review flagged the bottom of this page as clipped. It is not: the page is a
+plain scrolling `<view>` (not a `scroll-view`), so what looked like truncation is simply
+content below the fold.

@@ -20,11 +20,15 @@
 
 ## 界面
 
-| 植物档案与每日提醒 | 添加植物 | AI 病虫害诊断 |
-| --- | --- | --- |
-| ![植物详情](docs/screenshots/plant-detail.png) | ![添加植物](docs/screenshots/add-plant.png) | ![诊断](docs/screenshots/diagnosis.png) |
-| **AI 花农带着这盆植物的上下文开场** | **给建议，并回显已执行的改动** | **一键养护报告** |
-| ![对话开场](docs/screenshots/chat-opener.png) | ![对话](docs/screenshots/chat-executed-change.png) | ![养护报告](docs/screenshots/care-report.png) |
+| 我的花园 | 植物档案与每日提醒 |
+| --- | --- |
+| ![我的花园](docs/screenshots/garden.png) | ![植物详情](docs/screenshots/plant-detail.png) |
+| **提醒详情：按天气调整的方案** | **添加植物** |
+| ![提醒详情](docs/screenshots/reminder-detail.png) | ![添加植物](docs/screenshots/add-plant.png) |
+| **AI 病虫害诊断** | **一键养护报告** |
+| ![诊断](docs/screenshots/diagnosis.png) | ![养护报告](docs/screenshots/care-report.png) |
+| **AI 花农带着这盆植物的上下文开场** | **给建议，并回显已执行的改动** |
+| ![对话开场](docs/screenshots/chat-opener.png) | ![对话](docs/screenshots/chat-executed-change.png) |
 
 截图由 `miniprogram-automator` 驱动真机模拟器拍摄，发布前逐张做过视觉复核（见
 [docs/screenshots/README.md](docs/screenshots/README.md)）。
