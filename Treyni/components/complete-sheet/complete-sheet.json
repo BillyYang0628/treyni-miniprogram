@@ -1,0 +1,7 @@
+{
+  "component": true,
+  "usingComponents": {
+    "bottom-sheet": "../bottom-sheet/bottom-sheet",
+    "ai-text": "../ai-text/ai-text"
+  }
+}

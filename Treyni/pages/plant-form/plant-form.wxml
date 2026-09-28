@@ -1,0 +1,203 @@
+<view class="page">
+  <view class="form-card">
+    <view class="form-header">
+      <image class="form-header-banner" src="{{icons.plantFormHeader}}" mode="widthFix" />
+      <text class="form-title">为森林增添新生命</text>
+      <text class="muted">托蕾妮会为你的植物编织专属的养护之语</text>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">植物照片</text>
+      <view class="image-picker" bindtap="onChooseImage">
+        <image wx:if="{{image_url}}" class="image-preview" src="{{image_url}}" mode="aspectFill"></image>
+        <view wx:else class="image-placeholder">
+          <image class="icon-empty" src="{{icons.photo}}" mode="aspectFit" />
+          <text class="muted">{{uploading ? '上传中...' : '选择一张植物照片'}}</text>
+        </view>
+      </view>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">植物名称 *</text>
+      <input class="form-input" placeholder="给它一个名字，如“窗台上的薄荷”" value="{{name}}" bindinput="onInput" data-field="name" />
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">品种 *</text>
+      <picker
+        wx:if="{{speciesOptions.length}}"
+        mode="selector"
+        range="{{speciesOptions}}"
+        range-key="label"
+        value="{{speciesIndex}}"
+        bindchange="onSpeciesChange"
+      >
+        <view class="form-input picker-input">
+          <text wx:if="{{species}}">{{species}}{{speciesGroupText ? '（' + speciesGroupText + '）' : ''}}</text>
+          <text wx:else class="form-placeholder">点击选择品种（知识库共 {{speciesOptions.length}} 种）</text>
+          <text class="picker-arrow">▾</text>
+        </view>
+      </picker>
+      <input
+        wx:if="{{manualSpecies || !speciesOptions.length}}"
+        class="form-input form-input-gap"
+        placeholder="手动填写品种，例如：微型月季"
+        value="{{species}}"
+        bindinput="onInput"
+        data-field="species"
+      />
+      <view class="search-row">
+        <input
+          class="form-input search-input"
+          placeholder="搜索品种，例如：月季、绿萝、薄荷"
+          value="{{speciesQuery}}"
+          bindinput="onSearchInput"
+        />
+        <text wx:if="{{speciesQuery}}" class="search-clear" bindtap="onClearSearch">清空</text>
+      </view>
+      <view wx:if="{{speciesQuery}}" class="search-results">
+        <view wx:if="{{!speciesResults.length}}" class="search-empty">
+          没找到「{{speciesQuery}}」，可以在下面手动填写
+        </view>
+        <view
+          wx:for="{{speciesResults}}"
+          wx:key="id"
+          class="search-item"
+          data-id="{{item.id}}"
+          bindtap="onPickSpecies"
+        >
+          <text class="search-item-name">{{item.cn_name}}</text>
+          <text class="search-item-meta">{{item.care_group_label}}{{item.aliases.length ? ' · 别名 ' + item.aliases[0] : ''}}</text>
+        </view>
+      </view>
+      <text
+        wx:if="{{speciesOptions.length}}"
+        class="form-toggle"
+        bindtap="onToggleManualSpecies"
+      >{{manualSpecies ? '从知识库选择品种' : '知识库里没有？手动填写品种'}}</text>
+      <text wx:if="{{carePreview}}" class="form-hint">
+        托蕾妮会按「浇水 {{carePreview.watering}} 天、施肥 {{carePreview.fertilizing}} 天、打药 {{carePreview.pesticide}} 天、修剪 {{carePreview.pruning}} 天」的节奏提醒你
+      </text>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">细分品种</text>
+      <input class="form-input" placeholder="例如：果汁阳台、桃蛋、蝴蝶兰" value="{{variety}}" bindinput="onInput" data-field="variety" />
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">花盆大小</text>
+      <picker wx:if="{{potSpecOptions.length}}" mode="selector" range="{{potSpecOptions}}" range-key="label" value="{{potSpecIndex}}" bindchange="onPotSpecChange">
+        <view class="form-input picker-input">
+          <text wx:if="{{pot_size}}">{{pot_size}}</text>
+          <text wx:else class="form-placeholder">选择加仑规格，或手填口径与高度</text>
+          <text class="picker-arrow">▾</text>
+        </view>
+      </picker>
+      <view class="two-input-row">
+        <input class="form-input" type="number" placeholder="口径 cm" value="{{potDiameterCm}}" bindinput="onInput" data-field="potDiameterCm" />
+        <input class="form-input" type="number" placeholder="盆高 cm" value="{{potDepthCm}}" bindinput="onInput" data-field="potDepthCm" />
+      </view>
+      <text class="form-hint-plain">选规格会自动带出口径与高度；量一下自己的盆更准（口径 × 高度即可）。</text>
+      <text class="form-link" data-section="pot_size" bindtap="goCareGuide">查看详情：花盆大小怎么选 ›</text>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">土壤类型</text>
+      <picker wx:if="{{soilOptions.length}}" mode="selector" range="{{soilOptions}}" range-key="name" value="{{soilIndex}}" bindchange="onSoilChange">
+        <view class="form-input picker-input">
+          <text wx:if="{{soil_type}}">{{soil_type}}</text>
+          <text wx:else class="form-placeholder">点击选择土壤类型（共 {{soilOptions.length}} 种）</text>
+          <text class="picker-arrow">▾</text>
+        </view>
+      </picker>
+      <view class="search-row">
+        <input class="form-input search-input" placeholder="搜索，如：颗粒土、泥炭、水苔" value="{{soilQuery}}" bindinput="onSoilSearchInput" />
+        <text wx:if="{{soilQuery}}" class="search-clear" bindtap="onClearSoilSearch">清空</text>
+      </view>
+      <view wx:if="{{soilQuery}}" class="search-results">
+        <view wx:if="{{!soilResults.length}}" class="search-empty">没找到「{{soilQuery}}」，可以选“混合土 / 不确定”</view>
+        <view wx:for="{{soilResults}}" wx:key="id" class="search-item" data-id="{{item.id}}" bindtap="onPickSoil">
+          <text class="search-item-name">{{item.name}}</text>
+          <text class="search-item-meta">保水系数 {{item.w}}</text>
+        </view>
+      </view>
+      <text class="form-link" data-section="soil_type" bindtap="goCareGuide">查看详情：土壤类型怎么判断 ›</text>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">放置位置</text>
+      <input class="form-input" placeholder="例如：南阳台" value="{{location}}" bindinput="onInput" data-field="location" />
+      <text class="form-link" data-section="location" bindtap="goCareGuide">查看详情：摆放位置怎么选 ›</text>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">摆放环境 *</text>
+      <picker wx:if="{{exposureOptions.length}}" mode="selector" range="{{exposureOptions}}" range-key="name" value="{{exposureIndex}}" bindchange="onExposureChange">
+        <view class="form-input picker-input">
+          <text wx:if="{{exposureIndex >= 0}}">{{exposureOptions[exposureIndex].name}}</text>
+          <text wx:else class="form-placeholder">这盆放在什么环境里？</text>
+          <text class="picker-arrow">▾</text>
+        </view>
+      </picker>
+      <text class="form-hint-plain">{{exposureIndex >= 0 ? exposureOptions[exposureIndex].desc : '用来判断能不能淋到雨、土干得快不快，会影响浇水提醒。'}}</text>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">光照环境</text>
+      <input class="form-input" placeholder="例如：全日照环境" value="{{light_environment}}" bindinput="onInput" data-field="light_environment" />
+      <text class="form-link" data-section="light_environment" bindtap="goCareGuide">查看详情：光照环境怎么判断 ›</text>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">开始养护日期（选填）</text>
+      <picker mode="date" value="{{planting_date || today}}" bindchange="onDateChange">
+        <view class="form-input picker-input">
+          <text wx:if="{{planting_date}}">{{planting_date}}</text>
+          <text wx:else class="form-placeholder">不知道可以不填，点这里选日期</text>
+          <text class="picker-arrow">▾</text>
+        </view>
+      </picker>
+      <text class="form-hint-plain">填你开始养它的那天就行：网购或花市买回来的，填到手那天。记不清或不知道就不用填，托蕾妮会按“今天开始养护”来安排。</text>
+      <text wx:if="{{planting_date}}" class="form-link" bindtap="onClearDate">清除日期（改成不填）</text>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">苗情阶段 *</text>
+      <picker mode="selector" range="{{growthStageOptions}}" value="{{growthStageIndex}}" bindchange="onGrowthStageChange">
+        <view class="form-input picker-input">
+          <text wx:if="{{growth_stage}}">{{growth_stage}}</text>
+          <text wx:else class="form-placeholder">这盆现在是多大的苗？</text>
+          <text class="picker-arrow">▾</text>
+        </view>
+      </picker>
+      <text class="form-hint-plain">播种苗 = 刚发芽；小苗 = 只有几片叶；中苗 = 枝叶成型还没开花；大苗 = 接近成株；成株 = 已经开过花。</text>
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">来源</text>
+      <picker mode="selector" range="{{plantSourceOptions}}" value="{{plantSourceIndex}}" bindchange="onPlantSourceChange">
+        <view class="form-input picker-input">
+          <text wx:if="{{plant_source}}">{{plant_source}}</text>
+          <text wx:else class="form-placeholder">从哪里来的？（可不填）</text>
+          <text class="picker-arrow">▾</text>
+        </view>
+      </picker>
+    </view>
+
+    <view class="form-group switch-row">
+      <view class="switch-text">
+        <text class="form-label">刚换盆 / 刚移栽</text>
+        <text class="form-hint-plain">两周内换过盆或刚收到就移栽，缓苗期不能施肥。</text>
+      </view>
+      <switch checked="{{is_recent_transplant === 1}}" color="#1b4d3e" bindchange="onTransplantChange" />
+    </view>
+
+    <view class="form-group">
+      <text class="form-label">备注</text>
+      <textarea class="form-textarea" placeholder="任何关于这株植物的额外信息，托蕾妮都会铭记..." value="{{notes}}" bindinput="onInput" data-field="notes"></textarea>
+    </view>
+
+    <button class="btn btn-primary btn-block" bindtap="onSubmit">{{id ? '保存植物档案' : '创建植物档案'}}</button>
+  </view>
+</view>

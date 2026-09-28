@@ -1,0 +1,56 @@
+.rs-intro {
+  display: block;
+  margin: 20rpx 0 8rpx;
+  color: #4a3728;
+  font-size: 25rpx;
+  line-height: 1.7;
+}
+
+.rs-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16rpx;
+  padding: 22rpx 0;
+  border-bottom: 2rpx dashed #d8d2c0;
+}
+
+.rs-label {
+  flex: 0 0 auto;
+  color: #1b4d3e;
+  font-size: 26rpx;
+}
+
+.rs-value {
+  color: #0d3328;
+  font-size: 25rpx;
+  font-weight: 700;
+  text-align: right;
+}
+
+/* 说清代价，不折叠：此刻盆就在手边，是唯一低成本填对的机会 */
+.rs-note {
+  margin-top: 20rpx;
+  padding: 16rpx 18rpx;
+  border-left: 6rpx solid #d9a03c;
+  background: #fdf6e6;
+}
+
+.rs-note-text {
+  color: #4a3728;
+  font-size: 23rpx;
+  line-height: 1.7;
+}
+
+.rs-foot {
+  display: flex;
+  gap: 16rpx;
+  width: 100%;
+}
+
+.rs-btn {
+  flex: 1;
+  min-height: 84rpx;
+  padding: 0;
+  font-size: 28rpx;
+}

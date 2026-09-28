@@ -1,0 +1,81 @@
+<view class="page">
+  <view class="card diagnosis-card">
+    <view class="diagnosis-header">
+      <view class="icon-row">
+        <image class="icon-md" src="{{icons.aiDiagnosis}}" mode="aspectFit" />
+        <text class="diagnosis-title">AI 病虫害诊断</text>
+      </view>
+      <text class="muted">为 {{plantName}} 上传一张清晰的叶片照片</text>
+    </view>
+
+    <view class="diagnosis-image-box" bindtap="onChooseImage">
+      <image wx:if="{{imageUrl}}" class="diagnosis-image" src="{{imageUrl}}" mode="aspectFill"></image>
+      <view wx:else class="diagnosis-placeholder">
+        <image class="icon-empty" src="{{icons.emptyDiagnosis}}" mode="aspectFit" />
+        <text class="muted">{{loading ? '正在诊断...' : '选择或拍摄叶片照片'}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{loading}}" class="diagnosis-loading">
+      <text wx:if="{{previewDisease}}" class="loading-disease">已判断出：{{previewDisease}}</text>
+      <text class="loading-step">{{stepText}}</text>
+      <text class="loading-time">已等待 {{elapsed}} 秒{{estimateText ? '（' + estimateText + '）' : ''}}</text>
+      <view class="loading-bar">
+        <view class="loading-bar-inner"></view>
+      </view>
+    </view>
+
+    <view wx:if="{{error}}" class="diagnosis-error">
+      <text class="error-title">诊断失败</text>
+      <text class="error-detail">{{error}}</text>
+      <button class="btn btn-primary btn-block" bindtap="onRetry">重新选择图片</button>
+    </view>
+
+    <view wx:if="{{diagnosis}}" class="diagnosis-result">
+      <view class="result-row">
+        <text class="result-label">植物（档案）</text>
+        <text class="result-value">{{plantText}}</text>
+      </view>
+      <view class="result-row">
+        <text class="result-label">疑似问题</text>
+        <text class="result-value">{{diseaseText}}</text>
+      </view>
+      <view class="result-row">
+        <text class="result-label">严重程度</text>
+        <view class="icon-row">
+          <image wx:if="{{severityIcon}}" class="icon-sm" src="{{severityIcon}}" mode="aspectFit" />
+          <text class="result-value">{{severityText}}</text>
+        </view>
+      </view>
+      <view class="result-row">
+        <text class="result-label">判断置信度</text>
+        <text class="result-value">{{confidenceText}}</text>
+      </view>
+      <view wx:if="{{diagnosis.evidence}}" class="result-row">
+        <text class="result-label">判断依据</text>
+        <text class="result-value">{{diagnosis.evidence}}</text>
+      </view>
+
+      <view wx:if="{{referenceLabel}}" class="result-reference">
+        <text class="reference-title">参考识别（百度）</text>
+        <text class="reference-value">{{referenceLabel}} · {{referenceConfidenceText}}</text>
+        <text class="reference-note">仅作参考，本植物的品种以档案为准</text>
+      </view>
+
+      <view class="result-treatment">
+        <text class="result-label">处理建议</text>
+        <ai-text class="treatment-text" text="{{diagnosis.treatment || '未检测到需要用药的病虫害。'}}" />
+      </view>
+
+      <view wx:if="{{createdReminders.length}}" class="result-created">
+        <text class="result-label">本次已同步生成</text>
+        <view wx:for="{{createdReminders}}" wx:key="key" class="created-item">
+          <text class="created-text">{{item.text}}</text>
+        </view>
+        <text class="created-note">返回植物详情页即可看到最新的每日提醒和养护历程</text>
+      </view>
+    </view>
+
+    <button class="btn btn-outline btn-block" bindtap="goBack">返回植物详情</button>
+  </view>
+</view>

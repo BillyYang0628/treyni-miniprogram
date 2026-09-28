@@ -1,0 +1,1867 @@
+{
+  "绿萝": {
+    "index": 1,
+    "cn_name": "绿萝",
+    "scientific_name": "Epipremnum aureum",
+    "family": "天南星科 麒麟叶属",
+    "genus": "麒麟叶属",
+    "aliases": [
+      "黄金葛",
+      "魔鬼藤"
+    ],
+    "care_group": "G01",
+    "care_group_label": "观叶植物",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "办公桌"
+    ]
+  },
+  "吊兰": {
+    "index": 2,
+    "cn_name": "吊兰",
+    "scientific_name": "Chlorophytum comosum",
+    "family": "天门冬科 吊兰属",
+    "genus": "吊兰属",
+    "aliases": [
+      "挂兰",
+      "钓兰",
+      "垂盆草"
+    ],
+    "care_group": "G01",
+    "care_group_label": "观叶植物",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "阳台"
+    ]
+  },
+  "虎尾兰": {
+    "index": 3,
+    "cn_name": "虎尾兰",
+    "scientific_name": "Dracaena trifasciata",
+    "family": "天门冬科 龙血树属",
+    "genus": "龙血树属",
+    "aliases": [
+      "虎皮兰",
+      "千岁兰",
+      "虎尾掌"
+    ],
+    "care_group": "G01",
+    "care_group_label": "观叶植物",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "卧室"
+    ]
+  },
+  "芦荟": {
+    "index": 4,
+    "cn_name": "芦荟",
+    "scientific_name": "Aloe vera",
+    "family": "阿福花科 芦荟属",
+    "genus": "芦荟属",
+    "aliases": [
+      "库拉索芦荟",
+      "油葱",
+      "龙角"
+    ],
+    "care_group": "G02",
+    "care_group_label": "多肉植物",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "窗台"
+    ]
+  },
+  "富贵竹": {
+    "index": 5,
+    "cn_name": "富贵竹",
+    "scientific_name": "Dracaena sanderiana",
+    "family": "天门冬科 龙血树属",
+    "genus": "龙血树属",
+    "aliases": [
+      "万寿竹",
+      "开运竹",
+      "转运竹"
+    ],
+    "care_group": "G01",
+    "care_group_label": "观叶植物",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "书桌"
+    ]
+  },
+  "发财树": {
+    "index": 6,
+    "cn_name": "发财树",
+    "scientific_name": "Pachira aquatica",
+    "family": "锦葵科 瓜栗属",
+    "genus": "瓜栗属",
+    "aliases": [
+      "马拉巴栗",
+      "瓜栗",
+      "中美木棉"
+    ],
+    "care_group": "G11",
+    "care_group_label": "木本·观叶与乔木",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "客厅"
+    ]
+  },
+  "龟背竹": {
+    "index": 7,
+    "cn_name": "龟背竹",
+    "scientific_name": "Monstera deliciosa",
+    "family": "天南星科 龟背竹属",
+    "genus": "龟背竹属",
+    "aliases": [
+      "蓬莱蕉",
+      "龟背芋",
+      "电信叶"
+    ],
+    "care_group": "G01",
+    "care_group_label": "观叶植物",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "客厅"
+    ]
+  },
+  "常春藤": {
+    "index": 8,
+    "cn_name": "常春藤",
+    "scientific_name": "Hedera helix",
+    "family": "五加科 常春藤属",
+    "genus": "常春藤属",
+    "aliases": [
+      "洋常春藤",
+      "旋春藤",
+      "英国常春藤"
+    ],
+    "care_group": "G12",
+    "care_group_label": "藤本植物",
+    "difficulty": "新手",
+    "scene": [
+      "室内垂吊",
+      "阳台"
+    ]
+  },
+  "文竹": {
+    "index": 9,
+    "cn_name": "文竹",
+    "scientific_name": "Asparagus setaceus",
+    "family": "天门冬科 天门冬属",
+    "genus": "天门冬属",
+    "aliases": [
+      "云片松",
+      "云竹",
+      "刺天冬"
+    ],
+    "care_group": "G01",
+    "care_group_label": "观叶植物",
+    "difficulty": "进阶",
+    "scene": [
+      "室内",
+      "书房"
+    ]
+  },
+  "橡皮树": {
+    "index": 10,
+    "cn_name": "橡皮树",
+    "scientific_name": "Ficus elastica",
+    "family": "桑科 榕属",
+    "genus": "榕属",
+    "aliases": [
+      "印度榕",
+      "橡胶树",
+      "缅榕"
+    ],
+    "care_group": "G11",
+    "care_group_label": "木本·观叶与乔木",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "客厅"
+    ]
+  },
+  "君子兰": {
+    "index": 11,
+    "cn_name": "君子兰",
+    "scientific_name": "Clivia miniata",
+    "family": "石蒜科 君子兰属",
+    "genus": "君子兰属",
+    "aliases": [
+      "大花君子兰",
+      "剑叶石蒜"
+    ],
+    "care_group": "G08",
+    "care_group_label": "多年生草本",
+    "difficulty": "进阶",
+    "scene": [
+      "室内",
+      "客厅"
+    ]
+  },
+  "长寿花": {
+    "index": 12,
+    "cn_name": "长寿花",
+    "scientific_name": "Kalanchoe blossfeldiana",
+    "family": "景天科 伽蓝菜属",
+    "genus": "伽蓝菜属",
+    "aliases": [
+      "圣诞伽蓝菜",
+      "寿星花"
+    ],
+    "care_group": "G02",
+    "care_group_label": "多肉植物",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "窗台"
+    ]
+  },
+  "月季": {
+    "index": 13,
+    "cn_name": "月季",
+    "scientific_name": "Rosa chinensis",
+    "family": "蔷薇科 蔷薇属",
+    "genus": "蔷薇属",
+    "aliases": [
+      "玫瑰",
+      "蔷薇",
+      "微型月季",
+      "月月红"
+    ],
+    "care_group": "G10",
+    "care_group_label": "木本·观花灌木",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "玉露": {
+    "index": 14,
+    "cn_name": "玉露",
+    "scientific_name": "Haworthia cooperi",
+    "family": "阿福花科 瓦苇属",
+    "genus": "瓦苇属",
+    "aliases": [
+      "宝草",
+      "水泡玉露",
+      "雪之光"
+    ],
+    "care_group": "G02",
+    "care_group_label": "多肉植物",
+    "difficulty": "进阶",
+    "scene": [
+      "室内",
+      "书桌"
+    ]
+  },
+  "拟石莲花": {
+    "index": 15,
+    "cn_name": "拟石莲花",
+    "scientific_name": "Echeveria elegans",
+    "family": "景天科 拟石莲花属",
+    "genus": "拟石莲花属",
+    "aliases": [
+      "石莲花",
+      "宝石花",
+      "月影"
+    ],
+    "care_group": "G02",
+    "care_group_label": "多肉植物",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "窗台"
+    ]
+  },
+  "金琥": {
+    "index": 16,
+    "cn_name": "金琥",
+    "scientific_name": "Kroenleinia grusonii",
+    "family": "仙人掌科 金琥属",
+    "genus": "金琥属",
+    "aliases": [
+      "金桶球",
+      "象牙球",
+      "黄刺金琥"
+    ],
+    "care_group": "G03",
+    "care_group_label": "仙人掌类",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "窗台"
+    ]
+  },
+  "蟹爪兰": {
+    "index": 17,
+    "cn_name": "蟹爪兰",
+    "scientific_name": "Schlumbergera truncata",
+    "family": "仙人掌科 蟹爪兰属",
+    "genus": "蟹爪兰属",
+    "aliases": [
+      "蟹爪莲",
+      "圣诞仙人掌",
+      "锦上添花"
+    ],
+    "care_group": "G03",
+    "care_group_label": "仙人掌类",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "窗台"
+    ]
+  },
+  "蝴蝶兰": {
+    "index": 18,
+    "cn_name": "蝴蝶兰",
+    "scientific_name": "Phalaenopsis aphrodite",
+    "family": "兰科 蝴蝶兰属",
+    "genus": "蝴蝶兰属",
+    "aliases": [
+      "蝶兰",
+      "蝴蝶兰（商品统称）"
+    ],
+    "care_group": "G04",
+    "care_group_label": "兰花·附生型",
+    "difficulty": "进阶",
+    "scene": [
+      "室内",
+      "客厅"
+    ]
+  },
+  "春兰": {
+    "index": 19,
+    "cn_name": "春兰",
+    "scientific_name": "Cymbidium goeringii",
+    "family": "兰科 兰属",
+    "genus": "兰属",
+    "aliases": [
+      "朵朵香",
+      "草兰",
+      "山兰"
+    ],
+    "care_group": "G05",
+    "care_group_label": "兰花·地生型",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "茉莉": {
+    "index": 20,
+    "cn_name": "茉莉",
+    "scientific_name": "Jasminum sambac",
+    "family": "木樨科 素馨属",
+    "genus": "素馨属",
+    "aliases": [
+      "茉莉花",
+      "奈花",
+      "末利花"
+    ],
+    "care_group": "G10",
+    "care_group_label": "木本·观花灌木",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "栀子": {
+    "index": 21,
+    "cn_name": "栀子",
+    "scientific_name": "Gardenia jasminoides",
+    "family": "茜草科 栀子属",
+    "genus": "栀子属",
+    "aliases": [
+      "黄栀子",
+      "山栀",
+      "水横枝"
+    ],
+    "care_group": "G10",
+    "care_group_label": "木本·观花灌木",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "薄荷": {
+    "index": 22,
+    "cn_name": "薄荷",
+    "scientific_name": "Mentha canadensis",
+    "family": "唇形科 薄荷属",
+    "genus": "薄荷属",
+    "aliases": [
+      "野薄荷",
+      "仁丹草",
+      "土薄荷"
+    ],
+    "care_group": "G15",
+    "care_group_label": "香草与蔬菜",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "厨房窗台"
+    ]
+  },
+  "罗勒": {
+    "index": 23,
+    "cn_name": "罗勒",
+    "scientific_name": "Ocimum basilicum",
+    "family": "唇形科 罗勒属",
+    "genus": "罗勒属",
+    "aliases": [
+      "九层塔",
+      "金不换",
+      "西番香菜"
+    ],
+    "care_group": "G15",
+    "care_group_label": "香草与蔬菜",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "厨房窗台"
+    ]
+  },
+  "番茄": {
+    "index": 24,
+    "cn_name": "番茄",
+    "scientific_name": "Solanum lycopersicum",
+    "family": "茄科 茄属",
+    "genus": "茄属",
+    "aliases": [
+      "西红柿",
+      "洋柿子"
+    ],
+    "care_group": "G15",
+    "care_group_label": "香草与蔬菜",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "辣椒": {
+    "index": 25,
+    "cn_name": "辣椒",
+    "scientific_name": "Capsicum annuum",
+    "family": "茄科 辣椒属",
+    "genus": "辣椒属",
+    "aliases": [
+      "尖椒",
+      "菜椒",
+      "番椒"
+    ],
+    "care_group": "G15",
+    "care_group_label": "香草与蔬菜",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "草莓": {
+    "index": 26,
+    "cn_name": "草莓",
+    "scientific_name": "Fragaria × ananassa",
+    "family": "蔷薇科 草莓属",
+    "genus": "草莓属",
+    "aliases": [
+      "洋莓",
+      "地莓",
+      "士多啤梨"
+    ],
+    "care_group": "G15",
+    "care_group_label": "香草与蔬菜",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "向日葵": {
+    "index": 27,
+    "cn_name": "向日葵",
+    "scientific_name": "Helianthus annuus",
+    "family": "菊科 向日葵属",
+    "genus": "向日葵属",
+    "aliases": [
+      "向阳花",
+      "葵花",
+      "望日莲"
+    ],
+    "care_group": "G06",
+    "care_group_label": "一年生草本",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "铜钱草": {
+    "index": 28,
+    "cn_name": "铜钱草",
+    "scientific_name": "Hydrocotyle vulgaris",
+    "family": "五加科 天胡荽属",
+    "genus": "天胡荽属",
+    "aliases": [
+      "香菇草",
+      "金钱草",
+      "水金钱"
+    ],
+    "care_group": "G13",
+    "care_group_label": "水生/湿生",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "窗台"
+    ]
+  },
+  "白掌": {
+    "index": 29,
+    "cn_name": "白掌",
+    "scientific_name": "Spathiphyllum wallisii",
+    "family": "天南星科 白鹤芋属",
+    "genus": "白鹤芋属",
+    "aliases": [
+      "一帆风顺",
+      "白鹤芋",
+      "苞叶芋"
+    ],
+    "care_group": "G01",
+    "care_group_label": "观叶植物",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "客厅"
+    ]
+  },
+  "金钱树": {
+    "index": 30,
+    "cn_name": "金钱树",
+    "scientific_name": "Zamioculcas zamiifolia",
+    "family": "天南星科 雪铁芋属",
+    "genus": "雪铁芋属",
+    "aliases": [
+      "雪铁芋",
+      "泽米芋",
+      "金币树"
+    ],
+    "care_group": "G01",
+    "care_group_label": "观叶植物",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "客厅"
+    ]
+  },
+  "绣球": {
+    "index": 31,
+    "cn_name": "绣球",
+    "scientific_name": "Hydrangea macrophylla",
+    "family": "绣球花科 绣球属",
+    "genus": "绣球属",
+    "aliases": [
+      "八仙花",
+      "紫阳花"
+    ],
+    "care_group": "G10",
+    "care_group_label": "木本·观花灌木",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "三角梅": {
+    "index": 32,
+    "cn_name": "三角梅",
+    "scientific_name": "Bougainvillea glabra",
+    "family": "紫茉莉科 叶子花属",
+    "genus": "叶子花属",
+    "aliases": [
+      "叶子花",
+      "簕杜鹃",
+      "九重葛"
+    ],
+    "care_group": "G10",
+    "care_group_label": "木本·观花灌木",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "蓝雪花": {
+    "index": 33,
+    "cn_name": "蓝雪花",
+    "scientific_name": "Plumbago auriculata",
+    "family": "白花丹科 蓝雪花属",
+    "genus": "蓝雪花属",
+    "aliases": [
+      "蓝花丹",
+      "蓝花矶松"
+    ],
+    "care_group": "G10",
+    "care_group_label": "木本·观花灌木",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "天竺葵": {
+    "index": 34,
+    "cn_name": "天竺葵",
+    "scientific_name": "Pelargonium × hortorum",
+    "family": "牻牛儿苗科 天竺葵属",
+    "genus": "天竺葵属",
+    "aliases": [
+      "洋绣球",
+      "石腊红"
+    ],
+    "care_group": "G08",
+    "care_group_label": "多年生草本",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "窗台"
+    ]
+  },
+  "矮牵牛": {
+    "index": 35,
+    "cn_name": "矮牵牛",
+    "scientific_name": "Petunia × atkinsiana",
+    "family": "茄科 矮牵牛属",
+    "genus": "矮牵牛属",
+    "aliases": [
+      "碧冬茄",
+      "灵芝牡丹"
+    ],
+    "care_group": "G06",
+    "care_group_label": "一年生草本",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "吊盆"
+    ]
+  },
+  "三色堇": {
+    "index": 36,
+    "cn_name": "三色堇",
+    "scientific_name": "Viola tricolor",
+    "family": "堇菜科 堇菜属",
+    "genus": "堇菜属",
+    "aliases": [
+      "蝴蝶花",
+      "猫儿脸"
+    ],
+    "care_group": "G07",
+    "care_group_label": "二年生草本",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "花坛"
+    ]
+  },
+  "波斯菊": {
+    "index": 37,
+    "cn_name": "波斯菊",
+    "scientific_name": "Cosmos bipinnatus",
+    "family": "菊科 秋英属",
+    "genus": "秋英属",
+    "aliases": [
+      "秋英",
+      "大波斯菊",
+      "扫帚梅"
+    ],
+    "care_group": "G06",
+    "care_group_label": "一年生草本",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "万寿菊": {
+    "index": 38,
+    "cn_name": "万寿菊",
+    "scientific_name": "Tagetes erecta",
+    "family": "菊科 万寿菊属",
+    "genus": "万寿菊属",
+    "aliases": [
+      "臭菊",
+      "臭芙蓉"
+    ],
+    "care_group": "G06",
+    "care_group_label": "一年生草本",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "百日草": {
+    "index": 39,
+    "cn_name": "百日草",
+    "scientific_name": "Zinnia elegans",
+    "family": "菊科 百日菊属",
+    "genus": "百日菊属",
+    "aliases": [
+      "百日菊",
+      "步步高",
+      "火球花"
+    ],
+    "care_group": "G06",
+    "care_group_label": "一年生草本",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "大花马齿苋": {
+    "index": 40,
+    "cn_name": "大花马齿苋",
+    "scientific_name": "Portulaca grandiflora",
+    "family": "马齿苋科 马齿苋属",
+    "genus": "马齿苋属",
+    "aliases": [
+      "太阳花",
+      "半支莲",
+      "松叶牡丹"
+    ],
+    "care_group": "G06",
+    "care_group_label": "一年生草本",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "窗台"
+    ]
+  },
+  "菊花": {
+    "index": 41,
+    "cn_name": "菊花",
+    "scientific_name": "Chrysanthemum × morifolium",
+    "family": "菊科 菊属",
+    "genus": "菊属",
+    "aliases": [
+      "秋菊",
+      "黄花",
+      "菊华"
+    ],
+    "care_group": "G08",
+    "care_group_label": "多年生草本",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "石竹": {
+    "index": 42,
+    "cn_name": "石竹",
+    "scientific_name": "Dianthus chinensis",
+    "family": "石竹科 石竹属",
+    "genus": "石竹属",
+    "aliases": [
+      "洛阳石竹",
+      "中国石竹"
+    ],
+    "care_group": "G08",
+    "care_group_label": "多年生草本",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "花坛"
+    ]
+  },
+  "风信子": {
+    "index": 43,
+    "cn_name": "风信子",
+    "scientific_name": "Hyacinthus orientalis",
+    "family": "天门冬科 风信子属",
+    "genus": "风信子属",
+    "aliases": [
+      "五彩水仙",
+      "时样花"
+    ],
+    "care_group": "G09",
+    "care_group_label": "球根花卉",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "窗台"
+    ]
+  },
+  "郁金香": {
+    "index": 44,
+    "cn_name": "郁金香",
+    "scientific_name": "Tulipa gesneriana",
+    "family": "百合科 郁金香属",
+    "genus": "郁金香属",
+    "aliases": [
+      "洋荷花",
+      "草麝香"
+    ],
+    "care_group": "G09",
+    "care_group_label": "球根花卉",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "水仙": {
+    "index": 45,
+    "cn_name": "水仙",
+    "scientific_name": "Narcissus tazetta",
+    "family": "石蒜科 水仙属",
+    "genus": "水仙属",
+    "aliases": [
+      "中国水仙",
+      "金盏银台",
+      "雅蒜"
+    ],
+    "care_group": "G09",
+    "care_group_label": "球根花卉",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "窗台"
+    ]
+  },
+  "朱顶红": {
+    "index": 46,
+    "cn_name": "朱顶红",
+    "scientific_name": "Hippeastrum rutilum",
+    "family": "石蒜科 朱顶红属",
+    "genus": "朱顶红属",
+    "aliases": [
+      "孤挺花",
+      "朱顶兰"
+    ],
+    "care_group": "G09",
+    "care_group_label": "球根花卉",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "窗台"
+    ]
+  },
+  "百合": {
+    "index": 47,
+    "cn_name": "百合",
+    "scientific_name": "Lilium lancifolium",
+    "family": "百合科 百合属",
+    "genus": "百合属",
+    "aliases": [
+      "卷丹",
+      "虎皮百合",
+      "药百合"
+    ],
+    "care_group": "G09",
+    "care_group_label": "球根花卉",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "铁线蕨": {
+    "index": 48,
+    "cn_name": "铁线蕨",
+    "scientific_name": "Adiantum raddianum",
+    "family": "凤尾蕨科 铁线蕨属",
+    "genus": "铁线蕨属",
+    "aliases": [
+      "铁丝草",
+      "铁线草",
+      "美人枫"
+    ],
+    "care_group": "G14",
+    "care_group_label": "蕨类植物",
+    "difficulty": "进阶",
+    "scene": [
+      "室内",
+      "浴室"
+    ]
+  },
+  "鸟巢蕨": {
+    "index": 49,
+    "cn_name": "鸟巢蕨",
+    "scientific_name": "Asplenium nidus",
+    "family": "铁角蕨科 铁角蕨属",
+    "genus": "铁角蕨属",
+    "aliases": [
+      "巢蕨",
+      "山苏花",
+      "王冠蕨"
+    ],
+    "care_group": "G14",
+    "care_group_label": "蕨类植物",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "客厅"
+    ]
+  },
+  "孔雀竹芋": {
+    "index": 50,
+    "cn_name": "孔雀竹芋",
+    "scientific_name": "Goeppertia makoyana",
+    "family": "竹芋科 肖竹芋属",
+    "genus": "肖竹芋属",
+    "aliases": [
+      "斑叶竹芋",
+      "孔雀葛郁金"
+    ],
+    "care_group": "G01",
+    "care_group_label": "观叶植物",
+    "difficulty": "进阶",
+    "scene": [
+      "室内",
+      "客厅"
+    ]
+  },
+  "网纹草": {
+    "index": 51,
+    "cn_name": "网纹草",
+    "scientific_name": "Fittonia albivenis",
+    "family": "爵床科 网纹草属",
+    "genus": "网纹草属",
+    "aliases": [
+      "费通花",
+      "银网草",
+      "红网纹草"
+    ],
+    "care_group": "G01",
+    "care_group_label": "观叶植物",
+    "difficulty": "进阶",
+    "scene": [
+      "室内",
+      "玻璃缸"
+    ]
+  },
+  "合果芋": {
+    "index": 52,
+    "cn_name": "合果芋",
+    "scientific_name": "Syngonium podophyllum",
+    "family": "天南星科 合果芋属",
+    "genus": "合果芋属",
+    "aliases": [
+      "箭叶芋",
+      "白蝴蝶"
+    ],
+    "care_group": "G01",
+    "care_group_label": "观叶植物",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "客厅"
+    ]
+  },
+  "吊竹梅": {
+    "index": 53,
+    "cn_name": "吊竹梅",
+    "scientific_name": "Tradescantia zebrina",
+    "family": "鸭跖草科 紫露草属",
+    "genus": "紫露草属",
+    "aliases": [
+      "斑叶鸭跖草",
+      "水竹草"
+    ],
+    "care_group": "G01",
+    "care_group_label": "观叶植物",
+    "difficulty": "新手",
+    "scene": [
+      "室内垂吊",
+      "阳台"
+    ]
+  },
+  "琴叶榕": {
+    "index": 54,
+    "cn_name": "琴叶榕",
+    "scientific_name": "Ficus lyrata",
+    "family": "桑科 榕属",
+    "genus": "榕属",
+    "aliases": [
+      "大叶榕",
+      "提琴叶榕"
+    ],
+    "care_group": "G11",
+    "care_group_label": "木本·观叶与乔木",
+    "difficulty": "进阶",
+    "scene": [
+      "室内",
+      "客厅"
+    ]
+  },
+  "杜鹃": {
+    "index": 55,
+    "cn_name": "杜鹃",
+    "scientific_name": "Rhododendron simsii",
+    "family": "杜鹃花科 杜鹃花属",
+    "genus": "杜鹃花属",
+    "aliases": [
+      "映山红",
+      "山石榴"
+    ],
+    "care_group": "G10",
+    "care_group_label": "木本·观花灌木",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "室内"
+    ]
+  },
+  "茶花": {
+    "index": 56,
+    "cn_name": "茶花",
+    "scientific_name": "Camellia japonica",
+    "family": "山茶科 山茶属",
+    "genus": "山茶属",
+    "aliases": [
+      "山茶花",
+      "耐冬"
+    ],
+    "care_group": "G10",
+    "care_group_label": "木本·观花灌木",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "室内"
+    ]
+  },
+  "桂花": {
+    "index": 57,
+    "cn_name": "桂花",
+    "scientific_name": "Osmanthus fragrans",
+    "family": "木樨科 木樨属",
+    "genus": "木樨属",
+    "aliases": [
+      "木樨",
+      "金桂",
+      "丹桂"
+    ],
+    "care_group": "G11",
+    "care_group_label": "木本·观叶与乔木",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "铁线莲": {
+    "index": 58,
+    "cn_name": "铁线莲",
+    "scientific_name": "Clematis florida",
+    "family": "毛茛科 铁线莲属",
+    "genus": "铁线莲属",
+    "aliases": [
+      "转子莲",
+      "铁线牡丹"
+    ],
+    "care_group": "G12",
+    "care_group_label": "藤本植物",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "牵牛花": {
+    "index": 59,
+    "cn_name": "牵牛花",
+    "scientific_name": "Ipomoea nil",
+    "family": "旋花科 牵牛属",
+    "genus": "牵牛属",
+    "aliases": [
+      "喇叭花",
+      "朝颜"
+    ],
+    "care_group": "G12",
+    "care_group_label": "藤本植物",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "篱笆"
+    ]
+  },
+  "茑萝": {
+    "index": 60,
+    "cn_name": "茑萝",
+    "scientific_name": "Ipomoea quamoclit",
+    "family": "旋花科 牵牛属",
+    "genus": "牵牛属",
+    "aliases": [
+      "羽叶茑萝",
+      "五角星花"
+    ],
+    "care_group": "G12",
+    "care_group_label": "藤本植物",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "篱笆"
+    ]
+  },
+  "薰衣草": {
+    "index": 61,
+    "cn_name": "薰衣草",
+    "scientific_name": "Lavandula angustifolia",
+    "family": "唇形科 薰衣草属",
+    "genus": "薰衣草属",
+    "aliases": [
+      "英国薰衣草",
+      "真薰衣草"
+    ],
+    "care_group": "G15",
+    "care_group_label": "香草与蔬菜",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "迷迭香": {
+    "index": 62,
+    "cn_name": "迷迭香",
+    "scientific_name": "Salvia rosmarinus",
+    "family": "唇形科 鼠尾草属",
+    "genus": "鼠尾草属",
+    "aliases": [
+      "海洋之露",
+      "万年香"
+    ],
+    "care_group": "G15",
+    "care_group_label": "香草与蔬菜",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "厨房窗台"
+    ]
+  },
+  "非洲堇": {
+    "index": 63,
+    "cn_name": "非洲堇",
+    "scientific_name": "Saintpaulia ionantha",
+    "family": "苦苣苔科 非洲紫罗兰属",
+    "genus": "非洲紫罗兰属",
+    "aliases": [
+      "非洲紫罗兰",
+      "圣保罗花"
+    ],
+    "care_group": "G08",
+    "care_group_label": "多年生草本",
+    "difficulty": "进阶",
+    "scene": [
+      "室内",
+      "书桌"
+    ]
+  },
+  "四季秋海棠": {
+    "index": 64,
+    "cn_name": "四季秋海棠",
+    "scientific_name": "Begonia cucullata",
+    "family": "秋海棠科 秋海棠属",
+    "genus": "秋海棠属",
+    "aliases": [
+      "四季海棠",
+      "蚬肉秋海棠"
+    ],
+    "care_group": "G08",
+    "care_group_label": "多年生草本",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "窗台"
+    ]
+  },
+  "生石花": {
+    "index": 65,
+    "cn_name": "生石花",
+    "scientific_name": "Lithops pseudotruncatella",
+    "family": "番杏科 生石花属",
+    "genus": "生石花属",
+    "aliases": [
+      "石头花",
+      "屁股花",
+      "元宝花"
+    ],
+    "care_group": "G02",
+    "care_group_label": "多肉植物",
+    "difficulty": "进阶",
+    "scene": [
+      "室内",
+      "窗台"
+    ]
+  },
+  "熊童子": {
+    "index": 66,
+    "cn_name": "熊童子",
+    "scientific_name": "Cotyledon tomentosa",
+    "family": "景天科 银波锦属",
+    "genus": "银波锦属",
+    "aliases": [
+      "熊掌",
+      "熊爪"
+    ],
+    "care_group": "G02",
+    "care_group_label": "多肉植物",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "窗台"
+    ]
+  },
+  "仙人球": {
+    "index": 67,
+    "cn_name": "仙人球",
+    "scientific_name": "Echinopsis oxygona",
+    "family": "仙人掌科 仙人球属",
+    "genus": "仙人球属",
+    "aliases": [
+      "草球",
+      "花盛球"
+    ],
+    "care_group": "G03",
+    "care_group_label": "仙人掌类",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "窗台"
+    ]
+  },
+  "石斛": {
+    "index": 68,
+    "cn_name": "石斛",
+    "scientific_name": "Dendrobium nobile",
+    "family": "兰科 石斛属",
+    "genus": "石斛属",
+    "aliases": [
+      "金钗石斛",
+      "吊兰花"
+    ],
+    "care_group": "G04",
+    "care_group_label": "兰花·附生型",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "室内"
+    ]
+  },
+  "建兰": {
+    "index": 69,
+    "cn_name": "建兰",
+    "scientific_name": "Cymbidium ensifolium",
+    "family": "兰科 兰属",
+    "genus": "兰属",
+    "aliases": [
+      "四季兰",
+      "秋兰"
+    ],
+    "care_group": "G05",
+    "care_group_label": "兰花·地生型",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "波士顿蕨": {
+    "index": 70,
+    "cn_name": "波士顿蕨",
+    "scientific_name": "Nephrolepis exaltata",
+    "family": "肾蕨科 肾蕨属",
+    "genus": "肾蕨属",
+    "aliases": [
+      "波斯顿蕨",
+      "垂枝蕨"
+    ],
+    "care_group": "G14",
+    "care_group_label": "蕨类植物",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "浴室"
+    ]
+  },
+  "碗莲": {
+    "index": 71,
+    "cn_name": "碗莲",
+    "scientific_name": "Nelumbo nucifera",
+    "family": "莲科 莲属",
+    "genus": "莲属",
+    "aliases": [
+      "小型荷花",
+      "莲",
+      "芙蓉"
+    ],
+    "care_group": "G13",
+    "care_group_label": "水生/湿生",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "睡莲": {
+    "index": 72,
+    "cn_name": "睡莲",
+    "scientific_name": "Nymphaea tetragona",
+    "family": "睡莲科 睡莲属",
+    "genus": "睡莲属",
+    "aliases": [
+      "子午莲",
+      "矮睡莲"
+    ],
+    "care_group": "G13",
+    "care_group_label": "水生/湿生",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "香葱": {
+    "index": 73,
+    "cn_name": "香葱",
+    "scientific_name": "Allium fistulosum",
+    "family": "石蒜科 葱属",
+    "genus": "葱属",
+    "aliases": [
+      "小葱",
+      "青葱"
+    ],
+    "care_group": "G15",
+    "care_group_label": "香草与蔬菜",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "厨房窗台"
+    ]
+  },
+  "生菜": {
+    "index": 74,
+    "cn_name": "生菜",
+    "scientific_name": "Lactuca sativa",
+    "family": "菊科 莴苣属",
+    "genus": "莴苣属",
+    "aliases": [
+      "叶用莴苣",
+      "鹅仔菜"
+    ],
+    "care_group": "G15",
+    "care_group_label": "香草与蔬菜",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "厨房窗台"
+    ]
+  },
+  "黄瓜": {
+    "index": 75,
+    "cn_name": "黄瓜",
+    "scientific_name": "Cucumis sativus",
+    "family": "葫芦科 黄瓜属",
+    "genus": "黄瓜属",
+    "aliases": [
+      "胡瓜",
+      "青瓜"
+    ],
+    "care_group": "G15",
+    "care_group_label": "香草与蔬菜",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "小白菜": {
+    "index": 76,
+    "cn_name": "小白菜",
+    "scientific_name": "Brassica rapa",
+    "family": "十字花科 芸薹属",
+    "genus": "芸薹属",
+    "aliases": [
+      "青菜",
+      "油菜（幼苗）"
+    ],
+    "care_group": "G15",
+    "care_group_label": "香草与蔬菜",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "厨房窗台"
+    ]
+  },
+  "茄子": {
+    "index": 77,
+    "cn_name": "茄子",
+    "scientific_name": "Solanum melongena",
+    "family": "茄科 茄属",
+    "genus": "茄属",
+    "aliases": [
+      "矮瓜",
+      "落苏"
+    ],
+    "care_group": "G15",
+    "care_group_label": "香草与蔬菜",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "紫罗兰": {
+    "index": 78,
+    "cn_name": "紫罗兰",
+    "scientific_name": "Matthiola incana",
+    "family": "十字花科 紫罗兰属",
+    "genus": "紫罗兰属",
+    "aliases": [
+      "草紫罗兰",
+      "壁紫罗兰"
+    ],
+    "care_group": "G07",
+    "care_group_label": "二年生草本",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "花坛"
+    ]
+  },
+  "金鱼吊兰": {
+    "index": 79,
+    "cn_name": "金鱼吊兰",
+    "scientific_name": "Nematanthus gregarius",
+    "family": "苦苣苔科 袋鼠花属",
+    "genus": "袋鼠花属",
+    "aliases": [
+      "金鱼花",
+      "袋鼠花"
+    ],
+    "care_group": "G08",
+    "care_group_label": "多年生草本",
+    "difficulty": "新手",
+    "scene": [
+      "室内垂吊",
+      "阳台"
+    ]
+  },
+  "口红花": {
+    "index": 80,
+    "cn_name": "口红花",
+    "scientific_name": "Aeschynanthus pulcher",
+    "family": "苦苣苔科 芒毛苣苔属",
+    "genus": "芒毛苣苔属",
+    "aliases": [
+      "花蔓草",
+      "口红吊兰"
+    ],
+    "care_group": "G08",
+    "care_group_label": "多年生草本",
+    "difficulty": "进阶",
+    "scene": [
+      "室内垂吊",
+      "阳台"
+    ]
+  },
+  "真柏": {
+    "index": 81,
+    "cn_name": "真柏",
+    "scientific_name": "Juniperus chinensis",
+    "family": "柏科 刺柏属",
+    "genus": "刺柏属",
+    "aliases": [
+      "圆柏",
+      "桧柏"
+    ],
+    "care_group": "G11",
+    "care_group_label": "木本·观叶与乔木（盆景常用）",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "六月雪": {
+    "index": 82,
+    "cn_name": "六月雪",
+    "scientific_name": "Serissa japonica",
+    "family": "茜草科 白马骨属",
+    "genus": "白马骨属",
+    "aliases": [
+      "白马骨",
+      "满天星"
+    ],
+    "care_group": "G10",
+    "care_group_label": "木本·观花灌木（盆景常用）",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "室内"
+    ]
+  },
+  "人参榕": {
+    "index": 83,
+    "cn_name": "人参榕",
+    "scientific_name": "Ficus microcarpa",
+    "family": "桑科 榕属",
+    "genus": "榕属",
+    "aliases": [
+      "细叶榕",
+      "小叶榕",
+      "榕树"
+    ],
+    "care_group": "G11",
+    "care_group_label": "木本·观叶与乔木（盆景常用）",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "客厅"
+    ]
+  },
+  "榆树": {
+    "index": 84,
+    "cn_name": "榆树",
+    "scientific_name": "Ulmus pumila",
+    "family": "榆科 榆属",
+    "genus": "榆属",
+    "aliases": [
+      "家榆",
+      "白榆",
+      "钱榆"
+    ],
+    "care_group": "G11",
+    "care_group_label": "木本·观叶与乔木（盆景常用）",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "银杏": {
+    "index": 85,
+    "cn_name": "银杏",
+    "scientific_name": "Ginkgo biloba",
+    "family": "银杏科 银杏属",
+    "genus": "银杏属",
+    "aliases": [
+      "白果",
+      "公孙树",
+      "鸭脚树"
+    ],
+    "care_group": "G11",
+    "care_group_label": "木本·观叶与乔木",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "五针松": {
+    "index": 86,
+    "cn_name": "五针松",
+    "scientific_name": "Pinus parviflora",
+    "family": "松科 松属",
+    "genus": "松属",
+    "aliases": [
+      "日本五针松",
+      "姬小松"
+    ],
+    "care_group": "G11",
+    "care_group_label": "木本·观叶与乔木（盆景常用）",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "幸福树": {
+    "index": 87,
+    "cn_name": "幸福树",
+    "scientific_name": "Radermachera sinica",
+    "family": "紫葳科 菜豆树属",
+    "genus": "菜豆树属",
+    "aliases": [
+      "菜豆树",
+      "山菜豆"
+    ],
+    "care_group": "G11",
+    "care_group_label": "木本·观叶与乔木",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "客厅"
+    ]
+  },
+  "龙血树": {
+    "index": 88,
+    "cn_name": "龙血树",
+    "scientific_name": "Dracaena reflexa",
+    "family": "天门冬科 龙血树属",
+    "genus": "龙血树属",
+    "aliases": [
+      "千年木",
+      "红边龙血树"
+    ],
+    "care_group": "G01",
+    "care_group_label": "观叶植物",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "客厅"
+    ]
+  },
+  "长春花": {
+    "index": 89,
+    "cn_name": "长春花",
+    "scientific_name": "Catharanthus roseus",
+    "family": "夹竹桃科 长春花属",
+    "genus": "长春花属",
+    "aliases": [
+      "日日春",
+      "四季梅"
+    ],
+    "care_group": "G08",
+    "care_group_label": "多年生草本",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "窗台"
+    ]
+  },
+  "毛地黄": {
+    "index": 90,
+    "cn_name": "毛地黄",
+    "scientific_name": "Digitalis purpurea",
+    "family": "车前科 毛地黄属",
+    "genus": "毛地黄属",
+    "aliases": [
+      "洋地黄",
+      "自由钟",
+      "指顶花"
+    ],
+    "care_group": "G07",
+    "care_group_label": "二年生草本",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "羽衣甘蓝": {
+    "index": 91,
+    "cn_name": "羽衣甘蓝",
+    "scientific_name": "Brassica oleracea",
+    "family": "十字花科 芸薹属",
+    "genus": "芸薹属",
+    "aliases": [
+      "叶牡丹",
+      "牡丹菜"
+    ],
+    "care_group": "G07",
+    "care_group_label": "二年生草本（观叶）",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "花坛"
+    ]
+  },
+  "虞美人": {
+    "index": 92,
+    "cn_name": "虞美人",
+    "scientific_name": "Papaver rhoeas",
+    "family": "罂粟科 罂粟属",
+    "genus": "罂粟属",
+    "aliases": [
+      "丽春花",
+      "锦被花"
+    ],
+    "care_group": "G06",
+    "care_group_label": "一年生草本",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "芍药": {
+    "index": 93,
+    "cn_name": "芍药",
+    "scientific_name": "Paeonia lactiflora",
+    "family": "芍药科 芍药属",
+    "genus": "芍药属",
+    "aliases": [
+      "将离",
+      "婪尾春",
+      "殿春"
+    ],
+    "care_group": "G08",
+    "care_group_label": "多年生草本",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "牡丹": {
+    "index": 94,
+    "cn_name": "牡丹",
+    "scientific_name": "Paeonia × suffruticosa",
+    "family": "芍药科 芍药属",
+    "genus": "芍药属",
+    "aliases": [
+      "木芍药",
+      "富贵花",
+      "洛阳花"
+    ],
+    "care_group": "G10",
+    "care_group_label": "木本·观花灌木",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "千日红": {
+    "index": 95,
+    "cn_name": "千日红",
+    "scientific_name": "Gomphrena globosa",
+    "family": "苋科 千日红属",
+    "genus": "千日红属",
+    "aliases": [
+      "百日红",
+      "火球花",
+      "圆仔花"
+    ],
+    "care_group": "G06",
+    "care_group_label": "一年生草本",
+    "difficulty": "新手",
+    "scene": [
+      "阳台",
+      "庭院"
+    ]
+  },
+  "番红花": {
+    "index": 96,
+    "cn_name": "番红花",
+    "scientific_name": "Crocus sativus",
+    "family": "鸢尾科 番红花属",
+    "genus": "番红花属",
+    "aliases": [
+      "藏红花",
+      "西红花"
+    ],
+    "care_group": "G09",
+    "care_group_label": "球根花卉",
+    "difficulty": "进阶",
+    "scene": [
+      "阳台",
+      "窗台"
+    ]
+  },
+  "大岩桐": {
+    "index": 97,
+    "cn_name": "大岩桐",
+    "scientific_name": "Sinningia speciosa",
+    "family": "苦苣苔科 大岩桐属",
+    "genus": "大岩桐属",
+    "aliases": [
+      "落雪泥",
+      "芙蓉莲"
+    ],
+    "care_group": "G08",
+    "care_group_label": "多年生草本",
+    "difficulty": "进阶",
+    "scene": [
+      "室内",
+      "窗台"
+    ]
+  },
+  "蟆叶秋海棠": {
+    "index": 98,
+    "cn_name": "蟆叶秋海棠",
+    "scientific_name": "Begonia rex",
+    "family": "秋海棠科 秋海棠属",
+    "genus": "秋海棠属",
+    "aliases": [
+      "王秋海棠",
+      "彩叶秋海棠"
+    ],
+    "care_group": "G01",
+    "care_group_label": "观叶植物",
+    "difficulty": "进阶",
+    "scene": [
+      "室内",
+      "玻璃缸"
+    ]
+  },
+  "鹿角蕨": {
+    "index": 99,
+    "cn_name": "鹿角蕨",
+    "scientific_name": "Platycerium bifurcatum",
+    "family": "水龙骨科 鹿角蕨属",
+    "genus": "鹿角蕨属",
+    "aliases": [
+      "麋角蕨",
+      "蝙蝠蕨"
+    ],
+    "care_group": "G14",
+    "care_group_label": "蕨类植物",
+    "difficulty": "进阶",
+    "scene": [
+      "室内",
+      "客厅"
+    ]
+  },
+  "空气凤梨": {
+    "index": 100,
+    "cn_name": "空气凤梨",
+    "scientific_name": "Tillandsia ionantha",
+    "family": "凤梨科 铁兰属",
+    "genus": "铁兰属",
+    "aliases": [
+      "铁兰",
+      "紫花凤梨",
+      "精灵"
+    ],
+    "care_group": "G16",
+    "care_group_label": "附生植物",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "书桌"
+    ]
+  },
+  "豆瓣绿": {
+    "index": 101,
+    "cn_name": "豆瓣绿",
+    "scientific_name": "Peperomia obtusifolia",
+    "family": "胡椒科 草胡椒属",
+    "genus": "草胡椒属",
+    "aliases": [
+      "圆叶椒草",
+      "椒草"
+    ],
+    "care_group": "G01",
+    "care_group_label": "观叶植物",
+    "difficulty": "新手",
+    "scene": [
+      "室内",
+      "书桌"
+    ]
+  }
+}

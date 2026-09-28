@@ -1,0 +1,38 @@
+<bottom-sheet show="{{show}}" title="换盆记录" bind:close="onCancel">
+  <view class="rs-intro">换好了就可以记一笔，托蕾妮会据此调整接下来的浇水和施肥。</view>
+
+  <view class="rs-row">
+    <text class="rs-label">换成多大的盆</text>
+    <picker
+      mode="selector"
+      range="{{potOptions}}"
+      range-key="label"
+      value="{{potIndex}}"
+      bindchange="onPotChange"
+    >
+      <text class="rs-value">{{potLabel}} ›</text>
+    </picker>
+  </view>
+
+  <view class="rs-row">
+    <text class="rs-label">用的是哪种土</text>
+    <picker
+      mode="selector"
+      range="{{soilOptions}}"
+      range-key="name"
+      value="{{soilIndex}}"
+      bindchange="onSoilChange"
+    >
+      <text class="rs-value">{{soilLabel}} ›</text>
+    </picker>
+  </view>
+
+  <view class="rs-note">
+    <text class="rs-note-text">先不填也行，但浇水提醒会继续按原来的花盆估算。盆的大小影响每次要浇多少水，现在盆就在手边，是填准它最方便的时候。</text>
+  </view>
+
+  <view slot="footer" class="rs-foot">
+    <button class="btn btn-outline rs-btn" bindtap="onSkip" disabled="{{saving}}">先不填</button>
+    <button class="btn btn-primary rs-btn" bindtap="onSubmit" disabled="{{saving}}">保存</button>
+  </view>
+</bottom-sheet>

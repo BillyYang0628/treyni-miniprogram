@@ -1,0 +1,44 @@
+.record-card {
+  padding: 28rpx;
+  margin-bottom: 24rpx;
+}
+
+.record-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12rpx;
+  margin-bottom: 10rpx;
+}
+
+.record-type {
+  color: #0d3328;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.record-time {
+  color: #6b7d6b;
+  font-size: 22rpx;
+}
+
+.record-plant {
+  display: block;
+  color: #4a3728;
+  font-size: 24rpx;
+  margin-bottom: 18rpx;
+}
+
+.record-image {
+  width: 100%;
+  margin-bottom: 20rpx;
+  border: 3rpx solid #2d3a2d;
+}
+
+.record-content {
+  display: block;
+  color: #1a1a1a;
+  font-size: 27rpx;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}

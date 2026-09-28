@@ -1,0 +1,160 @@
+.cs-sub {
+  display: block;
+  margin-bottom: 4rpx;
+  color: #4a3728;
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.cs-pick-date {
+  margin-top: 8rpx;
+  padding: 24rpx 20rpx;
+  border: 3rpx solid #2d3a2d;
+  background: #ffffff;
+  color: #1b4d3e;
+  font-size: 30rpx;
+  font-weight: 700;
+  text-align: center;
+}
+
+.cs-name {
+  display: block;
+  margin: 20rpx 0 8rpx;
+  color: #0d3328;
+  font-size: 28rpx;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.cs-block {
+  margin-top: 20rpx;
+}
+
+.cs-question {
+  display: block;
+  margin-bottom: 14rpx;
+  color: #1b4d3e;
+  font-size: 26rpx;
+}
+
+.cs-options {
+  display: flex;
+  flex-wrap: wrap;
+  /* 两列：用 space-between + 49% 宽度，不依赖 gap 参与 100% 计算。
+     之前 calc(50% - 7rpx) + 14rpx gap 在真机取整后会超过 100%，每一项都换行成单列。 */
+  justify-content: space-between;
+  row-gap: 14rpx;
+}
+
+.cs-option {
+  width: 49%;
+  padding: 20rpx 12rpx;
+  border: 3rpx solid #2d3a2d;
+  background: #ffffff;
+  color: #1a1a1a;
+  font-size: 25rpx;
+  text-align: center;
+}
+
+.cs-option-on {
+  border-color: #1b4d3e;
+  background: #1b4d3e;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* 逾期原因有 5 个选项，三列排成两行——两列排会比折叠线还高，用户得滚才能看全 */
+.cs-options-late .cs-option {
+  width: 32%;
+  padding: 18rpx 4rpx;
+  font-size: 23rpx;
+}
+
+.cs-hint {
+  display: block;
+  margin-top: 12rpx;
+  color: #6b7d6b;
+  font-size: 22rpx;
+}
+
+.cs-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 26rpx;
+  padding: 18rpx 0;
+  border-top: 2rpx dashed #d8d2c0;
+}
+
+.cs-row-label {
+  color: #4a3728;
+  font-size: 26rpx;
+}
+
+.cs-row-value {
+  color: #1b4d3e;
+  font-size: 26rpx;
+  font-weight: 700;
+}
+
+.cs-note {
+  padding: 8rpx 0 4rpx;
+}
+
+.cs-note-toggle {
+  color: #2d6a4f;
+  font-size: 24rpx;
+}
+
+.cs-note-input {
+  width: 100%;
+  height: 140rpx;
+  margin-top: 12rpx;
+  padding: 16rpx;
+  border: 3rpx solid #2d3a2d;
+  background: #ffffff;
+  font-size: 25rpx;
+  box-sizing: border-box;
+}
+
+.cs-safety {
+  display: block;
+  margin-top: 18rpx;
+  padding: 14rpx 16rpx;
+  border-left: 6rpx solid #c0503c;
+  background: #fff0ef;
+  color: #7b2d26;
+  font-size: 22rpx;
+  line-height: 1.6;
+}
+
+.cs-foot {
+  display: flex;
+  gap: 16rpx;
+  width: 100%;
+}
+
+.cs-btn {
+  flex: 1;
+  min-height: 84rpx;
+  padding: 0;
+  font-size: 28rpx;
+}
+
+/* ---- B-2：对话化的部分 ---- */
+
+/* 面板里的气泡要比对话页紧凑一点（面板宽度和页面不同，74% 会显得太宽） */
+.cs-chat {
+  margin-bottom: 16rpx;
+}
+
+.cs-chat .bubble {
+  max-width: 78%;
+}
+
+/* 「我」那条气泡是提交后的回执动画，压扁一点，不要顶掉下面的按钮 */
+.cs-echo .bubble-text {
+  font-size: 26rpx;
+}
+/* 气泡和 AI 花农对话页共用一份（B-2：面板做成对话的样子） */
+@import "../../styles/chat-bubble.wxss";

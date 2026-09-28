@@ -1,0 +1,138 @@
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 24rpx;
+  padding: 32rpx;
+  margin-bottom: 24rpx;
+}
+
+.profile-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  flex: 0 0 128rpx;
+  background: #f0e2bd;
+  border: 4rpx solid #2d3a2d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.profile-avatar-img {
+  width: 100%;
+  height: 100%;
+}
+
+.profile-info {
+  flex: 1;
+}
+
+.profile-name {
+  display: block;
+  color: #0d3328;
+  font-size: 36rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+
+.profile-bio {
+  color: #4a3728;
+  font-size: 26rpx;
+}
+
+.menu-card {
+  padding: 12rpx 24rpx;
+}
+
+.menu-title {
+  display: block;
+  padding: 24rpx 0;
+  color: #6b7d6b;
+  font-size: 24rpx;
+}
+
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 24rpx 0;
+  border-top: 2rpx dashed #7ee787;
+  color: #4a3728;
+  font-size: 28rpx;
+}
+
+.debug-card {
+  margin-top: 24rpx;
+}
+
+/* 地址比较长，超出就用省略号，别把左边的标题挤掉 */
+.debug-url {
+  max-width: 300rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 22rpx;
+}
+.location-card {
+  padding: 26rpx;
+  margin-bottom: 24rpx;
+}
+
+.location-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 10rpx;
+}
+
+.location-title {
+  color: #0d3328;
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+.location-more {
+  color: #2d6a4f;
+  font-size: 23rpx;
+}
+
+.location-city {
+  display: block;
+  color: #1b4d3e;
+  font-size: 34rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+
+.location-weather {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.location-now {
+  color: #4a3728;
+  font-size: 24rpx;
+}
+
+.location-forecast {
+  color: #6b7d6b;
+  font-size: 22rpx;
+}
+
+.location-warning {
+  margin-top: 6rpx;
+  color: #7b2d26;
+  font-size: 22rpx;
+}
+
+.location-error {
+  display: block;
+  color: #7b2d26;
+  font-size: 23rpx;
+}
+
+.location-empty {
+  display: block;
+  color: #6b7d6b;
+  font-size: 23rpx;
+}

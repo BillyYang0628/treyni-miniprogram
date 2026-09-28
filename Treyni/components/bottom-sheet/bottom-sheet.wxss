@@ -1,0 +1,90 @@
+.sheet-root {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: 900;
+}
+
+.sheet-mask {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(13, 51, 40, 0.42);
+  animation: sheet-fade 0.18s ease-out;
+}
+
+.sheet-panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  /* 完成面板加了"逾期原因"之后内容变高，78vh 会把最后一行选项顶到折叠线以下 */
+  max-height: 86vh;
+  background: #faf8f0;
+  border-top: 4rpx solid #2d3a2d;
+  animation: sheet-up 0.22s ease-out;
+}
+
+.sheet-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 24rpx 28rpx 18rpx;
+  border-bottom: 2rpx dashed #d8d2c0;
+}
+
+.sheet-title {
+  color: #0d3328;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.sheet-close {
+  color: #6b7d6b;
+  font-size: 26rpx;
+}
+
+.sheet-body {
+  flex: 1;
+  min-height: 0;
+}
+
+/*
+ * 内边距必须加在这一层，不能加在 .sheet-body（scroll-view）上。
+ * scroll-view 的内容盒按整个滚动容器宽度算，padding 只会把内容往右推、
+ * 不会让内容变窄 —— 结果里面每个块都是"左起 28rpx、宽 100vw"，
+ * 右侧溢出约 28rpx，两列布局因为差这十几个像素永远排不下（2026-09-21 修）。
+ */
+.sheet-body-inner {
+  box-sizing: border-box;
+  padding: 0 28rpx;
+}
+
+.sheet-body-pad {
+  height: 8rpx;
+}
+
+.sheet-foot {
+  display: flex;
+  gap: 16rpx;
+  padding: 18rpx 28rpx;
+  padding-bottom: calc(18rpx + env(safe-area-inset-bottom));
+  border-top: 2rpx dashed #d8d2c0;
+  background: #faf8f0;
+}
+
+@keyframes sheet-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes sheet-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}

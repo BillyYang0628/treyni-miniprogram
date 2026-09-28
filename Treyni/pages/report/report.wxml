@@ -1,0 +1,97 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="empty-state">
+    <image class="icon-empty" src="{{icons.emptyReport}}" mode="aspectFit" />
+    <text class="empty-title">正在准备报告...</text>
+  </view>
+
+  <block wx:else>
+    <view wx:if="{{generating}}" class="card generating-card">
+      <text class="generating-title">托蕾妮正在写报告</text>
+      <text class="generating-time">已等待 {{elapsed}} 秒 · {{estimateText}}</text>
+      <view class="loading-bar">
+        <view class="loading-bar-inner"></view>
+      </view>
+      <text class="generating-note">正在整理这盆植物的养护记录、提醒完成情况和诊断历史。</text>
+    </view>
+
+    <view wx:if="{{error}}" class="card error-card">
+      <text class="error-title">报告生成失败</text>
+      <text class="error-detail">{{error}}</text>
+      <button class="btn btn-primary btn-block btn-with-icon" bindtap="onGenerate">
+        <image class="icon-sm" src="{{icons.refresh}}" mode="aspectFit" />
+        <text>重新生成</text>
+      </button>
+    </view>
+
+    <block wx:if="{{report}}">
+      <view class="card report-card">
+        <text class="report-title">{{report.title}}</text>
+        <text class="report-period">{{report.period_text}} · 生成于 {{generatedText}}</text>
+
+        <view wx:if="{{stats.length}}" class="stat-grid">
+          <view wx:for="{{stats}}" wx:key="label" class="stat-item">
+            <image class="stat-icon" src="{{item.icon}}" mode="aspectFit" />
+            <text class="stat-value">{{item.value}}</text>
+            <text class="stat-label">{{item.label}}</text>
+          </view>
+        </view>
+
+        <view wx:if="{{report.content.summary}}" class="summary-box">
+          <text class="summary-text">{{report.content.summary}}</text>
+        </view>
+      </view>
+
+      <view wx:for="{{report.content.sections}}" wx:key="index" class="card section-card">
+        <text class="section-heading">{{item.heading}}</text>
+        <ai-text class="section-body" text="{{item.body}}" />
+      </view>
+
+      <view wx:if="{{report.content.highlights.length}}" class="card list-card">
+        <view class="icon-row card-title-row">
+          <image class="icon-sm" src="{{icons.done}}" mode="aspectFit" />
+          <text class="list-title">做得好的地方</text>
+        </view>
+        <view wx:for="{{report.content.highlights}}" wx:key="index" class="list-item">
+          <text class="list-dot">·</text>
+          <text class="list-text">{{item}}</text>
+        </view>
+      </view>
+
+      <view wx:if="{{report.content.next_actions.length}}" class="card list-card">
+        <view class="icon-row card-title-row">
+          <image class="icon-sm" src="{{icons.stage}}" mode="aspectFit" />
+          <text class="list-title">接下来要做的</text>
+        </view>
+        <view wx:for="{{report.content.next_actions}}" wx:key="index" class="list-item">
+          <text class="list-dot">·</text>
+          <text class="list-text">{{item}}</text>
+        </view>
+      </view>
+    </block>
+
+    <view wx:if="{{!report && !generating && !error}}" class="card empty-card">
+      <image class="empty-illustration" src="{{icons.emptyReport}}" mode="aspectFit" />
+      <text class="empty-title">还没有养护报告</text>
+      <text class="empty-desc">托蕾妮会把这段时间的养护记录整理成一份报告，包含做了哪些养护、遇到的问题和接下来的建议。</text>
+    </view>
+
+    <view wx:if="{{history.length > 1}}" class="card history-card">
+      <text class="history-title">历史报告</text>
+      <view
+        wx:for="{{history}}"
+        wx:key="id"
+        class="history-item"
+        data-id="{{item.id}}"
+        bindtap="onPickHistory"
+      >
+        <text class="history-name">{{item.title}}</text>
+        <text class="history-time">{{item.timeText}}</text>
+      </view>
+    </view>
+
+    <button wx:if="{{!generating}}" class="btn btn-primary btn-block" bindtap="onGenerate">
+      {{report ? '生成新报告' : '生成养护报告'}}
+    </button>
+    <button class="btn btn-outline btn-block" bindtap="goBack">返回植物详情</button>
+  </block>
+</view>

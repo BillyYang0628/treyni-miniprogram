@@ -1,0 +1,26 @@
+<bottom-sheet show="{{show}}" title="写一条记录" bind:close="onCancel">
+  <view class="ws-body">
+    <textarea
+      class="ws-textarea"
+      value="{{content}}"
+      maxlength="500"
+      placeholder="这次看到了什么？例如：发现新芽、叶子有点卷、今天开了第一朵花"
+      bindinput="onInput"
+    ></textarea>
+
+    <view class="ws-image-row">
+      <view wx:if="{{imageUrl}}" class="ws-image-box" bindtap="onClearImage">
+        <image class="ws-image" src="{{imageUrl}}" mode="aspectFill"></image>
+        <text class="ws-image-clear">点一下换一张</text>
+      </view>
+      <view wx:else class="ws-image-add" bindtap="onChooseImage">
+        <text class="ws-image-add-text">{{uploading ? '上传中…' : '＋ 加一张照片'}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view slot="footer" class="ws-foot">
+    <button class="btn btn-outline ws-btn" bindtap="onCancel">取消</button>
+    <button class="btn btn-primary ws-btn" bindtap="onSubmit" disabled="{{saving || uploading}}">记录</button>
+  </view>
+</bottom-sheet>

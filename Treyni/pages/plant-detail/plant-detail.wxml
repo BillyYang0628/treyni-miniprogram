@@ -1,0 +1,231 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="empty-state">
+    <image class="icon-empty" src="{{icons.stage}}" mode="aspectFit" />
+    <text class="empty-title">正在加载植物档案...</text>
+  </view>
+
+  <view wx:elif="{{plant}}" class="detail-layout">
+    <!-- 接下来要做的：把「快到的提醒」和「自己计划的四类外的事」聚在一张卡里 -->
+    <view wx:if="{{agenda.length}}" class="card agenda-card">
+      <view class="icon-row card-title-row">
+        <image class="icon-sm" src="{{icons.season}}" mode="aspectFit" />
+        <text class="agenda-title">接下来要做的</text>
+      </view>
+      <view wx:for="{{agenda}}" wx:key="key" class="agenda-item">
+        <text class="agenda-when">{{item.when}}</text>
+        <text class="agenda-text">{{item.text}}</text>
+        <text wx:if="{{item.planned}}" class="agenda-tag">计划</text>
+      </view>
+    </view>
+
+    <view class="card plant-summary">
+      <view class="summary-media">
+        <image wx:if="{{plant.image_url}}" src="{{plant.image_url}}" mode="aspectFill"></image>
+        <image wx:else class="summary-default" src="{{icons.plantDefault}}" mode="aspectFit"></image>
+      </view>
+
+      <view class="summary-info">
+        <view class="summary-title-row">
+          <text class="detail-name">{{plant.name}}</text>
+          <text class="tag">{{plant.species}}</text>
+          <text class="tag tag-green">{{plant.status === 'active' ? '生长中' : plant.status}}</text>
+        </view>
+
+        <view class="summary-meta">
+          <view class="icon-row meta-item">
+            <image class="icon-xs" src="{{icons.pot}}" mode="aspectFit" />
+            <text>{{plant.pot_size || '未填写花盆'}}</text>
+          </view>
+          <view class="icon-row meta-item">
+            <image class="icon-xs" src="{{icons.soil}}" mode="aspectFit" />
+            <text>{{plant.soil_type || '未填写土壤'}}</text>
+          </view>
+          <view class="icon-row meta-item">
+            <image class="icon-xs" src="{{icons.location}}" mode="aspectFit" />
+            <text>{{plant.location || '未填写位置'}}</text>
+          </view>
+          <view class="icon-row meta-item">
+            <image class="icon-xs" src="{{icons.sunny}}" mode="aspectFit" />
+            <text>{{plant.light_environment || '未填写光照'}}</text>
+          </view>
+          <view class="icon-row meta-item">
+            <image class="icon-xs" src="{{icons.season}}" mode="aspectFit" />
+            <text>{{plant.planting_date || '未填写日期'}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="summary-actions">
+        <button class="mini-btn" bindtap="goEdit">编辑</button>
+        <button class="mini-btn mini-btn-danger" bindtap="onDelete">删除</button>
+        <button class="mini-btn mini-btn-ai" bindtap="goDiagnosis">AI诊断</button>
+        <button class="mini-btn mini-btn-ai mini-btn-blue" bindtap="goChat">AI花农</button>
+        <button class="mini-btn" bindtap="goReport">养护报告</button>
+      </view>
+    </view>
+
+    <view class="card section-card">
+      <view class="section-header">
+        <view class="section-title-row">
+          <image class="icon-sm" src="{{icons.bell}}" mode="aspectFit" />
+          <text class="section-title">每日提醒</text>
+        </view>
+        <button class="section-add" bindtap="onAddReminder">+ 添加</button>
+      </view>
+      <scroll-view class="section-scroll" scroll-y enhanced show-scrollbar="false">
+        <view wx:if="{{reminders.length}}" class="reminder-list">
+          <view
+            wx:for="{{reminders}}"
+            wx:key="id"
+            class="reminder-item"
+            style="border-color: {{item.overdueColor}}"
+            data-id="{{item.id}}"
+            bindtap="goReminderDetail"
+          >
+            <image class="reminder-icon" src="{{item.icon}}" mode="aspectFit" />
+            <view class="reminder-body">
+              <text class="reminder-title">{{item.title}}</text>
+              <text class="reminder-desc">{{item.summary}}</text>
+              <text
+                class="reminder-time {{item.lateDays ? 'reminder-time-overdue' : ''}}"
+                style="{{item.lateDays ? 'color: ' + item.overdueColor : ''}}"
+              >{{item.dueLabel}} · {{item.dueText}}</text>
+              <view wx:if="{{item.aiStatusText}}" class="icon-row reminder-ai-row">
+                <image class="icon-xs" src="{{item.aiStatusIcon}}" mode="aspectFit" />
+                <text class="reminder-ai {{item.aiFailed ? 'reminder-ai-failed' : ''}}">{{item.aiStatusText}}</text>
+              </view>
+            </view>
+            <view class="reminder-actions">
+              <button class="mini-btn" data-id="{{item.id}}" catchtap="onCompleteReminder">完成</button>
+              <button class="mini-btn mini-btn-danger" data-id="{{item.id}}" catchtap="onDeleteReminder">删除</button>
+            </view>
+          </view>
+        </view>
+        <view wx:else class="reminder-empty">
+          <image class="icon-empty" src="{{icons.emptyReminders}}" mode="aspectFit" />
+          <text class="empty-title">暂无每日提醒</text>
+          <text class="empty-desc">添加提醒后会显示在这里</text>
+        </view>
+      </scroll-view>
+    </view>
+
+    <view wx:if="{{completedReminders.length}}" class="card section-card completed-section">
+      <view class="section-header">
+        <view class="section-title-row">
+          <image class="icon-sm" src="{{icons.done}}" mode="aspectFit" />
+          <text class="section-title">已完成</text>
+        </view>
+      </view>
+      <scroll-view class="section-scroll" scroll-y enhanced show-scrollbar="false">
+        <view class="completed-list">
+          <view
+            wx:for="{{completedReminders}}"
+            wx:key="id"
+            class="completed-item"
+            data-id="{{item.id}}"
+            bindtap="goReminderDetail"
+          >
+            <image class="completed-check" src="{{icons.done}}" mode="aspectFit" />
+            <view class="completed-body">
+              <text class="completed-title">{{item.title}}</text>
+              <text class="completed-time">{{item.skipped ? '已跳过（不是这次做的）' : '完成于 ' + item.completedText}}</text>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <view class="card section-card">
+      <view class="section-header">
+        <view class="section-title-row">
+          <image class="icon-sm" src="{{icons.stage}}" mode="aspectFit" />
+          <text class="section-title">植物养护历程</text>
+        </view>
+        <view class="section-add-group">
+          <button class="section-add section-add-half" bindtap="onWriteJournal">+ 写记录</button>
+          <button class="section-add section-add-half" bindtap="onPlanSomething">+ 计划</button>
+        </view>
+      </view>
+      <scroll-view class="section-scroll" scroll-y enhanced show-scrollbar="false">
+        <view wx:if="{{journals.length}}" class="journal-timeline">
+          <view wx:for="{{journals}}" wx:key="id" class="journal-item">
+            <view class="journal-dot"></view>
+            <view
+              class="journal-body"
+              data-id="{{item.id}}"
+              bindtap="goJournalDetail"
+            >
+              <view class="journal-head">
+                <view class="icon-row">
+                  <image class="icon-xs" src="{{item.typeIcon}}" mode="aspectFit" />
+                  <text class="journal-type">{{item.typeText}}</text>
+                </view>
+                <view class="icon-row">
+                  <text wx:if="{{item.isPlanned}}" class="journal-planned">计划</text>
+                  <text class="journal-more">查看详情 ›</text>
+                </view>
+              </view>
+              <text class="journal-content">{{item.content}}</text>
+              <text class="journal-time">{{item.isPlanned ? '计划于 ' + item.planDateText : item.timeText}}</text>
+            </view>
+          </view>
+        </view>
+        <view wx:else class="journal-empty">
+          <image class="journal-illustration" src="{{icons.plantDetailEmpty}}" mode="aspectFit" />
+          <text class="empty-title">还没有记录</text>
+          <text class="empty-desc">点击上方“写记录”开始记录养护历程</text>
+        </view>
+      </scroll-view>
+    </view>
+
+    <button class="btn btn-outline btn-block" bindtap="goBack">返回花园</button>
+  </view>
+
+  <view wx:else class="empty-state">
+    <image class="icon-empty" src="{{icons.emptyJournal}}" mode="aspectFit" />
+    <text class="empty-title">植物不存在</text>
+    <button class="btn btn-outline" bindtap="goBack">返回花园</button>
+  </view>
+
+  <!-- 完成登记面板：列表里的「完成」和提醒详情里的「完成这条提醒」用的是同一个组件 -->
+  <complete-sheet
+    id="completeSheet"
+    show="{{sheetShow}}"
+    reminder="{{sheetReminder}}"
+    bind:submit="onSheetSubmit"
+    bind:cancel="onSheetCancel"
+    bind:reschedule="onSheetReschedule"
+  />
+
+  <!-- 完成后 5 秒内可整行撤销 -->
+  <!-- 换盆是事件型，走独立的确认面板（要更新花盆/土壤 + 触发缓苗期） -->
+  <repot-sheet
+    show="{{repotShow}}"
+    reminder="{{repotReminder}}"
+    plant="{{plant}}"
+    bind:submit="onRepotSubmit"
+    bind:cancel="onRepotCancel"
+  />
+
+  <!-- 写记录：纯图片 + 纯文字，只记录已经发生的事 -->
+  <write-sheet
+    show="{{writeShow}}"
+    bind:submit="onWriteSubmit"
+    bind:cancel="onWriteCancel"
+  />
+
+  <!-- 计划一件事：四类以内会排进每日提醒，四类以外只记一笔 -->
+  <plan-sheet
+    show="{{planShow}}"
+    plant-id="{{plantId}}"
+    bind:done="onPlanDone"
+    bind:cancel="onPlanCancel"
+  />
+
+  <undo-bar
+    show="{{undoShow}}"
+    seconds="{{undoSeconds}}"
+    bind:undo="onUndo"
+    bind:expire="onUndoExpire"
+  />
+</view>

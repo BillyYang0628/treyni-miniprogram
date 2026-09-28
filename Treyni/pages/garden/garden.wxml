@@ -1,0 +1,80 @@
+<view class="page">
+  <view class="page-header">
+    <view class="page-title-row">
+      <image class="icon-md" src="{{icons.pot}}" mode="aspectFit" />
+      <text class="page-title">我的花园</text>
+    </view>
+    <button class="btn btn-primary btn-with-icon" bindtap="goAddPlant">
+      <image class="icon-sm" src="{{icons.add}}" mode="aspectFit" />
+      <text>添加植物</text>
+    </button>
+  </view>
+
+  <!-- 连不上后端时明确说出来，不要伪装成"还没有添加植物" -->
+  <view wx:if="{{error}}" class="card load-error">
+    <view class="icon-row card-title-row">
+      <image class="icon-sm" src="{{icons.failed}}" mode="aspectFit" />
+      <text class="load-error-title">连不上后端服务</text>
+    </view>
+    <text class="load-error-msg">{{error}}</text>
+    <text class="load-error-url">当前地址：{{serverUrl}}</text>
+    <view class="load-error-actions">
+      <button class="btn btn-primary btn-with-icon" bindtap="onRetry">
+        <image class="icon-sm" src="{{icons.refresh}}" mode="aspectFit" />
+        <text>重试</text>
+      </button>
+      <button class="btn btn-outline btn-with-icon" bindtap="onEditServer">
+        <image class="icon-sm" src="{{icons.operate}}" mode="aspectFit" />
+        <text>改地址</text>
+      </button>
+    </view>
+  </view>
+
+  <view wx:elif="{{loading}}" class="empty-state">
+    <image class="icon-empty" src="{{icons.stage}}" mode="aspectFit" />
+    <text class="empty-title">正在加载你的花园...</text>
+  </view>
+
+  <view wx:elif="{{plants.length === 0}}" class="empty-state">
+    <image class="empty-illustration" src="{{icons.emptyGarden}}" mode="aspectFit" />
+    <text class="empty-title">还没有添加植物</text>
+    <text class="empty-desc">来创建你的第一盆植物档案吧，AI 会帮你记住每一盆花的成长故事</text>
+    <button class="btn btn-primary btn-with-icon" bindtap="goAddPlant">
+      <image class="icon-sm" src="{{icons.pot}}" mode="aspectFit" />
+      <text>添加我的第一盆植物</text>
+    </button>
+  </view>
+
+  <view wx:else class="plant-list">
+    <view
+      wx:for="{{plants}}"
+      wx:key="id"
+      class="plant-card"
+      data-id="{{item.id}}"
+      bindtap="goPlantDetail"
+    >
+      <view class="plant-card-img">
+        <image wx:if="{{item.image_url}}" src="{{item.image_url}}" mode="aspectFill"></image>
+        <image wx:else class="plant-card-default" src="{{icons.plantDefault}}" mode="aspectFit"></image>
+      </view>
+      <view class="plant-card-body">
+        <text class="plant-card-name">{{item.name}}</text>
+        <text class="plant-card-species">{{item.species}}</text>
+        <view class="plant-card-meta">
+          <view class="icon-row">
+            <image class="icon-xs" src="{{icons.season}}" mode="aspectFit" />
+            <text>{{item.createdDay}}</text>
+          </view>
+          <view class="icon-row">
+            <image class="icon-xs" src="{{icons.sunny}}" mode="aspectFit" />
+            <text>{{item.light_environment || '未填写光照'}}</text>
+          </view>
+        </view>
+        <view class="plant-card-reminder icon-row">
+          <image class="icon-xs" src="{{icons.location}}" mode="aspectFit" />
+          <text>{{item.location || '未填写位置'}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

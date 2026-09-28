@@ -1,0 +1,117 @@
+<view class="page chat-page">
+  <view wx:if="{{loading}}" class="empty-state">
+    <image class="empty-avatar" src="{{icons.aiChat}}" mode="aspectFit" />
+    <text class="empty-title">托蕾妮正在赶来...</text>
+  </view>
+
+  <block wx:else>
+    <view class="chat-head">
+      <view class="chat-head-title">
+        <image class="chat-head-avatar" src="{{icons.elfAvatar}}" mode="aspectFit" />
+        <text class="chat-title">托蕾妮</text>
+      </view>
+      <text class="chat-sub" wx:if="{{plant}}">正在照顾：{{plant.name}}（{{plant.species}}）</text>
+    </view>
+
+    <scroll-view class="chat-body" scroll-y enhanced show-scrollbar="false" scroll-into-view="{{scrollTarget}}">
+      <view wx:if="{{!messages.length && greeting}}" id="msg-greeting" class="bubble-row bubble-row-assistant">
+        <image class="bubble-avatar" src="{{icons.aiChat}}" mode="aspectFit" />
+        <view class="bubble bubble-assistant">
+          <ai-text class="bubble-text" text="{{greeting}}" />
+        </view>
+      </view>
+
+      <view
+        wx:for="{{messages}}"
+        wx:key="index"
+        id="{{'msg-' + index}}"
+        class="bubble-row {{item.role === 'user' ? 'bubble-row-user' : (item.role === 'system' ? 'bubble-row-system' : 'bubble-row-assistant')}}"
+      >
+        <image
+          wx:if="{{item.role !== 'system'}}"
+          class="bubble-avatar"
+          src="{{item.role === 'user' ? icons.aiChatUser : icons.aiChat}}"
+          mode="aspectFit"
+        />
+        <view class="bubble {{item.role === 'user' ? 'bubble-user' : (item.role === 'system' ? 'bubble-system' : 'bubble-assistant')}}">
+          <!-- 用户自己说的话不做分段/高亮（那是自己的输入），只有 AI 和 system 的消息走 ai-text -->
+          <ai-text wx:if="{{item.role !== 'user'}}" class="bubble-text" text="{{item.content}}" />
+          <text wx:else class="bubble-text">{{item.content}}</text>
+          <text class="bubble-time">{{item.timeText}}</text>
+        </view>
+      </view>
+
+      <view wx:if="{{sending}}" class="bubble-row bubble-row-assistant">
+        <image class="bubble-avatar" src="{{icons.aiChat}}" mode="aspectFit" />
+        <view class="bubble bubble-assistant">
+          <view class="icon-row">
+            <image class="icon-sm" src="{{stageIcon}}" mode="aspectFit" />
+            <text class="bubble-text icon-row-text">{{stageText || '托蕾妮正在想…'}}</text>
+          </view>
+          <text class="bubble-time">已等待 {{elapsed}} 秒 · {{estimateText}}</text>
+          <view class="loading-bar">
+            <view class="loading-bar-inner"></view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{error}}" class="bubble-row bubble-row-assistant">
+        <image class="bubble-avatar" src="{{icons.aiChat}}" mode="aspectFit" />
+        <view class="bubble bubble-error">
+          <text class="bubble-text">{{error}}</text>
+          <button class="mini-btn" bindtap="onRetry">知道了</button>
+        </view>
+      </view>
+
+      <view wx:for="{{pendingChanges}}" wx:key="id" class="change-card">
+        <text class="change-title">{{item.title}}</text>
+        <text class="change-text">{{item.text}}</text>
+        <view class="change-actions">
+          <button
+            class="mini-btn mini-btn-primary"
+            data-id="{{item.id}}"
+            bindtap="onConfirmChange"
+            disabled="{{resolving === item.id}}"
+          >确认修改</button>
+          <button
+            class="mini-btn"
+            data-id="{{item.id}}"
+            bindtap="onRejectChange"
+            disabled="{{resolving === item.id}}"
+          >先不改</button>
+        </view>
+      </view>
+
+      <view wx:if="{{!messages.length}}" class="sample-row">
+        <text class="sample" data-text="叶子发黄怎么办" bindtap="onUseSample">叶子发黄怎么办</text>
+        <text class="sample" data-text="以后每 5 天提醒我浇一次水" bindtap="onUseSample">改成每 5 天浇水</text>
+      </view>
+
+      <view id="chat-bottom" class="chat-bottom-anchor"></view>
+    </scroll-view>
+
+    <view class="chat-compose">
+      <textarea
+        class="chat-textarea"
+        placeholder="问问托蕾妮，例如：叶子发黄怎么办"
+        value="{{input}}"
+        bindinput="onInput"
+        maxlength="-1"
+        auto-height="{{false}}"
+        fixed="{{true}}"
+        show-confirm-bar="{{false}}"
+        cursor-spacing="24"
+        disable-default-padding="{{true}}"
+      ></textarea>
+
+      <view class="chat-actions">
+        <button class="btn btn-primary chat-action" bindtap="onSend" disabled="{{sending}}">
+          {{sending ? '发送中…' : '发送'}}
+        </button>
+        <button class="btn btn-outline chat-action" bindtap="onEndChat">
+          {{pendingChanges.length ? '结束对话（' + pendingChanges.length + '）' : '结束对话'}}
+        </button>
+      </view>
+    </view>
+  </block>
+</view>

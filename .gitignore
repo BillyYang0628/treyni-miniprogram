@@ -1,0 +1,23 @@
+node_modules/
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Runtime data
+server/data/*.db
+server/data/*.db-*
+server/data/*.log
+server/data/ai_metrics.jsonl
+server/data/uploads/*
+
+# WeChat DevTools local config
+project.private.config.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp

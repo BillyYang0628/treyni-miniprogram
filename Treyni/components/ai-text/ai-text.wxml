@@ -1,0 +1,5 @@
+<view class="ai-text ai-tone-{{tone}}">
+  <view wx:for="{{blocks}}" wx:key="index" class="ai-p">
+    <text wx:for="{{item.segs}}" wx:for-item="seg" wx:key="index" class="ai-seg {{seg.cls}}">{{seg.text}}</text>
+  </view>
+</view>

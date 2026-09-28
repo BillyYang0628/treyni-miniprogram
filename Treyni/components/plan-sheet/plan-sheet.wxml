@@ -1,0 +1,44 @@
+<bottom-sheet show="{{show}}" title="计划一件事" bind:close="onCancel">
+  <view class="ps-block">
+    <text class="ps-label">要计划什么</text>
+    <view class="ps-kinds">
+      <view
+        wx:for="{{kinds}}"
+        wx:key="key"
+        class="ps-kind {{kindIndex === index ? 'ps-kind-on' : ''}}"
+        data-index="{{index}}"
+        bindtap="onPickKind"
+      >{{item.label}}</view>
+    </view>
+    <text class="ps-hint">浇水、施肥、打药、修剪、换盆会排进每日提醒；「其他」只记一笔。</text>
+  </view>
+
+  <view class="ps-row">
+    <text class="ps-row-label">安排在哪天</text>
+    <picker mode="date" value="{{dueDate}}" start="{{todayText}}" bindchange="onDateChange">
+      <text class="ps-row-value">{{dueText}} ›</text>
+    </picker>
+  </view>
+
+  <view class="ps-block">
+    <input
+      class="ps-input"
+      value="{{title}}"
+      maxlength="60"
+      placeholder="{{kindIndex === 5 ? '例如：买个补光灯' : '想怎么写就怎么写（可不填）'}}"
+      bindinput="onTitleInput"
+    />
+    <textarea
+      class="ps-textarea"
+      value="{{note}}"
+      maxlength="200"
+      placeholder="补充说明（可不填）"
+      bindinput="onNoteInput"
+    ></textarea>
+  </view>
+
+  <view slot="footer" class="ps-foot">
+    <button class="btn btn-outline ps-btn" bindtap="onCancel">取消</button>
+    <button class="btn btn-primary ps-btn" bindtap="onSubmit" disabled="{{saving}}">计划</button>
+  </view>
+</bottom-sheet>

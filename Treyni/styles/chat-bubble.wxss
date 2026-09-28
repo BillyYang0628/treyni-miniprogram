@@ -1,0 +1,90 @@
+/* 气泡样式：AI 花农对话页和「完成提醒」面板共用一份。
+ *
+ * 为什么单独抽出来（2026-09-20，B-2 完成面板对话化）：
+ * 面板要长得像对话，就得用和对话页一模一样的气泡；
+ * 各写一份的话，改了一处另一处就慢慢跑偏（这是双份样式的老问题）。
+ * 用法：在 wxss 顶部 @import "../../styles/chat-bubble.wxss"（组件）/ "../styles/..."（页面）。
+ */
+
+/* 每条消息 = 头像 + 气泡，用 row-reverse 把用户侧整体推到右边 */
+.bubble-row {
+  display: flex;
+  align-items: flex-start;
+  /* 头像左右各留了约 19% 的透明边，所以 CSS 间距要比视觉间距小 */
+  gap: 8rpx;
+  margin-bottom: 20rpx;
+}
+
+.bubble-row-assistant {
+  flex-direction: row;
+}
+
+.bubble-row-user {
+  flex-direction: row-reverse;
+}
+
+.bubble-row-system {
+  flex-direction: row;
+  justify-content: center;
+}
+
+.bubble-avatar {
+  /* 图本身已经画了气泡边框和尾巴（内容只占 70% 宽），
+     所以这里不能再加方框，只把方框尺寸放大到可视气泡约 56×69rpx。 */
+  width: 80rpx;
+  height: 80rpx;
+  flex: 0 0 80rpx;
+}
+
+.bubble {
+  max-width: 74%;
+  padding: 20rpx 22rpx;
+  border: 3rpx solid #2d3a2d;
+  background: #faf8f0;
+  box-shadow: 4rpx 4rpx 0 rgba(0, 0, 0, 0.1);
+}
+
+.bubble-assistant {
+  border-radius: 0 12rpx 12rpx 12rpx;
+}
+
+.bubble-user {
+  background: #1b4d3e;
+  border-color: #0d3328;
+  border-radius: 12rpx 0 12rpx 12rpx;
+}
+
+.bubble-user .bubble-text,
+.bubble-user .bubble-time {
+  color: #ffffff;
+}
+
+.bubble-system {
+  background: #f2f8f3;
+  border-color: #2d6a4f;
+}
+
+.bubble-error {
+  background: #fff0ef;
+  border-color: #7b2d26;
+}
+
+.bubble-error .bubble-text {
+  color: #7b2d26;
+}
+
+.bubble-text {
+  display: block;
+  color: #1a1a1a;
+  font-size: 27rpx;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.bubble-time {
+  display: block;
+  margin-top: 8rpx;
+  color: #8a958a;
+  font-size: 20rpx;
+}

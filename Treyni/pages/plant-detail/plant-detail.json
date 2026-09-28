@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "植物详情",
+  "usingComponents": {
+    "complete-sheet": "/components/complete-sheet/complete-sheet",
+    "repot-sheet": "/components/repot-sheet/repot-sheet",
+    "write-sheet": "/components/write-sheet/write-sheet",
+    "plan-sheet": "/components/plan-sheet/plan-sheet",
+    "undo-bar": "/components/undo-bar/undo-bar"
+  }
+}

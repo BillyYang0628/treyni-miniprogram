@@ -1,0 +1,95 @@
+<view class="page">
+  <view class="card profile-card">
+    <view class="profile-avatar">
+      <image class="profile-avatar-img" src="{{icons.profileAvatar}}" mode="aspectFit" />
+    </view>
+    <view class="profile-info">
+      <text class="profile-name">{{userInfo.nickname || '微信用户'}}</text>
+      <text class="profile-bio">{{userInfo ? '已通过微信登录' : '登录后可使用完整功能'}}</text>
+    </view>
+  </view>
+
+  <button
+    wx:if="{{!userInfo}}"
+    class="btn btn-primary btn-block"
+    loading="{{loggingIn}}"
+    disabled="{{loggingIn}}"
+    bindtap="onLogin"
+  >
+    微信登录
+  </button>
+
+  <view class="card location-card" bindtap="goCity">
+    <view class="location-head">
+      <view class="icon-row">
+        <image class="icon-sm" src="{{icons.location}}" mode="aspectFit" />
+        <text class="location-title">养护位置</text>
+      </view>
+      <text class="location-more">{{location ? '修改 ›' : '去设置 ›'}}</text>
+    </view>
+
+    <block wx:if="{{location}}">
+      <text class="location-city">{{location.city}}{{location.district && location.district !== location.city ? ' · ' + location.district : ''}}</text>
+      <view wx:if="{{weather}}" class="location-weather">
+        <view class="icon-row">
+          <image class="icon-sm" src="{{weatherIcon}}" mode="aspectFit" />
+          <text class="location-now">{{weather.now.text}} {{weather.now.temp}}℃ · 湿度 {{weather.now.humidity}}%</text>
+        </view>
+        <text wx:if="{{weather.today}}" class="location-forecast">
+          今天 {{weather.today.tmin}}~{{weather.today.tmax}}℃{{weather.today.rainMm ? ' · 降雨 ' + weather.today.rainMm + 'mm' : ' · 无降雨'}}
+        </text>
+        <view wx:if="{{weather.warnings.length}}" class="icon-row location-warning">
+          <image class="icon-xs" src="{{icons.pitfall}}" mode="aspectFit" />
+          <text>{{weather.warnings[0].title}}</text>
+        </view>
+      </view>
+      <text wx:elif="{{weatherError}}" class="location-error">{{weatherError}}（点这里重试）</text>
+      <text wx:elif="{{weatherLoading}}" class="location-empty">正在获取当地天气…</text>
+    </block>
+    <text wx:else class="location-empty">设置城市后，浇水提醒会结合当地天气推算</text>
+  </view>
+
+  <view class="card menu-card">
+    <text class="menu-title">养护工具</text>
+    <view class="menu-item" bindtap="goGarden">
+      <view class="icon-row menu-item-main">
+        <image class="icon-sm" src="{{icons.stage}}" mode="aspectFit" />
+        <text>我的花园</text>
+      </view>
+      <text class="muted">{{location ? '看这盆今天要不要浇水' : '添加并管理植物'}}</text>
+    </view>
+    <view class="menu-item" bindtap="goCareGuide">
+      <view class="icon-row menu-item-main">
+        <image class="icon-sm" src="{{icons.guide}}" mode="aspectFit" />
+        <text>种植条件速查</text>
+      </view>
+      <text class="muted">花盆 / 土壤 / 位置 / 光照</text>
+    </view>
+    <view class="menu-item" bindtap="onSubscribe">
+      <view class="icon-row menu-item-main">
+        <image class="icon-sm" src="{{icons.bell}}" mode="aspectFit" />
+        <text>养护提醒推送</text>
+      </view>
+      <text class="muted">{{subscribeStatus || (subscribeConfigured ? '点击开启' : '模板待配置')}}</text>
+    </view>
+    <view class="menu-item" bindtap="onAbout">
+      <view class="icon-row menu-item-main">
+        <image class="icon-sm" src="{{icons.leaf}}" mode="aspectFit" />
+        <text>关于托蕾妮</text>
+      </view>
+      <text class="muted">版本与说明</text>
+    </view>
+  </view>
+
+  <!-- 调试入口：只在开发版 / 真机调试 / 体验版出现，正式版自动隐藏 -->
+  <view wx:if="{{devMode}}" class="card menu-card debug-card">
+    <text class="menu-title">调试（正式版不显示）</text>
+    <view class="menu-item" bindtap="onEditServer">
+      <view class="icon-row menu-item-main">
+        <image class="icon-sm" src="{{icons.operate}}" mode="aspectFit" />
+        <text>后端地址</text>
+      </view>
+      <text class="muted debug-url">{{serverUrl}}</text>
+    </view>
+  </view>
+</view>

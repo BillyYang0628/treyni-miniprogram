@@ -1,0 +1,391 @@
+{
+  "G01": {
+    "label": "G01 观叶植物",
+    "member_count": 15,
+    "members": [
+      "绿萝",
+      "吊兰",
+      "虎尾兰",
+      "富贵竹",
+      "龟背竹",
+      "文竹",
+      "白掌",
+      "金钱树",
+      "孔雀竹芋",
+      "网纹草",
+      "合果芋",
+      "吊竹梅",
+      "龙血树",
+      "蟆叶秋海棠",
+      "豆瓣绿"
+    ],
+    "watering": {
+      "interval_days": 3
+    },
+    "fertilizing": {
+      "interval_days": 15
+    },
+    "pesticide": {
+      "interval_days": 20
+    },
+    "pruning": {
+      "interval_days": 30
+    }
+  },
+  "G02": {
+    "label": "G02 多肉植物",
+    "member_count": 6,
+    "members": [
+      "芦荟",
+      "长寿花",
+      "玉露",
+      "拟石莲花",
+      "生石花",
+      "熊童子"
+    ],
+    "watering": {
+      "interval_days": 7
+    },
+    "fertilizing": {
+      "interval_days": 30
+    },
+    "pesticide": {
+      "interval_days": 20
+    },
+    "pruning": {
+      "interval_days": 60
+    }
+  },
+  "G03": {
+    "label": "G03 仙人掌类",
+    "member_count": 3,
+    "members": [
+      "金琥",
+      "蟹爪兰",
+      "仙人球"
+    ],
+    "watering": {
+      "interval_days": 14
+    },
+    "fertilizing": {
+      "interval_days": 30
+    },
+    "pesticide": {
+      "interval_days": 30
+    },
+    "pruning": {
+      "interval_days": 90
+    }
+  },
+  "G04": {
+    "label": "G04 兰花·附生型",
+    "member_count": 2,
+    "members": [
+      "蝴蝶兰",
+      "石斛"
+    ],
+    "watering": {
+      "interval_days": 5
+    },
+    "fertilizing": {
+      "interval_days": 15
+    },
+    "pesticide": {
+      "interval_days": 15
+    },
+    "pruning": {
+      "interval_days": 90
+    }
+  },
+  "G05": {
+    "label": "G05 兰花·地生型",
+    "member_count": 2,
+    "members": [
+      "春兰",
+      "建兰"
+    ],
+    "watering": {
+      "interval_days": 5
+    },
+    "fertilizing": {
+      "interval_days": 20
+    },
+    "pesticide": {
+      "interval_days": 20
+    },
+    "pruning": {
+      "interval_days": 90
+    }
+  },
+  "G06": {
+    "label": "G06 一年生草本",
+    "member_count": 8,
+    "members": [
+      "向日葵",
+      "矮牵牛",
+      "波斯菊",
+      "万寿菊",
+      "百日草",
+      "大花马齿苋",
+      "虞美人",
+      "千日红"
+    ],
+    "watering": {
+      "interval_days": 2
+    },
+    "fertilizing": {
+      "interval_days": 10
+    },
+    "pesticide": {
+      "interval_days": 15
+    },
+    "pruning": {
+      "interval_days": 13
+    }
+  },
+  "G07": {
+    "label": "G07 二年生草本",
+    "member_count": 4,
+    "members": [
+      "三色堇",
+      "紫罗兰",
+      "毛地黄",
+      "羽衣甘蓝"
+    ],
+    "watering": {
+      "interval_days": 2
+    },
+    "fertilizing": {
+      "interval_days": 10
+    },
+    "pesticide": {
+      "interval_days": 10
+    },
+    "pruning": {
+      "interval_days": 10
+    }
+  },
+  "G08": {
+    "label": "G08 多年生草本",
+    "member_count": 11,
+    "members": [
+      "君子兰",
+      "天竺葵",
+      "菊花",
+      "石竹",
+      "非洲堇",
+      "四季秋海棠",
+      "金鱼吊兰",
+      "口红花",
+      "长春花",
+      "芍药",
+      "大岩桐"
+    ],
+    "watering": {
+      "interval_days": 3
+    },
+    "fertilizing": {
+      "interval_days": 10
+    },
+    "pesticide": {
+      "interval_days": 15
+    },
+    "pruning": {
+      "interval_days": 20
+    }
+  },
+  "G09": {
+    "label": "G09 球根花卉",
+    "member_count": 6,
+    "members": [
+      "风信子",
+      "郁金香",
+      "水仙",
+      "朱顶红",
+      "百合",
+      "番红花"
+    ],
+    "watering": {
+      "interval_days": 5
+    },
+    "fertilizing": {
+      "interval_days": 15
+    },
+    "pesticide": {
+      "interval_days": 20
+    },
+    "pruning": {
+      "interval_days": 30
+    }
+  },
+  "G10": {
+    "label": "G10 木本·观花灌木",
+    "member_count": 10,
+    "members": [
+      "月季",
+      "茉莉",
+      "栀子",
+      "绣球",
+      "三角梅",
+      "蓝雪花",
+      "杜鹃",
+      "茶花",
+      "六月雪",
+      "牡丹"
+    ],
+    "watering": {
+      "interval_days": 2
+    },
+    "fertilizing": {
+      "interval_days": 10
+    },
+    "pesticide": {
+      "interval_days": 15
+    },
+    "pruning": {
+      "interval_days": 30
+    }
+  },
+  "G11": {
+    "label": "G11 木本·观叶与乔木",
+    "member_count": 10,
+    "members": [
+      "发财树",
+      "橡皮树",
+      "琴叶榕",
+      "桂花",
+      "真柏",
+      "人参榕",
+      "榆树",
+      "银杏",
+      "五针松",
+      "幸福树"
+    ],
+    "watering": {
+      "interval_days": 3
+    },
+    "fertilizing": {
+      "interval_days": 20
+    },
+    "pesticide": {
+      "interval_days": 25
+    },
+    "pruning": {
+      "interval_days": 40
+    }
+  },
+  "G12": {
+    "label": "G12 藤本植物",
+    "member_count": 4,
+    "members": [
+      "常春藤",
+      "铁线莲",
+      "牵牛花",
+      "茑萝"
+    ],
+    "watering": {
+      "interval_days": 2
+    },
+    "fertilizing": {
+      "interval_days": 10
+    },
+    "pesticide": {
+      "interval_days": 15
+    },
+    "pruning": {
+      "interval_days": 18
+    }
+  },
+  "G13": {
+    "label": "G13 水生/湿生",
+    "member_count": 3,
+    "members": [
+      "铜钱草",
+      "碗莲",
+      "睡莲"
+    ],
+    "watering": {
+      "interval_days": 1
+    },
+    "fertilizing": {
+      "interval_days": 20
+    },
+    "pesticide": {
+      "interval_days": 30
+    },
+    "pruning": {
+      "interval_days": 30
+    }
+  },
+  "G14": {
+    "label": "G14 蕨类植物",
+    "member_count": 4,
+    "members": [
+      "铁线蕨",
+      "鸟巢蕨",
+      "波士顿蕨",
+      "鹿角蕨"
+    ],
+    "watering": {
+      "interval_days": 3
+    },
+    "fertilizing": {
+      "interval_days": 20
+    },
+    "pesticide": {
+      "interval_days": 30
+    },
+    "pruning": {
+      "interval_days": 60
+    }
+  },
+  "G15": {
+    "label": "G15 香草与蔬菜",
+    "member_count": 12,
+    "members": [
+      "薄荷",
+      "罗勒",
+      "番茄",
+      "辣椒",
+      "草莓",
+      "薰衣草",
+      "迷迭香",
+      "香葱",
+      "生菜",
+      "黄瓜",
+      "小白菜",
+      "茄子"
+    ],
+    "watering": {
+      "interval_days": 2
+    },
+    "fertilizing": {
+      "interval_days": 10
+    },
+    "pesticide": {
+      "interval_days": 15
+    },
+    "pruning": {
+      "interval_days": 15
+    }
+  },
+  "G16": {
+    "label": "G16 附生植物",
+    "member_count": 1,
+    "members": [
+      "空气凤梨"
+    ],
+    "watering": {
+      "interval_days": 4
+    },
+    "fertilizing": {
+      "interval_days": 20
+    },
+    "pesticide": {
+      "interval_days": 30
+    },
+    "pruning": {
+      "interval_days": 60
+    }
+  }
+}

@@ -1,0 +1,232 @@
+.generating-card,
+.error-card,
+.report-card,
+.section-card,
+.list-card,
+.empty-card,
+.history-card {
+  padding: 26rpx;
+  margin-bottom: 24rpx;
+}
+
+.generating-title {
+  display: block;
+  color: #0d3328;
+  font-size: 30rpx;
+  font-weight: 700;
+  margin-bottom: 10rpx;
+}
+
+.generating-time {
+  display: block;
+  color: #4a3728;
+  font-size: 23rpx;
+  margin-bottom: 16rpx;
+}
+
+.generating-note {
+  display: block;
+  margin-top: 14rpx;
+  color: #6b7d6b;
+  font-size: 22rpx;
+}
+
+.loading-bar {
+  width: 100%;
+  height: 12rpx;
+  overflow: hidden;
+  background: #efe6c9;
+}
+
+.loading-bar-inner {
+  width: 40%;
+  height: 100%;
+  background: #2d6a4f;
+  animation: treyni-loading 1.4s ease-in-out infinite;
+}
+
+@keyframes treyni-loading {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(250%);
+  }
+}
+
+.error-card {
+  border-color: #7b2d26;
+  background: #fff0ef;
+}
+
+.error-title {
+  display: block;
+  color: #7b2d26;
+  font-size: 28rpx;
+  font-weight: 700;
+  margin-bottom: 10rpx;
+}
+
+.error-detail {
+  display: block;
+  color: #7b2d26;
+  font-size: 23rpx;
+  margin-bottom: 16rpx;
+  white-space: pre-wrap;
+}
+
+.report-title {
+  display: block;
+  color: #0d3328;
+  font-size: 36rpx;
+  font-weight: 700;
+}
+
+.report-period {
+  display: block;
+  margin-top: 8rpx;
+  color: #6b7d6b;
+  font-size: 22rpx;
+}
+
+.stat-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16rpx;
+  margin-top: 22rpx;
+}
+
+.stat-item {
+  width: calc(33.33% - 11rpx);
+  padding: 16rpx 12rpx;
+  border: 3rpx solid #2d3a2d;
+  background: #ffffff;
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  color: #1b4d3e;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.stat-icon {
+  display: block;
+  width: 44rpx;
+  height: 44rpx;
+  margin: 0 auto 6rpx;
+}
+
+.stat-label {
+  display: block;
+  margin-top: 4rpx;
+  color: #6b7d6b;
+  font-size: 21rpx;
+}
+
+.summary-box {
+  margin-top: 22rpx;
+  padding: 18rpx;
+  border-left: 8rpx solid #2d6a4f;
+  background: #f2f8f3;
+}
+
+.summary-text {
+  color: #0d3328;
+  font-size: 26rpx;
+  line-height: 1.7;
+}
+
+.section-heading {
+  display: block;
+  margin-bottom: 12rpx;
+  padding-left: 16rpx;
+  border-left: 8rpx solid #2d6a4f;
+  color: #0d3328;
+  font-size: 29rpx;
+  font-weight: 700;
+}
+
+.section-body {
+  display: block;
+  color: #1a1a1a;
+  font-size: 26rpx;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.list-title {
+  display: block;
+  margin-bottom: 12rpx;
+  color: #0d3328;
+  font-size: 28rpx;
+  font-weight: 700;
+}
+
+/* 空状态卡片：插画居中 */
+.empty-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.list-item {
+  display: flex;
+  gap: 10rpx;
+  margin-bottom: 8rpx;
+}
+
+.list-dot {
+  flex: none;
+  color: #2d6a4f;
+  font-size: 26rpx;
+  line-height: 1.7;
+}
+
+.list-text {
+  flex: 1;
+  color: #1a1a1a;
+  font-size: 25rpx;
+  line-height: 1.7;
+}
+
+.empty-desc {
+  display: block;
+  margin-top: 10rpx;
+  color: #4a3728;
+  font-size: 24rpx;
+  line-height: 1.7;
+}
+
+.history-title {
+  display: block;
+  margin-bottom: 12rpx;
+  color: #0d3328;
+  font-size: 27rpx;
+  font-weight: 700;
+}
+
+.history-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12rpx;
+  padding: 14rpx 0;
+  border-bottom: 2rpx dashed #d8d2c0;
+}
+
+.history-item:last-child {
+  border-bottom: none;
+}
+
+.history-name {
+  color: #1b4d3e;
+  font-size: 25rpx;
+}
+
+.history-time {
+  color: #6b7d6b;
+  font-size: 21rpx;
+}

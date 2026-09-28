@@ -1,0 +1,21 @@
+<view wx:if="{{show}}" class="sheet-root">
+  <view class="sheet-mask" bindtap="onClose" catchtouchmove="blockMove"></view>
+
+  <view class="sheet-panel">
+    <view class="sheet-head">
+      <text class="sheet-title">{{title}}</text>
+      <text class="sheet-close" bindtap="onClose">关闭</text>
+    </view>
+
+    <scroll-view class="sheet-body" scroll-y enhanced show-scrollbar="{{false}}">
+      <view class="sheet-body-inner">
+        <slot></slot>
+        <view class="sheet-body-pad"></view>
+      </view>
+    </scroll-view>
+
+    <view class="sheet-foot">
+      <slot name="footer"></slot>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,46 @@
+{
+  "pages": [
+    "pages/garden/garden",
+    "pages/profile/profile",
+    "pages/plant-form/plant-form",
+    "pages/plant-detail/plant-detail",
+    "pages/diagnosis/diagnosis",
+    "pages/reminder-detail/reminder-detail",
+    "pages/journal-detail/journal-detail",
+    "pages/chat/chat",
+    "pages/care-guide/care-guide",
+    "pages/city/city",
+    "pages/report/report"
+  ],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "托蕾妮",
+    "navigationBarBackgroundColor": "#f0ead6",
+    "backgroundColor": "#f0ead6",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#6b7d6b",
+    "selectedColor": "#1b4d3e",
+    "backgroundColor": "#faf8f0",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/garden/garden",
+        "text": "我的花园",
+        "iconPath": "assets/icons/tabbar/tab-garden.png",
+        "selectedIconPath": "assets/icons/tabbar/tab-garden-active.png"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "我的",
+        "iconPath": "assets/icons/tabbar/tab-profile.png",
+        "selectedIconPath": "assets/icons/tabbar/tab-profile-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "componentFramework": "glass-easel",
+  "sitemapLocation": "sitemap.json",
+  "lazyCodeLoading": "requiredComponents"
+}

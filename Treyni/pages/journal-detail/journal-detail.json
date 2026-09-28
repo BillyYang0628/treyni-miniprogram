@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "养护记录",
+  "usingComponents": {
+    "ai-text": "/components/ai-text/ai-text"
+  }
+}

@@ -1,0 +1,257 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="empty-state">
+    <image class="icon-empty" src="{{icons.bell}}" mode="aspectFit" />
+    <text class="empty-title">正在打开提醒...</text>
+  </view>
+
+  <block wx:else>
+    <view wx:if="{{noticeText}}" class="inline-notice">{{noticeText}}</view>
+
+    <view class="card head-card" style="border-color: {{overdueColor}}">
+      <view class="head-top">
+        <view class="icon-row">
+          <image class="icon-sm" src="{{typeIcon}}" mode="aspectFit" />
+          <text class="head-type">{{typeText}}</text>
+        </view>
+        <text class="head-status {{lateDays ? 'head-status-overdue' : ''}}" style="{{lateDays ? 'color: ' + overdueColor : ''}}">{{statusText}}</text>
+      </view>
+      <text class="head-title">{{reminder.title}}</text>
+      <text class="head-plant" wx:if="{{plant}}">属于：{{plant.name}}（{{plant.species}}）</text>
+      <view class="head-summary">
+        <text class="head-summary-text">{{summary}}</text>
+      </view>
+      <view wx:if="{{restText}}" class="head-rest icon-row">
+        <image class="icon-xs" src="{{icons.stage}}" mode="aspectFit" />
+        <text class="head-rest-text icon-row-text">{{restText}}</text>
+      </view>
+    </view>
+
+    <!-- 下一轮提醒的 AI 安排状态 -->
+    <view wx:if="{{aiStatus && !isFeedback}}" class="card ai-card {{aiStatus === 'failed' ? 'ai-card-failed' : ''}}">
+      <block wx:if="{{regeneratingAdvice}}">
+        <text class="ai-title">托蕾妮正在重新安排</text>
+        <text class="ai-time">已等待 {{elapsed}} 秒 · {{estimateText}}</text>
+        <view class="loading-bar">
+          <view class="loading-bar-inner"></view>
+        </view>
+      </block>
+
+      <block wx:elif="{{aiStatus === 'pending'}}">
+        <text class="ai-title">托蕾妮正在安排下一轮</text>
+        <text class="ai-desc">正在结合这盆植物的档案、知识库和最近的养护记录，稍后会自动更新间隔和内容。</text>
+      </block>
+
+      <block wx:elif="{{aiStatus === 'failed'}}">
+        <text class="ai-title">AI 建议生成失败</text>
+        <text class="ai-error">{{aiError}}</text>
+        <text class="ai-desc">当前显示的仍是知识库标准方案，可以重新生成。</text>
+        <button class="btn btn-primary btn-block btn-with-icon" bindtap="onRegenerateAdvice">
+          <image class="icon-sm" src="{{icons.refresh}}" mode="aspectFit" />
+          <text>重新生成</text>
+        </button>
+      </block>
+
+      <block wx:else>
+        <text class="ai-title">已按这盆植物调整</text>
+        <text wx:if="{{aiReason}}" class="ai-desc">托蕾妮的判断：{{aiReason}}</text>
+        <text class="ai-desc">想改的话，用下面「完整操作方案」里的按钮一起重新生成即可。</text>
+      </block>
+    </view>
+
+    <!-- 天气模型：土壤水分估算 -->
+    <!-- 先让用户描述当前土壤状态，作为水分账户的起点。
+         以前起点固定是"今天刚浇透"，所以"剩余约 X%"跟实际浇水时间无关。 -->
+    <view wx:if="{{water && needsWaterBaseline}}" class="card baseline-card">
+      <view class="icon-row card-title-row">
+        <image class="icon-sm" src="{{icons.watering}}" mode="aspectFit" />
+        <text class="baseline-title">先确认一下现在的土</text>
+      </view>
+      <text class="baseline-desc">土壤水分估算需要一个起点。这盆现在是什么状态？选了之后就能按真实情况推算下次浇水时间。</text>
+      <view class="baseline-options">
+        <button
+          wx:for="{{baselineLevels}}"
+          wx:key="key"
+          class="mini-btn baseline-btn"
+          data-level="{{item.key}}"
+          bindtap="onSetWaterBaseline"
+          disabled="{{savingBaseline}}"
+        >{{item.label}}</button>
+      </view>
+    </view>
+
+    <view wx:if="{{water}}" class="card water-card">
+      <view class="icon-row card-title-row">
+        <image class="icon-sm" src="{{icons.watering}}" mode="aspectFit" />
+        <text class="water-title">土壤水分估算</text>
+      </view>
+      <view class="water-bar">
+        <view class="water-bar-inner" style="width: {{water.tank_percent}}%"></view>
+      </view>
+      <text class="water-percent">剩余约 {{waterPercentText}}</text>
+      <text wx:if="{{waterBaselineText}}" class="water-baseline">{{waterBaselineText}}</text>
+      <view wx:if="{{!needsWaterBaseline}}" class="baseline-adjust">
+        <text class="baseline-adjust-text">土的状态变了？</text>
+        <button
+          wx:for="{{baselineLevels}}"
+          wx:key="key"
+          class="baseline-chip"
+          data-level="{{item.key}}"
+          bindtap="onSetWaterBaseline"
+          disabled="{{savingBaseline}}"
+        >{{item.label}}</button>
+      </view>
+      <view class="water-rows">
+        <text class="water-row">预计下次浇水：{{water.next_due_date}}</text>
+        <text wx:if="{{water.et0}}" class="water-row">当前蒸发量：{{waterEt0Text}}（蒸发越强，土干得越快）</text>
+        <text class="water-row">摆放环境：{{water.exposure}}｜基质：{{water.soil}}</text>
+        <text wx:if="{{water.city}}" class="water-row">已结合 {{water.city}} 的天气推算</text>
+        <text wx:if="{{waterCorrectText}}" class="water-row">{{waterCorrectText}}</text>
+      </view>
+      <view wx:if="{{waterResetText}}" class="water-reset">
+        <image class="icon-xs" src="{{icons.rain}}" mode="aspectFit" />
+        <text class="water-reset-text">{{waterResetText}}</text>
+      </view>
+      <text class="water-note">这是根据天气、摆放环境和基质估算的，不是测量值。你随时可以点“完成这条提醒”手动重置。</text>
+    </view>
+
+    <!-- 用药效果询问：等待用户反馈 -->
+    <view wx:if="{{isFeedback && stage === 'ask'}}" class="card feedback-card">
+      <text class="feedback-title">第 {{feedbackRound}} 轮用药后，病虫害有改善吗？</text>
+      <text class="feedback-sub" wx:if="{{related}}">这一轮的处理是：{{related.summary_text}}</text>
+      <text class="feedback-desc">对照喷药前的照片看看：病斑有没有变干、不再扩散，新长出来的叶子是不是健康。</text>
+      <view class="feedback-actions">
+        <button class="btn btn-primary btn-block btn-with-icon feedback-yes" bindtap="onFeedbackEffective" disabled="{{submitting}}">
+          <image class="icon-sm" src="{{icons.done}}" mode="aspectFit" />
+          <text>有效，已经明显好转</text>
+        </button>
+        <button class="btn btn-outline btn-block btn-with-icon feedback-no" bindtap="onFeedbackIneffective" disabled="{{submitting}}">
+          <image class="icon-sm" src="{{icons.failed}}" mode="aspectFit" />
+          <text>无效，还是老样子</text>
+        </button>
+      </view>
+    </view>
+
+    <!-- 用药效果询问：两个疗程无效，交给 AI 判断 -->
+    <view wx:if="{{isFeedback && stage === 'consult'}}" class="card consult-card">
+      <text class="result-title">{{resultTitle}}</text>
+      <text class="result-text">{{resultText}}</text>
+
+      <view wx:if="{{consulting}}" class="generating">
+        <text class="generating-title">AI 正在分析这两轮的用药记录</text>
+        <text class="generating-time">已等待 {{elapsed}} 秒 · {{estimateText}}</text>
+        <view class="loading-bar">
+          <view class="loading-bar-inner"></view>
+        </view>
+      </view>
+
+      <view wx:if="{{consultError}}" class="detail-error">
+        <text class="error-title">判断失败</text>
+        <text class="error-detail">{{consultError}}</text>
+        <button class="btn btn-primary btn-block" bindtap="onRetryConsult">重试</button>
+      </view>
+
+      <block wx:if="{{suggestion}}">
+        <text class="consult-label">AI 建议的调整方案</text>
+        <ai-text class="detail-text" text="{{suggestion}}" />
+        <view class="feedback-actions">
+          <button class="btn btn-primary btn-block apply-plan" bindtap="onApplySuggestion" disabled="{{applying}}">采用这个方案</button>
+          <button class="btn btn-outline btn-block skip-plan" bindtap="onSkipSuggestion">暂不调整</button>
+        </view>
+      </block>
+    </view>
+
+    <!-- 反馈结果 -->
+    <view wx:if="{{isFeedback && stage === 'result'}}" class="card result-card">
+      <text class="result-title">{{resultTitle}}</text>
+      <text class="result-text">{{resultText}}</text>
+      <view wx:if="{{nextReminders.length}}" class="result-list">
+        <view wx:for="{{nextReminders}}" wx:key="key" class="result-item">
+          <text class="result-item-label">{{item.label}}</text>
+          <text class="result-item-title">{{item.title}}</text>
+          <text class="result-item-when">{{item.when}}</text>
+        </view>
+      </view>
+      <button class="btn btn-primary btn-block" bindtap="goBack">返回植物详情</button>
+    </view>
+
+    <!-- 普通提醒：完整操作方案 -->
+    <view wx:if="{{!isFeedback}}" class="card detail-card">
+      <view class="detail-header">
+        <view class="icon-row">
+          <image class="icon-sm" src="{{icons.treatmentFeedback}}" mode="aspectFit" />
+          <text class="detail-title">完整操作方案</text>
+        </view>
+        <text wx:if="{{detailSourceText}}" class="detail-source">{{detailSourceText}}</text>
+      </view>
+
+      <view wx:if="{{generating}}" class="generating">
+        <text class="generating-title">AI 正在生成详细方案</text>
+        <text class="generating-time">已等待 {{elapsed}} 秒 · {{estimateText}}</text>
+        <view class="loading-bar">
+          <view class="loading-bar-inner"></view>
+        </view>
+      </view>
+
+      <view wx:if="{{error}}" class="detail-error">
+        <text class="error-title">生成失败</text>
+        <text class="error-detail">{{error}}</text>
+        <button class="btn btn-primary btn-block" bindtap="onRegenerate">重试</button>
+      </view>
+
+      <view wx:if="{{detailItems.length}}" class="detail-list">
+        <view wx:for="{{detailItems}}" wx:key="index" class="detail-item">
+          <image class="detail-item-icon" src="{{item.icon}}" mode="aspectFit" />
+          <text class="detail-item-text">{{item.text}}</text>
+        </view>
+      </view>
+      <ai-text wx:elif="{{detailText}}" class="detail-text" text="{{detailText}}" />
+
+      <view wx:if="{{!detailText && !generating && !error}}" class="detail-empty">
+        <text class="muted">这条提醒还没有详细内容，可以直接按提醒标题操作。</text>
+      </view>
+
+      <view wx:if="{{generating}}" class="generating-note">
+        <text class="muted">生成期间可以先看上面的提醒摘要，不要退出页面。</text>
+      </view>
+
+      <view wx:if="{{detailText && !generating}}" class="detail-note">
+        <text class="detail-note-text">这份方案是根据你填写的档案和品种知识库生成的。如果盆土、摆放位置或天气有变化，点下面的「重新生成这份方案」告诉托蕾妮，她会重新安排。</text>
+      </view>
+    </view>
+
+    <view class="action-stack">
+      <button wx:if="{{!isFeedback && reminder.status !== 'completed'}}" class="btn btn-primary btn-block" bindtap="onComplete">完成这条提醒</button>
+      <button wx:if="{{canGenerate}}" class="btn btn-outline btn-block" bindtap="onRegenerate">
+        {{generateButtonText}}
+      </button>
+      <button wx:if="{{!isFeedback || stage === 'ask'}}" class="btn btn-outline btn-block btn-danger-outline" bindtap="onDelete">删除这条提醒</button>
+      <button wx:if="{{!isFeedback}}" class="btn btn-outline btn-block" bindtap="goBack">返回植物详情</button>
+    </view>
+  </block>
+
+  <!-- 和植物详情列表里的「完成」是同一个面板组件 -->
+  <complete-sheet
+    id="completeSheet"
+    show="{{sheetShow}}"
+    reminder="{{reminder}}"
+    bind:submit="onSheetSubmit"
+    bind:cancel="onSheetCancel"
+    bind:reschedule="onSheetReschedule"
+  />
+
+  <!-- 换盆是事件型，走独立的确认面板 -->
+  <repot-sheet
+    show="{{repotShow}}"
+    reminder="{{reminder}}"
+    plant="{{plant}}"
+    bind:submit="onRepotSubmit"
+    bind:cancel="onRepotCancel"
+  />
+
+  <undo-bar
+    show="{{undoShow}}"
+    seconds="{{undoSeconds}}"
+    bind:undo="onUndo"
+    bind:expire="onUndoExpire"
+  />
+</view>

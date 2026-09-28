@@ -1,0 +1,53 @@
+.ai-text {
+  display: block;
+}
+
+/* 段与段之间留空行——这是批注 2 的本体要求 */
+.ai-p {
+  margin-bottom: 18rpx;
+  color: #1a1a1a;
+  font-size: 27rpx;
+  line-height: 1.75;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.ai-p:last-child {
+  margin-bottom: 0;
+}
+
+.ai-seg {
+  display: inline;
+}
+
+/* 安全警示 / 结论句：浅红。只用于提醒注意，不改变字号 */
+.ai-warn {
+  color: #c0503c;
+}
+
+/* 关键剂量：深色加粗，比正文更实 */
+.ai-strong {
+  color: #0d3328;
+  font-weight: 700;
+}
+
+/* 放在浅红底上（比如完成面板的安全提示）：整段都是警示色，
+   段内的"安全词"高亮等于没变化，不会突兀 */
+.ai-tone-warn .ai-p,
+.ai-tone-warn .ai-warn {
+  color: #7b2d26;
+}
+
+.ai-tone-warn .ai-strong {
+  color: #7b2d26;
+  font-weight: 700;
+}
+
+/* 深色气泡（用户消息不用，预留给以后的深色卡片） */
+.ai-tone-inverse .ai-p {
+  color: #ffffff;
+}
+
+.ai-tone-inverse .ai-warn {
+  color: #f2c9c1;
+}

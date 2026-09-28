@@ -1,0 +1,174 @@
+.form-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 28rpx;
+  margin-bottom: 28rpx;
+  border-bottom: 3rpx dashed #7ee787;
+  text-align: center;
+}
+
+/* 顶部横幅插画：1024×512 的 WebP（PNG 版 266KB 超过小程序单图建议体积） */
+.form-header-banner {
+  width: 100%;
+  max-width: 560rpx;
+  margin-bottom: 16rpx;
+}
+
+.form-title {
+  color: #0d3328;
+  font-size: 34rpx;
+  font-weight: 700;
+  margin-bottom: 8rpx;
+}
+
+.image-picker {
+  width: 100%;
+  height: 240rpx;
+  overflow: hidden;
+  border: 3rpx dashed #2d3a2d;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-preview {
+  width: 100%;
+  height: 100%;
+}
+
+.image-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #6b7d6b;
+}
+
+.picker-input {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12rpx;
+  min-height: 88rpx;
+}
+
+.picker-arrow {
+  flex: none;
+  color: #4a3728;
+  font-size: 28rpx;
+}
+
+.form-input-gap {
+  margin-top: 12rpx;
+}
+
+.two-input-row {
+  display: flex;
+  gap: 12rpx;
+  margin-top: 12rpx;
+}
+
+.two-input-row .form-input {
+  flex: 1;
+}
+
+.form-hint-plain {
+  display: block;
+  margin-top: 8rpx;
+  color: #6b7d6b;
+  font-size: 21rpx;
+  line-height: 1.5;
+}
+
+.switch-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20rpx;
+}
+
+.switch-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.form-toggle {
+  display: block;
+  margin-top: 10rpx;
+  color: #2d6a4f;
+  font-size: 22rpx;
+  text-decoration: underline;
+}
+
+.form-link {
+  display: block;
+  margin-top: 10rpx;
+  color: #2d6a4f;
+  font-size: 23rpx;
+}
+
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: 12rpx;
+  margin-top: 12rpx;
+}
+
+.search-input {
+  flex: 1;
+}
+
+.search-clear {
+  flex: none;
+  color: #6b7d6b;
+  font-size: 23rpx;
+}
+
+.search-results {
+  margin-top: 12rpx;
+  border: 3rpx solid #2d3a2d;
+  background: #ffffff;
+}
+
+.search-empty {
+  padding: 20rpx;
+  color: #6b7d6b;
+  font-size: 24rpx;
+}
+
+.search-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12rpx;
+  padding: 18rpx 20rpx;
+  border-bottom: 2rpx dashed #d8d2c0;
+}
+
+.search-item:last-child {
+  border-bottom: none;
+}
+
+.search-item-name {
+  color: #0d3328;
+  font-size: 27rpx;
+  font-weight: 700;
+}
+
+.search-item-meta {
+  color: #6b7d6b;
+  font-size: 21rpx;
+}
+
+.form-hint {
+  display: block;
+  margin-top: 12rpx;
+  padding: 12rpx 16rpx;
+  border-left: 6rpx solid #2d6a4f;
+  background: #f2f8f3;
+  color: #0d3328;
+  font-size: 21rpx;
+  line-height: 1.5;
+}

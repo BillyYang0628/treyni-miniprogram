@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "提醒详情",
+  "usingComponents": {
+    "complete-sheet": "/components/complete-sheet/complete-sheet",
+    "repot-sheet": "/components/repot-sheet/repot-sheet",
+    "ai-text": "/components/ai-text/ai-text",
+    "undo-bar": "/components/undo-bar/undo-bar"
+  }
+}

@@ -1,0 +1,42 @@
+<view class="page">
+  <view class="guide-head">
+    <text class="guide-title">{{title}}</text>
+    <text class="guide-toggle" bindtap="onToggleAll">{{allOpen ? '全部收起' : '全部展开'}}</text>
+  </view>
+
+  <view wx:for="{{groups}}" wx:key="key" class="group {{item.open ? 'group-open' : ''}}">
+    <view class="group-head" data-index="{{index}}" bindtap="onToggleGroup">
+      <view class="group-head-text">
+        <text class="group-title">{{item.title}}</text>
+        <text wx:if="{{!item.open && item.hint}}" class="group-hint">{{item.hint}}</text>
+      </view>
+      <text class="group-arrow">{{item.open ? '收起 ▴' : '展开 ▾'}}</text>
+    </view>
+
+    <view wx:if="{{item.open}}" class="group-body">
+      <block wx:for="{{item.blocks}}" wx:key="index" wx:for-item="block">
+        <text wx:if="{{block.type === 'h4'}}" class="block-h4">{{block.text}}</text>
+        <text wx:elif="{{block.type === 'p'}}" class="block-p">{{block.text}}</text>
+        <view wx:elif="{{block.type === 'quote'}}" class="block-quote">
+          <text class="block-quote-text">{{block.text}}</text>
+        </view>
+        <view wx:elif="{{block.type === 'ul' || block.type === 'ol'}}" class="block-list">
+          <view wx:for="{{block.items}}" wx:key="index" wx:for-item="item" class="block-li">
+            <text class="block-li-dot">{{block.type === 'ol' ? (index + 1) + '.' : '·'}}</text>
+            <text class="block-li-text">{{item}}</text>
+          </view>
+        </view>
+        <view wx:elif="{{block.type === 'table'}}" class="block-table">
+          <view wx:for="{{block.rows}}" wx:key="index" wx:for-item="row" class="table-row">
+            <view wx:for="{{row}}" wx:key="index" wx:for-item="cell" wx:for-index="cellIndex" class="table-cell">
+              <text class="table-head">{{block.headers[cellIndex]}}</text>
+              <text class="table-value">{{cell}}</text>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+  </view>
+
+  <button class="btn btn-outline btn-block" bindtap="goBack">返回</button>
+</view>

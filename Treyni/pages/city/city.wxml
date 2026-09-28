@@ -1,0 +1,47 @@
+<view class="page">
+  <view wx:if="{{location}}" class="card current-card">
+    <text class="current-label">当前养护位置</text>
+    <text class="current-city">{{location.city}}{{location.district && location.district !== location.city ? ' · ' + location.district : ''}}</text>
+    <text class="current-note">托蕾妮会结合这里的天气推算浇水时间。</text>
+  </view>
+
+  <view class="card search-card">
+    <text class="search-title">搜索城市</text>
+    <view class="search-row">
+      <input
+        class="form-input search-input"
+        placeholder="例如：上海、成都、哈尔滨"
+        value="{{keyword}}"
+        bindinput="onInput"
+        confirm-type="search"
+        bindconfirm="onSearch"
+      />
+      <button class="btn btn-primary search-btn" bindtap="onSearch" disabled="{{loading}}">
+        {{loading ? '…' : '搜索'}}
+      </button>
+    </view>
+
+    <view wx:if="{{error}}" class="search-error">{{error}}</view>
+
+    <view wx:if="{{cities.length}}" class="city-list">
+      <view
+        wx:for="{{cities}}"
+        wx:key="id"
+        class="city-item"
+        data-index="{{index}}"
+        bindtap="onPick"
+      >
+        <text class="city-name">{{item.name}}</text>
+        <text class="city-meta">{{item.province}}{{item.district && item.district !== item.name ? ' · ' + item.district : ''}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{!cities.length && !loading && keyword && !error}}" class="search-empty">
+      没有搜索结果，换个写法试试（例如“上海市”改成“上海”）
+    </view>
+
+    <text class="search-hint">只保存城市级别的位置，不记录精确坐标。</text>
+  </view>
+
+  <button class="btn btn-outline btn-block" bindtap="goBack">返回</button>
+</view>

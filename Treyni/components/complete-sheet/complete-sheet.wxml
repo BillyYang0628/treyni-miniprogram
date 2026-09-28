@@ -1,0 +1,107 @@
+<bottom-sheet show="{{show}}" title="完成提醒" bind:close="onCancel">
+  <view class="cs-name">{{reminder.title}}</view>
+  <view class="cs-sub" wx:if="{{reminder.summary || reminder.summary_text}}">{{reminder.summary || reminder.summary_text}}</view>
+
+  <!-- 太早档：先问清楚是"真做了"还是"只是想把日子挪一挪" -->
+  <view wx:if="{{stage === 'ask'}}" class="cs-block">
+    <text class="cs-question">{{earlyText}}</text>
+    <view class="cs-options">
+      <view class="cs-option" bindtap="onPickDone">已经做了</view>
+      <view class="cs-option" bindtap="onPickReschedule">只是安排到那天</view>
+    </view>
+  </view>
+
+  <!-- 选日期：不记录完成，只改期 -->
+  <view wx:elif="{{stage === 'reschedule'}}" class="cs-block">
+    <text class="cs-question">希望托蕾妮哪一天提醒你？</text>
+    <picker
+      mode="date"
+      value="{{rescheduleDate}}"
+      start="{{todayText}}"
+      bindchange="onRescheduleDateChange"
+    >
+      <view class="cs-pick-date">{{rescheduleText}} ›</view>
+    </picker>
+    <text class="cs-hint">这次先不记为完成，只把日子挪过去。</text>
+  </view>
+
+  <block wx:else>
+  <!-- 托蕾妮先问一句：和 AI 花农对话页同一套气泡样式 -->
+  <view class="bubble-row bubble-row-assistant cs-chat">
+    <image class="bubble-avatar" src="{{icons.aiChat}}" mode="aspectFit" />
+    <view class="bubble bubble-assistant">
+      <text class="bubble-text">{{questionText}}</text>
+    </view>
+  </view>
+
+  <view class="cs-block">
+    <view class="cs-options">
+      <view
+        wx:for="{{options}}"
+        wx:key="value"
+        class="cs-option {{pickedMap[item.value] ? 'cs-option-on' : ''}}"
+        data-value="{{item.value}}"
+        bindtap="onToggle"
+      >{{item.label}}</view>
+    </view>
+    <text class="cs-hint">{{multi ? '可以多选；不确定也可以不选' : '选一个；不确定也可以不选'}}</text>
+  </view>
+
+  <!-- 点「完成」之后，勾选的内容以「我」的气泡发出去（就是给选项做的动画） -->
+  <view wx:if="{{echoText}}" class="bubble-row bubble-row-user cs-chat cs-echo">
+    <image class="bubble-avatar" src="{{icons.aiChatUser}}" mode="aspectFit" />
+    <view class="bubble bubble-user">
+      <text class="bubble-text">{{echoText}}</text>
+      <text class="bubble-time">刚发出去</text>
+    </view>
+  </view>
+
+  <view class="cs-row">
+    <text class="cs-row-label">实际做的时间</text>
+    <picker
+      mode="date"
+      value="{{occurredAt}}"
+      start="{{minDate}}"
+      end="{{todayText}}"
+      bindchange="onDateChange"
+    >
+      <text class="cs-row-value">{{occurredText}} ›</text>
+    </picker>
+  </view>
+
+  <!-- 逾期超过容忍天数时才出现：问"这段时间是什么情况" -->
+  <view wx:if="{{showLate}}" class="cs-block">
+    <text class="cs-question">{{lateQuestion}}</text>
+    <view class="cs-options cs-options-late">
+      <view
+        wx:for="{{lateOptions}}"
+        wx:key="key"
+        class="cs-option {{lateMap[item.key] ? 'cs-option-on' : ''}}"
+        data-key="{{item.key}}"
+        bindtap="onPickLate"
+      >{{item.label}}</view>
+    </view>
+    <text class="cs-hint">可以不选；选了「其他原因」就在下面的补充说明里写。</text>
+  </view>
+
+  <view class="cs-note">
+    <text class="cs-note-toggle" bindtap="onToggleNote">{{noteOpen ? '收起补充说明' : '＋ 补充说明'}}</text>
+    <textarea
+      wx:if="{{noteOpen}}"
+      class="cs-note-input"
+      value="{{note}}"
+      maxlength="200"
+      placeholder="还有什么想告诉托蕾妮的"
+      bindinput="onNoteInput"
+    ></textarea>
+  </view>
+
+  <ai-text wx:if="{{safetyText}}" class="cs-safety" tone="warn" text="{{safetyText}}" />
+  </block>
+
+  <view slot="footer" class="cs-foot">
+    <button class="btn btn-outline cs-btn" bindtap="onCancel">取消</button>
+    <button wx:if="{{stage === 'reschedule'}}" class="btn btn-primary cs-btn" bindtap="onSubmitReschedule">保存安排</button>
+    <button wx:elif="{{stage === 'form'}}" class="btn btn-primary cs-btn" bindtap="onSubmit">完成</button>
+  </view>
+</bottom-sheet>

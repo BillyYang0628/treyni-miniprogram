@@ -1,0 +1,7 @@
+<view wx:if="{{show}}" class="undo-bar">
+  <text class="undo-text">已记录</text>
+  <view class="undo-action" bindtap="onUndo">
+    <text>撤销</text>
+    <text class="undo-count">{{left}}</text>
+  </view>
+</view>

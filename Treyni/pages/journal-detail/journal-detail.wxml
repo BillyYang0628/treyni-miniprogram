@@ -1,0 +1,31 @@
+<view class="page">
+  <view wx:if="{{loading}}" class="empty-state">
+    <image class="icon-empty" src="{{icons.stage}}" mode="aspectFit" />
+    <text class="empty-title">正在打开记录...</text>
+  </view>
+
+  <block wx:else>
+    <view class="card record-card">
+      <view class="record-head">
+        <view class="icon-row">
+          <image class="icon-sm" src="{{typeIcon}}" mode="aspectFit" />
+          <text class="record-type">{{typeText}}</text>
+        </view>
+        <text class="record-time">{{timeText}}</text>
+      </view>
+      <text class="record-plant" wx:if="{{plant}}">属于：{{plant.name}}（{{plant.species}}）</text>
+
+      <image
+        wx:if="{{journal.image_url}}"
+        class="record-image"
+        src="{{journal.image_url}}"
+        mode="widthFix"
+        bindtap="onPreviewImage"
+      ></image>
+
+      <ai-text class="record-content" text="{{journal.content}}" />
+    </view>
+
+    <button class="btn btn-outline btn-block" bindtap="goBack">返回植物详情</button>
+  </block>
+</view>
