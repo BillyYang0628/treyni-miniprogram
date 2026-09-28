@@ -9,19 +9,10 @@ App({
     this.globalData.token = token || ''
     this.globalData.userInfo = userInfo || null
 
-    // 没有登录态就先静默登一次。
-    // 后端 token 有效期 7 天，过期后所有接口都会返回 401；
-    // request.js 里也有 401 自动重登的兜底，这里只是让首屏少一次失败的往返。
+    // 没有登录态直接去登录页：账号由管理员私下发放，客户端不做静默登录。
+    // token 有效期 7 天，过期后 request.js 会清凭据并把人送回登录页。
     if (!token) {
-      session.reLogin().then(
-        (data) => {
-          this.globalData.token = data.token
-          this.globalData.userInfo = data.user || null
-        },
-        () => {
-          // 登录失败不拦启动，页面自己的报错卡片会说明原因
-        }
-      )
+      wx.reLaunch({ url: '/pages/login/login' })
     }
 
     if (typeof wx.setEnableDebug === 'function') {

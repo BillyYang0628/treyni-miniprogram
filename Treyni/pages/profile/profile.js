@@ -161,25 +161,18 @@ Page({
     })
   },
 
-  async onLogin() {
-    if (this.data.loggingIn) return
-
-    this.setData({ loggingIn: true })
-    try {
-      const data = await auth.login()
-      this.setData({ userInfo: data.user })
-      wx.showToast({
-        title: '登录成功',
-        icon: 'success'
-      })
-    } catch (err) {
-      wx.showModal({
-        title: '登录失败',
-        content: err.message || '请确认后端服务已启动并配置微信登录',
-        showCancel: false
-      })
-    } finally {
-      this.setData({ loggingIn: false })
-    }
-  }
+  // 登录入口已经搬到 pages/login（账号口令、私下发放），
+  // 这里只留退出登录：作废服务端 token 并回登录页。
+  onLogout() {
+    wx.showModal({
+      title: '退出登录',
+      content: '退出后需要重新输入账号和口令才能进入。',
+      confirmText: '退出',
+      success: (res) => {
+        if (!res.confirm) return
+        this.setData({ userInfo: null })
+        auth.logout()
+      }
+    })
+  },
 })

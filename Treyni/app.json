@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/garden/garden",
     "pages/profile/profile",
     "pages/plant-form/plant-form",

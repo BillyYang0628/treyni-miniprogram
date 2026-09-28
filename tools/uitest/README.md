@@ -13,7 +13,7 @@ npm install
 node verify-reminder-timing.js     # threshold table + freezing into meta.timing
 node verify-occurred-at.js         # next round scheduled from the actual date + undo
 node verify-water-baseline.js      # soil-water account (creates and deletes its own plant)
-node verify-session-recovery.js    # invalid token → silent re-login → replayed request
+node verify-account-login.js       # account login, wrong password, 401 → back to login
 node verify-purchase-guide.js      # purchase-guide tiers and alias matching
 node verify-share.js               # share to chat and to timeline (field-by-field)
 ```

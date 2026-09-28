@@ -167,23 +167,14 @@ function request(options) {
   const absolute = path.startsWith('http')
 
   return sendRequest(url, options, session.getToken()).catch((err) => {
-    // 登录态过期：清掉旧的，静默换一个新的，再把刚才那次请求重发一遍。
-    // 只重试一次——重登之后还 401，说明不是 token 的问题，直接把错误抛出去。
+    // 登录态不可用：账号是私下发放的，没有静默续期这回事，
+    // 清掉本地凭据、回登录页，让使用者重新输入账号口令。
     if (err.isAuthError) {
-      session.clear()
-      return session.reLogin().then(
-        () => sendRequest(url, options, session.getToken()),
-        (loginErr) => {
-          throw {
-            code: 401,
-            url,
-            isAuthError: true,
-            message: '登录态已失效',
-            detail: '自动重新登录没成功：' + (loginErr.message || '未知原因') +
-              '\n请到「我的」页点「微信登录」，然后再试一次。'
-          }
-        }
-      )
+      session.requireLogin()
+      err.message = '登录态已失效，请重新登录'
+      err.detail = '后端拒绝了这次请求（token 过期或已在别处退出）。\n' +
+        '账号口令由管理员发放，请用收到的账号重新登录。'
+      throw err
     }
 
     // 网络问题：换个候选地址再试（绝对地址不参与）

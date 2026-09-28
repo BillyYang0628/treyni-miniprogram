@@ -27,6 +27,10 @@ function createTables() {
       unionid TEXT,
       nickname TEXT,
       avatar_url TEXT,
+      username TEXT,
+      password_hash TEXT,
+      status TEXT,
+      last_login_at TEXT,
       created_at TEXT NOT NULL DEFAULT (datetime('now')),
       updated_at TEXT NOT NULL DEFAULT (datetime('now'))
     );
@@ -245,6 +249,7 @@ CREATE INDEX IF NOT EXISTS idx_journal_plant_id ON plant_journal(plant_id);
   migrateReminderWordingV1()
   migratePlantProfileFields()
   migrateJournalKindFields()
+  migrateAccountLogin()
 }
 
 function hasRunMigration(name) {
@@ -609,6 +614,31 @@ function migrateImagePaths() {
       }
     }
   }
+}
+
+/**
+ * 账号口令登录：给 users 补上 username / password_hash / status / last_login_at。
+ * 纯账号用户没有微信 openid，而这一列是 NOT NULL UNIQUE，
+ * 所以统一写一个合成值 account:<username>，不必重建表。
+ */
+function migrateAccountLogin() {
+  const name = 'account-login-v1'
+  if (hasRunMigration(name)) return
+
+  const columns = db.prepare('PRAGMA table_info(users)').all()
+  const existing = new Set(columns.map((column) => column.name))
+
+  const additions = [
+    ['username', 'TEXT'],
+    ['password_hash', 'TEXT'],
+    ['status', 'TEXT'],
+    ['last_login_at', 'TEXT']
+  ]
+  for (const [column, type] of additions) {
+    if (!existing.has(column)) db.exec(`ALTER TABLE users ADD COLUMN ${column} ${type}`)
+  }
+  db.exec('CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username ON users(username) WHERE username IS NOT NULL')
+  markMigration(name)
 }
 
 function migratePlantReminders() {

@@ -4,19 +4,19 @@
       <image class="profile-avatar-img" src="{{icons.profileAvatar}}" mode="aspectFit" />
     </view>
     <view class="profile-info">
-      <text class="profile-name">{{userInfo.nickname || '微信用户'}}</text>
-      <text class="profile-bio">{{userInfo ? '已通过微信登录' : '登录后可使用完整功能'}}</text>
+      <text class="profile-name">{{userInfo.nickname || '未登录'}}</text>
+      <text class="profile-bio">{{userInfo ? '账号：' + (userInfo.username || '—') : '登录后可使用完整功能'}}</text>
     </view>
   </view>
 
   <button
-    wx:if="{{!userInfo}}"
+    wx:if="{{userInfo}}"
     class="btn btn-primary btn-block"
     loading="{{loggingIn}}"
     disabled="{{loggingIn}}"
-    bindtap="onLogin"
+    bindtap="onLogout"
   >
-    微信登录
+    退出登录
   </button>
 
   <view class="card location-card" bindtap="goCity">

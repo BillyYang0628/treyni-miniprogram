@@ -3,20 +3,15 @@ const config = require('./config')
 /**
  * 登录态。
  *
- * 背景（2026-09-18）：后端发的 token 有效期 7 天（AUTH_TOKEN_TTL_MS=604800000）。
- * 手机里的 token 是 9-10 登录时发的，9-17 过期，之后每个请求都返回 401
- * 「登录已过期，请重新登录」——而小程序这边完全没处理：不清理、不重登、不提示，
- * 用户只能干看着报错。
+ * 2026-09-28 起改用「账号口令」：账号只能由 tools/admin/create-account.js 生成，
+ * 私下发放给使用者，客户端没有注册入口，也没有微信静默登录。
  *
- * 现在：401 时自动清掉旧 token，用 wx.login 静默换一个新的，再重发请求。
- * wx.login 不需要用户授权、不弹窗，所以整个过程用户是无感的。
+ * 因此 401 不再有"自动续期"这条路：旧 token 一律清掉并回到登录页，
+ * 由使用者自己重新输入账号口令。
  *
  * 注意：这里用的是原始 wx.request，不走 utils/request——
- * 否则 request 401 → 重登 → 走 request → 401 会绕成循环依赖。
+ * 否则 request 401 → 回登录页 → 走 request → 401 会绕成循环依赖。
  */
-
-// 并发请求同时 401 时，只发起一次登录，其余共用同一个 Promise
-let inflight = null
 
 function getToken() {
   try {
@@ -40,68 +35,53 @@ function clear() {
   }
 }
 
-/** 用 wx.login 的 code 换后端 token */
-function requestToken(profile) {
-  const extra = profile || {}
-
+/** 账号口令登录（后端 POST /auth/login） */
+function loginWithAccount(username, password) {
   return new Promise((resolve, reject) => {
-    wx.login({
-      success(res) {
-        if (!res.code) {
-          reject(new Error('微信登录失败：没拿到 code'))
+    wx.request({
+      url: config.getBaseUrl() + '/auth/login',
+      method: 'POST',
+      header: { 'Content-Type': 'application/json' },
+      timeout: config.timeout,
+      data: {
+        username: String(username || '').trim(),
+        password: String(password || '')
+      },
+      success(r) {
+        if (r.statusCode >= 200 && r.statusCode < 300 && r.data && r.data.token) {
+          saveSession(r.data)
+          resolve(r.data)
           return
         }
-
-        wx.request({
-          url: config.getBaseUrl() + '/auth/wechat/login',
-          method: 'POST',
-          header: { 'Content-Type': 'application/json' },
-          timeout: config.timeout,
-          data: {
-            code: res.code,
-            nickname: extra.nickname || '',
-            avatar_url: extra.avatar_url || ''
-          },
-          success(r) {
-            if (r.statusCode >= 200 && r.statusCode < 300 && r.data && r.data.token) {
-              saveSession(r.data)
-              resolve(r.data)
-            } else {
-              reject(new Error((r.data && r.data.error) || '登录失败'))
-            }
-          },
-          fail(err) {
-            reject(new Error((err && err.errMsg) || '登录请求失败'))
-          }
-        })
+        reject(new Error((r.data && r.data.error) || '登录失败'))
       },
       fail(err) {
-        reject(new Error((err && err.errMsg) || '微信登录失败'))
+        reject(new Error((err && err.errMsg) || '登录请求失败'))
       }
     })
   })
 }
 
-/** 静默重新登录（登录态过期时自动调用） */
-function reLogin(profile) {
-  if (!inflight) {
-    inflight = requestToken(profile).then(
-      (data) => {
-        inflight = null
-        return data
-      },
-      (err) => {
-        inflight = null
-        throw err
-      }
-    )
+/**
+ * 登录态不可用：清掉本地凭据并回到登录页。
+ * 已经在登录页上就不再跳，免得 reLaunch 打转。
+ */
+function requireLogin() {
+  clear()
+  try {
+    const pages = typeof getCurrentPages === 'function' ? getCurrentPages() : []
+    const current = pages.length ? pages[pages.length - 1].route : ''
+    if (current === 'pages/login/login') return
+  } catch (e) {
+    // 取不到页面栈时按需要跳转处理
   }
-  return inflight
+  wx.reLaunch({ url: '/pages/login/login' })
 }
 
 module.exports = {
   getToken,
+  saveSession,
   clear,
-  requestToken,
-  reLogin
+  loginWithAccount,
+  requireLogin
 }

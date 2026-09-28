@@ -1,0 +1,98 @@
+.page {
+  min-height: 100vh;
+  padding: 120rpx 48rpx 60rpx;
+  background: #f0ead6;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 56rpx;
+}
+
+.brand-mark {
+  width: 160rpx;
+  height: 160rpx;
+  margin-bottom: 20rpx;
+}
+
+.brand-name {
+  font-size: 46rpx;
+  font-weight: 600;
+  color: #1b4d3e;
+  letter-spacing: 4rpx;
+}
+
+.brand-sub {
+  margin-top: 8rpx;
+  font-size: 26rpx;
+  color: #6b7d6b;
+}
+
+.card {
+  padding: 40rpx 36rpx;
+  background: #faf8f0;
+  border: 2rpx solid #e2d9be;
+  border-radius: 24rpx;
+  box-shadow: 0 6rpx 20rpx rgba(27, 77, 62, 0.06);
+}
+
+.field {
+  margin-bottom: 28rpx;
+}
+
+.field-label {
+  display: block;
+  margin-bottom: 12rpx;
+  font-size: 26rpx;
+  color: #4a5a4a;
+}
+
+.field-input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 92rpx;
+  line-height: 92rpx;
+  padding: 0 24rpx;
+  font-size: 30rpx;
+  color: #23331f;
+  background: #ffffff;
+  border: 2rpx solid #e2d9be;
+  border-radius: 14rpx;
+}
+
+.field-ph {
+  color: #a9b0a4;
+  font-size: 28rpx;
+}
+
+.error-text {
+  margin-bottom: 20rpx;
+  font-size: 26rpx;
+  line-height: 1.5;
+  color: #c0392b;
+}
+
+.submit {
+  margin-top: 12rpx;
+  font-size: 32rpx;
+  color: #f7f4e9;
+  background: #1b4d3e;
+  border-radius: 14rpx;
+}
+
+.submit-busy {
+  opacity: 0.7;
+}
+
+.footnote {
+  margin-top: 24rpx;
+  font-size: 24rpx;
+  line-height: 1.7;
+  color: #8b9689;
+  text-align: center;
+}

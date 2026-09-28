@@ -123,8 +123,11 @@ The simulator is a Chromium browser; phones are not.
   a short candidate list, probes `/health` on failure, switches to whichever answers, tells
   the user, and replays the request. Wi-Fi changes stopped being an outage.
 - **Session expiry presented as a network error.** A 401 rendered as "can't reach the
-  backend", which sent debugging in the wrong direction for a while. Now a 401 is a
-  distinct state: silent re-login, one replay, and an explicit message only if that fails.
+  backend", which sent debugging in the wrong direction for a while. A 401 is now a
+  distinct state with its own handling. (For a few weeks it was answered with a silent
+  re-login and a replayed request; that went away when the app moved to invite-only
+  accounts, because there is nothing to renew silently — the client clears the token and
+  returns to the login screen.)
 - **`scroll-view` padding.** Padding on a `scroll-view` pushes content without narrowing the
   content box, so children were laid out against the full width and overflowed on the right.
   Padding moved to an inner wrapper.

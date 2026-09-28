@@ -36,6 +36,10 @@ const config = {
   storageRoot: resolveFromRoot(process.env.STORAGE_ROOT || './data/uploads'),
   publicBaseUrl: process.env.PUBLIC_BASE_URL || 'http://localhost:3000',
   authTokenTtlMs: Number(process.env.AUTH_TOKEN_TTL_MS || 7 * 24 * 60 * 60 * 1000),
+  auth: {
+    // 账号口令是唯一的常规登录方式；微信登录默认关闭，仅在本地调试时打开
+    allowWechat: process.env.AUTH_ALLOW_WECHAT === 'true'
+  },
   wechat: {
     appid: process.env.WECHAT_APPID || '',
     secret: process.env.WECHAT_SECRET || '',

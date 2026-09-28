@@ -1,16 +1,34 @@
+const config = require('./config')
 const session = require('./session')
 
 /**
- * 「我的」页的登录按钮走这里。
- * 真正的换 token 逻辑在 utils/session.js——登录态过期时 request.js 也会用它自动重登，
- * 两边共用一份实现，避免以后改一处忘一处。
+ * 账号口令登录。
+ * 账号由管理员在服务端用 tools/admin/create-account.js 生成后私下发放，
+ * 客户端没有注册入口，也不提供自助找回。
  */
-function login(profile = {}) {
-  return session.requestToken(profile)
+function login(username, password) {
+  return session.loginWithAccount(username, password)
 }
 
+/** 退出登录：先让服务端作废这个 token，再清本地并回登录页 */
 function logout() {
-  session.clear()
+  const token = session.getToken()
+  if (token) {
+    wx.request({
+      url: config.getBaseUrl() + '/auth/logout',
+      method: 'POST',
+      header: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token
+      },
+      timeout: config.timeout,
+      complete() {
+        session.requireLogin()
+      }
+    })
+    return
+  }
+  session.requireLogin()
 }
 
 function getToken() {
