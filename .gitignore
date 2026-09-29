@@ -12,6 +12,9 @@ server/data/*.log
 server/data/ai_metrics.jsonl
 server/data/uploads/*
 
+# 账号台账（含明文口令，只能在服务器本地留存，绝不能提交）
+tools/gen/
+
 # WeChat DevTools local config
 project.private.config.json
 

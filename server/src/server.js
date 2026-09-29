@@ -55,9 +55,13 @@ function lanAddresses() {
  * 内容没变就不写，否则每次启动都碰文件，会一直触发开发者工具的文件监听。
  */
 function syncLanHostToMiniProgram(lan) {
-  // 生产环境（PUBLIC_BASE_URL 是 https 域名）不做局域网同步：
-  // 服务器上既没有小程序源码目录，把 10.x 内网地址写给小程序也没有意义。
-  if (/^https:\/\//i.test(config.publicBaseUrl)) return
+  // 只在"本机开发"场景做同步。
+  // 2026-09-29 踩过：一开始只挡了 https，结果生产机用公网 IP 跑的时候照样把
+  // 服务器的内网地址（10.2.0.17）写进了小程序源码，白白改了工作区。
+  // 所以判断改成"地址看起来是不是本机/局域网"，不是就整段跳过。
+  const base = String(config.publicBaseUrl || '')
+  const looksLocal = /^https?:\/\/(127\.|localhost|0\.0\.0\.0|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/i.test(base)
+  if (!looksLocal) return
 
   const virtualAdapter = /vpn|radmin|virtual|vmware|蓝牙|本地连接 \*/i
   const primary = lan.find((item) => !virtualAdapter.test(item.name)) || lan[0]
