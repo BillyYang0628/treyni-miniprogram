@@ -53,9 +53,10 @@ const LAN_ORIGIN = 'http://' + LAN_HOST + ':' + PORT
  * 升级到正式版会继续用那个旧 IP，直接白屏。
  * 所以正式版**忽略覆盖和所有候选**，只用这个域名。
  *
- * 备案通过后把这里改成真实域名；域名必须 HTTPS 且已备案（微信的硬要求）。
+ * 域名必须 HTTPS 且已备案（微信的硬要求）。
+ * 2026-09-29 定：treyni.cn，后端走 api 子域。
  */
-const PROD_ORIGIN = 'https://api.example.com' // TODO: 换成你的备案域名
+const PROD_ORIGIN = 'https://api.treyni.cn'
 
 // 自动切换时探测候选地址用的超时。只探一个 /health，不该等太久。
 const PROBE_TIMEOUT = 3000

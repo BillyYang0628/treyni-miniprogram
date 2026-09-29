@@ -34,7 +34,7 @@ function loadConfig(wxStub) {
   return require(target)
 }
 
-const PROD = 'https://api.example.com' // 与 config.js 里的占位一致
+const PROD = 'https://api.treyni.cn' // 与 config.js 的 PROD_ORIGIN 保持一致
 
 // 1) 开发者工具
 const devtools = loadConfig(makeWx({ platform: 'devtools' }))
