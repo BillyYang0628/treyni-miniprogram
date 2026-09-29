@@ -1,0 +1,27 @@
+[Unit]
+Description=Treyni API (托蕾妮小程序后端)
+Documentation=https://github.com/BillyYang0628/treyni-miniprogram
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=treyni
+Group=treyni
+WorkingDirectory=/srv/treyni/app/server
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/node --env-file=.env src/server.js
+Restart=always
+RestartSec=3
+# 日志：一份进 journal，一份落盘方便直接查
+StandardOutput=append:/var/log/treyni/api.log
+StandardError=append:/var/log/treyni/api.err.log
+# 基本加固
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+ReadWritePaths=/srv/treyni /var/log/treyni
+
+[Install]
+WantedBy=multi-user.target

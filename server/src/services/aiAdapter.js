@@ -1,6 +1,7 @@
 const knowledge = require('./knowledge')
 const config = require('../config')
 const aiMetrics = require('./aiMetrics')
+const aiBudget = require('./aiBudget')
 const { restInfo } = require('./transplantRest')
 
 const AI_TIMEOUT_MS = 300000
@@ -1052,6 +1053,15 @@ class AIAdapter {
   }
 
   async callChatModel(messages, timeoutMs, errorLabel, options = {}) {
+    // 先看今天的额度：超了就不要再把请求发出去（发出去就是花钱）
+    const budget = aiBudget.check()
+    if (!budget.allowed) {
+      const err = new Error(budget.message)
+      err.code = 'AI_DAILY_LIMIT'
+      err.status = 429
+      throw err
+    }
+
     const started = Date.now()
     const payload = this.buildPayload(messages, options)
 
@@ -1088,6 +1098,8 @@ class AIAdapter {
       ok: Boolean(response.ok && !data.error),
       error: data && data.error ? String(data.error.message || data.error.code || '').slice(0, 200) : null
     })
+
+    aiBudget.record()
 
     if (!response.ok || data.error) {
       const err = new Error((data.error && data.error.message) || errorLabel)

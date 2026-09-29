@@ -45,6 +45,18 @@ const PORT = 3000
 const DEVTOOLS_ORIGIN = 'http://127.0.0.1:' + PORT
 const LAN_ORIGIN = 'http://' + LAN_HOST + ':' + PORT
 
+/**
+ * 正式版（release）固定走这个地址。
+ *
+ * 为什么必须单独有一档：局域网地址是给真机调试用的，正式版连不上；
+ * 而"手动覆盖"是存在用户手机缓存里的——装过体验版并改过地址的人，
+ * 升级到正式版会继续用那个旧 IP，直接白屏。
+ * 所以正式版**忽略覆盖和所有候选**，只用这个域名。
+ *
+ * 备案通过后把这里改成真实域名；域名必须 HTTPS 且已备案（微信的硬要求）。
+ */
+const PROD_ORIGIN = 'https://api.example.com' // TODO: 换成你的备案域名
+
 // 自动切换时探测候选地址用的超时。只探一个 /health，不该等太久。
 const PROBE_TIMEOUT = 3000
 
@@ -77,15 +89,26 @@ function isDevEnv() {
   }
 }
 
+/** 是否是已发布的正式版（体验版/开发版都算"非正式版"） */
+function isReleaseEnv() {
+  try {
+    if (typeof wx === 'undefined') return false
+    const account = wx.getAccountInfoSync()
+    return Boolean(account && account.miniProgram && account.miniProgram.envVersion === 'release')
+  } catch (e) {
+    return false
+  }
+}
+
 /** 用户可能只输 `10.0.0.5` 或 `10.0.0.5:3000`，这里补齐协议和端口 */
 function normalizeBaseUrl(input) {
   let value = String(input || '').trim().replace(/\/+$/, '')
   if (!value) return ''
   if (!/^https?:\/\//i.test(value)) value = 'http://' + value
 
-  // 没写端口就补上默认端口（已经写了 http:// 带路径的除外）
+  // 只有 http 才补默认端口：https 走 443，补成 :3000 会把正式域名写坏
   const matched = value.match(/^https?:\/\/([^/]+)(\/.*)?$/i)
-  if (matched && matched[1].indexOf(':') === -1) {
+  if (matched && /^http:\/\//i.test(value) && matched[1].indexOf(':') === -1) {
     value = value.replace(/^(https?:\/\/[^/]+)/i, '$1:' + PORT)
   }
   return value
@@ -93,6 +116,7 @@ function normalizeBaseUrl(input) {
 
 /** 没有手动覆盖时的默认地址 */
 function getDefaultBaseUrl() {
+  if (isReleaseEnv()) return PROD_ORIGIN
   return getPlatform() === 'devtools' ? DEVTOOLS_ORIGIN : LAN_ORIGIN
 }
 
@@ -101,6 +125,9 @@ function getDefaultBaseUrl() {
  * request.js 在连不上时会顺着这个列表往下试，试通了就记成手动地址。
  */
 function getProbeOrder() {
+  // 正式版没有可切换的候选：出问题就是后端/域名/备案的事，探测局域网地址只会白等 3 秒
+  if (isReleaseEnv()) return [PROD_ORIGIN]
+
   const current = getBaseUrl()
   const all = [DEVTOOLS_ORIGIN].concat(
     LAN_HOSTS.map(function (host) { return 'http://' + host + ':' + PORT })
@@ -132,6 +159,8 @@ function getOverrideBaseUrl() {
  * 每次请求都会重新算，所以在「我的」页改完立刻生效，不用重启小程序。
  */
 function getBaseUrl() {
+  // 正式版一律走备案域名，忽略历史缓存里的手动覆盖
+  if (isReleaseEnv()) return PROD_ORIGIN
   return getOverrideBaseUrl() || getDefaultBaseUrl()
 }
 
@@ -157,7 +186,9 @@ module.exports = {
   getOverrideBaseUrl,
   getProbeOrder,
   isDevEnv,
+  isReleaseEnv,
   normalizeBaseUrl,
+  prodOrigin: PROD_ORIGIN,
   lanHost: LAN_HOST,
   lanHosts: LAN_HOSTS,
   port: PORT,
