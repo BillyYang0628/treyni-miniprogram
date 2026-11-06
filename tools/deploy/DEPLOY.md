@@ -16,7 +16,7 @@
 
 ## 1. 初始化服务器
 
-把 `tools/deploy/` 整个目录传到服务器（或直接在服务器上 `git clone` 本项目后进目录执行），然后：
+把 `运维/` 整个目录传到服务器（或直接在服务器上 `git clone` 本项目后进目录执行），然后：
 
 ```bash
 sudo bash bootstrap.sh
@@ -78,22 +78,22 @@ sudo journalctl -u treyni-api -n 50 --no-pager
 
 ```bash
 cd /srv/treyni/app
-sudo -u treyni node tools/admin/create-account.js new --note="给X老师"
-sudo -u treyni node tools/admin/create-account.js list
+sudo -u treyni node 工具/admin/create-account.js new --note="给X老师"
+sudo -u treyni node 工具/admin/create-account.js list
 ```
 
-口令只在生成时打印一次，同时追加到 `tools/gen/accounts.tsv`（不入库）。发给使用者后建议提醒他们别转发。
+口令只在生成时打印一次，同时追加到 `工具/gen/accounts.tsv`（不入库）。发给使用者后建议提醒他们别转发。
 
 ## 7. 日常运维
 
 | 事项 | 命令 |
 | --- | --- |
-| 更新版本 | `sudo bash tools/deploy/update.sh`（失败会打印回滚命令） |
+| 更新版本 | `sudo bash 运维/update.sh`（失败会打印回滚命令） |
 | 看日志 | `sudo journalctl -u treyni-api -f` 或 `tail -f /var/log/treyni/api.log` |
 | 备份 | 每天 03:20 自动；产物在 `/srv/treyni/backup`，保留 14 天 |
 | 手动备份 | `sudo /usr/local/bin/backup-treyni.sh` |
-| 停用账号 | `node tools/admin/create-account.js disable <账号>` |
-| 重置口令 | `node tools/admin/create-account.js reset <账号>` |
+| 停用账号 | `node 工具/admin/create-account.js disable <账号>` |
+| 重置口令 | `node 工具/admin/create-account.js reset <账号>` |
 | AI 花费 | 看 `/srv/treyni/app/server/data/ai_metrics.jsonl` |
 
 ## 8. 回滚

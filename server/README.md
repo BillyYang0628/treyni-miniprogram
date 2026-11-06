@@ -54,8 +54,8 @@ AI_THINKING_OVERRIDE=         # 留空=按板块策略；调试可填 disabled/l
 ### 观测与对照
 
 - 每次 AI 调用的供应商、模型、档位、耗时、token 用量都会追加到 `data/ai_metrics.jsonl`。
-- `node tools/ai-parity-check.js all` 会把七个 AI 板块跑一遍做功能对照；
-  `node tools/ai-output-inspect.js` 用于人工抽查输出文本。
+- `node 工具/gen/ai-probes/ai-parity-check.js all` 会把七个 AI 板块跑一遍做功能对照；
+  `node 工具/gen/ai-probes/ai-output-inspect.js` 用于人工抽查输出文本。
 
 ## 目录
 

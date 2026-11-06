@@ -1,4 +1,4 @@
-// 由 tools/knowledge/build-care-guide.js 自动生成，请勿手动修改。
+// 由 工具/知识库构建/build-care-guide.js 自动生成，请勿手动修改。
 // 来源：《种植条件速查（花盆·土壤·位置·光照）.md》
 module.exports = {
   "pot_size": {

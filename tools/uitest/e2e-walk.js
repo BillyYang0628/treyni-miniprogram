@@ -1,6 +1,6 @@
 // 全流程走查：从登录态开始，把小程序每个页面依次打开一遍，
 // 收集渲染结果、控制台报错、异常日志并输出截图，用于汇总当前存在的问题。
-// 用法：node tools/uitest/e2e-walk.js
+// 用法：node 工具/uitest/e2e-walk.js
 const path = require('node:path')
 const fs = require('node:fs')
 const automator = require('miniprogram-automator')

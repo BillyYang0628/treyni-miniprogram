@@ -3,7 +3,7 @@ const config = require('./config')
 /**
  * 登录态。
  *
- * 2026-09-28 起改用「账号口令」：账号只能由 tools/admin/create-account.js 生成，
+ * 2026-09-28 起改用「账号口令」：账号只能由 工具/admin/create-account.js 生成，
  * 私下发放给使用者，客户端没有注册入口，也没有微信静默登录。
  *
  * 因此 401 不再有"自动续期"这条路：旧 token 一律清掉并回到登录页，

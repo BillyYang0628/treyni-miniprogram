@@ -3,7 +3,7 @@
 // 背景：以前只有「手动覆盖 → 开发者工具 127.0.0.1 → 局域网地址」三层，
 // 正式版会把局域网地址当默认值，上线必然连不上；而装过体验版并改过地址的手机，
 // 缓存里的旧 IP 会一直生效。这里把规则钉死：
-//   正式版 = 只走备案域名，忽略覆盖和候选；非正式版才走局域网/开发工具。
+//   体验版 / 正式版 = 只走备案域名，忽略覆盖和候选；开发版走局域网/开发工具。
 const path = require('node:path')
 
 let passed = 0
@@ -44,6 +44,17 @@ check('开发者工具不是正式版', devtools.isReleaseEnv(), false)
 // 2) 真机非正式版：走局域网
 const dev = loadConfig(makeWx({ envVersion: 'develop', platform: 'android' }))
 check('真机开发版走局域网地址', /^http:\/\/\d+\.\d+\.\d+\.\d+:3000$/.test(dev.getBaseUrl()), true)
+dev.setBaseUrl('10.0.0.5')
+check('开发版仍可手动指定调试地址', dev.getBaseUrl(), 'http://10.0.0.5:3000')
+
+// 体验版：手机平台和开发者工具均连接公网，不受旧调试缓存影响。
+for (const platform of ['android', 'ios', 'devtools']) {
+  const trial = loadConfig(makeWx({ envVersion: 'trial', platform, storage: { debug_baseUrl: 'http://192.168.1.4:3000' } }))
+  check('体验版 ' + platform + ' 默认公网', trial.getDefaultBaseUrl(), PROD)
+  check('体验版 ' + platform + ' 忽略旧调试地址', trial.getBaseUrl(), PROD)
+  check('体验版 ' + platform + ' 不回退局域网', JSON.stringify(trial.getProbeOrder()), JSON.stringify([PROD]))
+  check('体验版 ' + platform + ' 不误报为正式版', trial.isReleaseEnv(), false)
+}
 
 // 3) 正式版：只走域名，且忽略缓存里的旧覆盖
 const releaseStorage = { debug_baseUrl: 'http://192.168.1.4:3000' }

@@ -5,7 +5,7 @@
  * 而这个 IP 会随网络环境变。2026-09-16 真机一进去就 request fail，
  * 就是电脑换到了 10.11.x 网段，这里还留着旧的 192.168.1.4。
  *
- * 所以地址分三层，按优先级从高到低：
+ * 体验版 / 正式版固定连接公网 HTTPS 后端；开发版地址分三层：
  *   1. 手动设置过的地址（存在本地缓存里）——「我的」页最下面有入口，
  *      真机上改一次就记住，不用重新编译；
  *   2. 开发者工具固定走 127.0.0.1；
@@ -46,12 +46,12 @@ const DEVTOOLS_ORIGIN = 'http://127.0.0.1:' + PORT
 const LAN_ORIGIN = 'http://' + LAN_HOST + ':' + PORT
 
 /**
- * 正式版（release）固定走这个地址。
+ * 体验版（trial）和正式版（release）固定走这个地址。
  *
  * 为什么必须单独有一档：局域网地址是给真机调试用的，正式版连不上；
  * 而"手动覆盖"是存在用户手机缓存里的——装过体验版并改过地址的人，
  * 升级到正式版会继续用那个旧 IP，直接白屏。
- * 所以正式版**忽略覆盖和所有候选**，只用这个域名。
+ * 所以体验版和正式版**忽略覆盖和所有候选**，只用这个域名。
  *
  * 域名必须 HTTPS 且已备案（微信的硬要求）。
  * 2026-09-29 定：treyni.cn，后端走 api 子域。
@@ -101,6 +101,18 @@ function isReleaseEnv() {
   }
 }
 
+/** 体验版也要供不同网络下的参与者使用，地址策略与正式版一致。 */
+function usesPublicBackend() {
+  try {
+    if (typeof wx === 'undefined') return false
+    const account = wx.getAccountInfoSync()
+    const version = account && account.miniProgram && account.miniProgram.envVersion
+    return version === 'trial' || version === 'release'
+  } catch (e) {
+    return false
+  }
+}
+
 /** 用户可能只输 `10.0.0.5` 或 `10.0.0.5:3000`，这里补齐协议和端口 */
 function normalizeBaseUrl(input) {
   let value = String(input || '').trim().replace(/\/+$/, '')
@@ -117,7 +129,7 @@ function normalizeBaseUrl(input) {
 
 /** 没有手动覆盖时的默认地址 */
 function getDefaultBaseUrl() {
-  if (isReleaseEnv()) return PROD_ORIGIN
+  if (usesPublicBackend()) return PROD_ORIGIN
   return getPlatform() === 'devtools' ? DEVTOOLS_ORIGIN : LAN_ORIGIN
 }
 
@@ -126,8 +138,8 @@ function getDefaultBaseUrl() {
  * request.js 在连不上时会顺着这个列表往下试，试通了就记成手动地址。
  */
 function getProbeOrder() {
-  // 正式版没有可切换的候选：出问题就是后端/域名/备案的事，探测局域网地址只会白等 3 秒
-  if (isReleaseEnv()) return [PROD_ORIGIN]
+  // 体验版和正式版只访问公网服务，不回退到电脑或历史局域网地址。
+  if (usesPublicBackend()) return [PROD_ORIGIN]
 
   const current = getBaseUrl()
   const all = [DEVTOOLS_ORIGIN].concat(
@@ -160,8 +172,8 @@ function getOverrideBaseUrl() {
  * 每次请求都会重新算，所以在「我的」页改完立刻生效，不用重启小程序。
  */
 function getBaseUrl() {
-  // 正式版一律走备案域名，忽略历史缓存里的手动覆盖
-  if (isReleaseEnv()) return PROD_ORIGIN
+  // 体验版和正式版一律走备案域名，忽略历史缓存里的手动覆盖
+  if (usesPublicBackend()) return PROD_ORIGIN
   return getOverrideBaseUrl() || getDefaultBaseUrl()
 }
 

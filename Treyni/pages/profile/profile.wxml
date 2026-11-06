@@ -84,6 +84,13 @@
   <!-- 调试入口：只在开发版 / 真机调试 / 体验版出现，正式版自动隐藏 -->
   <view wx:if="{{devMode}}" class="card menu-card debug-card">
     <text class="menu-title">调试（正式版不显示）</text>
+    <view class="menu-item" bindtap="onToggleDebug">
+      <view class="icon-row menu-item-main">
+        <image class="icon-sm" src="{{icons.operate}}" mode="aspectFit" />
+        <text>vConsole 调试浮窗</text>
+      </view>
+      <text class="muted debug-url">{{debugEnabled ? '已打开 ›' : '已关闭 ›'}}</text>
+    </view>
     <view class="menu-item" bindtap="onEditServer">
       <view class="icon-row menu-item-main">
         <image class="icon-sm" src="{{icons.operate}}" mode="aspectFit" />

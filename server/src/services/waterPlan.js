@@ -75,10 +75,15 @@ async function computeNextWatering(plant, options = {}) {
     careGroup: knowledge ? knowledge.careGroup : null
   })
 
+  // 兜底到内置默认值：data/planting_options.json 缺失时 findSoil/findExposure 会返回 null，
+  // 以前直接读 soil.w 抛 `Cannot read properties of null (reading 'w')`，
+  // 整条浇水提醒的 AI 方案就废了（2026-10-12 线上实测）。
   const exposure = waterModel.findExposure(plant.exposure) ||
-    waterModel.findExposure('open_balcony')
+    waterModel.findExposure('open_balcony') ||
+    waterModel.DEFAULT_EXPOSURE
   const soil = waterModel.findSoil(plant.soil_id || plant.soil_type) ||
-    waterModel.findSoil('mixed_unknown')
+    waterModel.findSoil('mixed_unknown') ||
+    waterModel.DEFAULT_SOIL
   const potDepth = Number(plant.pot_depth_mm) || 150
   const awc = waterModel.availableWater(potDepth, soil.w)
 
@@ -316,11 +321,18 @@ async function applyToReminder(reminderId) {
 
     return { updated: true, plan }
   } catch (err) {
+    // 报错细节留在服务端日志里；给用户看的是人话（以前直接把 TypeError 原文塞进 ai_error，
+    // 提醒详情页就出现了 `Cannot read properties of null (reading 'w')` 这种句子）。
+    console.warn('[waterPlan] 提醒 #' + reminderId + ' 重算失败：' + err.message)
     db.prepare(`
       UPDATE plant_reminders
       SET ai_status = 'failed', ai_error = ?, updated_at = ?
       WHERE id = ?
-    `).run(String(err.message).slice(0, 300), new Date().toISOString(), reminderId)
+    `).run(
+      '这次没能按你的盆土和天气算出来，先用通用方案顶上。稍后可以点「重新生成这份方案」再试一次。',
+      new Date().toISOString(),
+      reminderId
+    )
 
     throw err
   }

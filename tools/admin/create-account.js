@@ -2,15 +2,15 @@
 /**
  * 账号管理命令行（唯一能开出账号的地方）
  *
- *   node tools/admin/create-account.js new                  新建 1 个账号
- *   node tools/admin/create-account.js new --count=5        批量建 5 个
- *   node tools/admin/create-account.js new --note="给张老师"  记个备注（存成 nickname）
- *   node tools/admin/create-account.js list                 列出全部账号
- *   node tools/admin/create-account.js reset <账号>          重置口令
- *   node tools/admin/create-account.js disable <账号>        停用（登录直接被拒）
- *   node tools/admin/create-account.js enable <账号>         重新启用
+ *   node 工具/admin/create-account.js new                  新建 1 个账号
+ *   node 工具/admin/create-account.js new --count=5        批量建 5 个
+ *   node 工具/admin/create-account.js new --note="给张老师"  记个备注（存成 nickname）
+ *   node 工具/admin/create-account.js list                 列出全部账号
+ *   node 工具/admin/create-account.js reset <账号>          重置口令
+ *   node 工具/admin/create-account.js disable <账号>        停用（登录直接被拒）
+ *   node 工具/admin/create-account.js enable <账号>         重新启用
  *
- * 生成结果会追加到 tools/gen/accounts.tsv（该目录不入库），口令只在生成时打印一次。
+ * 生成结果会追加到 工具/gen/accounts.tsv（该目录不入库），口令只在生成时打印一次。
  */
 const fs = require('node:fs')
 const path = require('node:path')

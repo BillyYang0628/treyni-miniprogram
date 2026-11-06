@@ -3,7 +3,7 @@
 const path = require('node:path')
 const fs = require('node:fs')
 const automator = require('miniprogram-automator')
-const { getToken, api, deletePlant } = require('./lib')
+const { getToken, setMiniProgramToken, api, deletePlant } = require('./lib')
 
 const SHOT_DIR = path.resolve(__dirname, 'shots-art')
 
@@ -56,6 +56,7 @@ async function main() {
     }
 
     miniProgram = await automator.connect({ wsEndpoint: 'ws://127.0.0.1:9420' })
+    await setMiniProgramToken(miniProgram, token)
     await miniProgram.reLaunch('/pages/garden/garden')
     await miniProgram.currentPage().then((p) => p.waitFor(2500))
     await shoot(miniProgram, '01-garden')
@@ -109,7 +110,13 @@ async function main() {
     await (await miniProgram.currentPage()).waitFor(2500)
     await shoot(miniProgram, '08-report')
   } finally {
-    if (miniProgram) await miniProgram.close().catch(() => {})
+    if (miniProgram) {
+      try {
+        await miniProgram.disconnect()
+      } catch (e) {
+        // 断开失败不影响截图结果
+      }
+    }
     if (plantId) await deletePlant(token, plantId).catch((err) => console.log('清理失败：' + err.message))
   }
 

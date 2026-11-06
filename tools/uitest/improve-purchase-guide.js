@@ -1,7 +1,7 @@
 /**
  * 按淘宝实测（82 个词的首屏）批量改进购买建议。
  *
- * 这张表里的每一条都有实测依据，来源是 tools/gen/purchase-taobao-all.json：
+ * 这张表里的每一条都有实测依据，来源是 工具/gen/purchase-taobao-all.json：
  *   · 首屏混进别的品类 → 改 search / 加 avoid
  *   · 首屏大包装霸屏 → 加「规格认准」
  *   · 首屏有更好的家庭买法 → 写进 tips

@@ -3,7 +3,7 @@ const session = require('./session')
 
 /**
  * 账号口令登录。
- * 账号由管理员在服务端用 tools/admin/create-account.js 生成后私下发放，
+ * 账号由管理员在服务端用 工具/admin/create-account.js 生成后私下发放，
  * 客户端没有注册入口，也不提供自助找回。
  */
 function login(username, password) {

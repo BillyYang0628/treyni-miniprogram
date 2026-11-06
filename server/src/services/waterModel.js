@@ -18,6 +18,33 @@ const config = require('../config')
 
 const OPTIONS_FILE = path.resolve(config.rootDir, 'data', 'planting_options.json')
 
+/**
+ * 数据文件缺失时的内置兜底。
+ *
+ * 2026-10-12 踩过：`server/data/planting_options.json` 没被部署脚本推到服务器，
+ * 于是 getSoils()/getExposures() 全空 → 添加植物页「摆放环境」没有可选项
+ * （必填但选不了，用户直接卡死），waterPlan 里 `findSoil(...)` 返回 null
+ * 再读 `soil.w` 直接抛 `Cannot read properties of null (reading 'w')`。
+ * 所以这里给一份最小默认值：**缺数据时功能降级但不崩**。
+ * 数值取通用营养土的保守值；能读到 data/planting_options.json 时完全用不上这份兜底。
+ */
+const DEFAULT_SOIL = {
+  id: 'unknown_soil',
+  name: '未知土壤（按通用配方估算）',
+  w: 0.3,
+  drainage: 'medium',
+  aliases: []
+}
+
+const DEFAULT_EXPOSURE = {
+  id: 'open_balcony',
+  name: '开放阳台',
+  indoor: false,
+  rain_factor: 0.6,
+  env_factor: 0.85,
+  desc: '兜底用的默认摆放环境'
+}
+
 const ET0_REF = 3.0
 const INTERVAL_MIN = 0.5
 const INTERVAL_MAX = 45
@@ -43,7 +70,11 @@ function loadOptions() {
   try {
     optionsCache = JSON.parse(fs.readFileSync(OPTIONS_FILE, 'utf8'))
   } catch (e) {
-    console.warn('[waterModel] 读取种植条件参数失败：' + e.message)
+    console.error(
+      '[waterModel] 读不到种植条件参数 ' + OPTIONS_FILE + '：' + e.message + '\n' +
+      '  → 土壤/花盆/摆放环境会返回空数组（添加植物页的「摆放环境」是必填项，用户会卡住），\n' +
+      '  → 浇水模型退化成内置默认参数。请确认该文件是否随部署一起推上去了。'
+    )
     optionsCache = { soil_types: [], pot_specs: [], exposures: [], i0_overrides: {}, care_group_i0: {} }
   }
   return optionsCache
@@ -457,6 +488,8 @@ module.exports = {
   INTERVAL_MAX,
   INDOOR_ET0_FLOOR,
   SEASONAL_W,
+  DEFAULT_SOIL,
+  DEFAULT_EXPOSURE,
   loadOptions,
   getSoils,
   getPotSpecs,

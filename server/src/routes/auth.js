@@ -20,7 +20,7 @@ function toPublicUser(user, baseUrl) {
 
 /**
  * 账号口令登录。
- * 账号只能由 tools/admin 下的命令行生成，客户端没有注册入口；
+ * 账号只能由 工具/admin 下的命令行生成，客户端没有注册入口；
  * 只有拿到发放出去的账号口令才能进主界面。
  */
 router.post('/login', (req, res, next) => {

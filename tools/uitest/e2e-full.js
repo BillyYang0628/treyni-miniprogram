@@ -1,6 +1,6 @@
 // 全流程实操走查（真实模拟器 + 真实后端 + 真实 AI）
-// 用法：node tools/uitest/e2e-full.js [add|detail|complete|chat|diagnosis|report|all]
-// 每个阶段都会打印 PASS / FAIL / 备注，并在 tools/uitest/logs 下留一份 json 记录。
+// 用法：node 工具/uitest/e2e-full.js [add|detail|complete|chat|diagnosis|report|all]
+// 每个阶段都会打印 PASS / FAIL / 备注，并在 工具/uitest/logs 下留一份 json 记录。
 const path = require('node:path')
 const fs = require('node:fs')
 const automator = require('miniprogram-automator')

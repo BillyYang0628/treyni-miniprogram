@@ -1,7 +1,7 @@
 // 直接问模拟器：页面上真正渲染出来的 <image> 用的是哪个文件。
 // 比看截图可靠——截图放大后小图标容易认错。
 const automator = require('miniprogram-automator')
-const { getToken, createTempPlant, deletePlant } = require('./lib')
+const { getToken, setMiniProgramToken, createTempPlant, deletePlant } = require('./lib')
 
 function check(label, actual, expected) {
   const ok = actual === expected
@@ -18,6 +18,7 @@ async function main() {
   try {
     plantId = await createTempPlant(token, '头像渲染验证', '月季')
     miniProgram = await automator.connect({ wsEndpoint: 'ws://127.0.0.1:9420' })
+    await setMiniProgramToken(miniProgram, token)
     await miniProgram.reLaunch('/pages/garden/garden')
     await miniProgram.navigateTo('/pages/chat/chat?plant_id=' + plantId)
     const page = await miniProgram.currentPage()
@@ -73,7 +74,13 @@ async function main() {
       jSrc, '/assets/illustrations/plant-detail-empty.png')) failures++
 
   } finally {
-    if (miniProgram) await miniProgram.close().catch(() => {})
+    if (miniProgram) {
+      try {
+        await miniProgram.disconnect()
+      } catch (e) {
+        // 断开失败不影响断言结果
+      }
+    }
     if (plantId) await deletePlant(token, plantId).catch(() => {})
   }
 

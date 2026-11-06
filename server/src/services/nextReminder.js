@@ -33,13 +33,22 @@ function markPending(db, reminderId) {
   `).run(now, reminderId)
 }
 
+/**
+ * 给用户看的失败说明。
+ *
+ * 以前这里直接存 err.message，于是提醒详情页会出现
+ * `Cannot read properties of null (reading 'w')` 这种内部报错（2026-10-12 线上实测）。
+ * 原始报错只进服务端日志，写进库的必须是人话。
+ */
+const FAILED_MESSAGE = '这次没能生成方案，先用知识库里的通用做法顶上。稍后可以点「重新生成这份方案」再试一次。'
+
 function markFailed(db, reminderId, message) {
   const now = new Date().toISOString()
   db.prepare(`
     UPDATE plant_reminders
     SET ai_status = 'failed', ai_error = ?, updated_at = ?
     WHERE id = ?
-  `).run(String(message || 'AI 生成失败').slice(0, 300), now, reminderId)
+  `).run(String(message || FAILED_MESSAGE).slice(0, 300), now, reminderId)
 }
 
 /** 读取天气模型写进 meta 的浇水安排（存在说明这条是浇水提醒且已算过日期） */
@@ -147,7 +156,7 @@ function scheduleAdviceInBackground(db, reminderId) {
   generateAdvice(db, reminderId).catch((err) => {
     console.warn('[nextReminder] 提醒 #' + reminderId + ' 的 AI 建议生成失败：' + err.message)
     try {
-      markFailed(db, reminderId, err.message)
+      markFailed(db, reminderId, FAILED_MESSAGE)
     } catch (e) {
       console.warn('[nextReminder] 写入失败状态时出错：' + e.message)
     }

@@ -16,8 +16,8 @@
       "horticulture": "RHS / 密苏里植物园 · 栽培与病虫害条目（按植物名检索）",
       "own_material": "本项目自有资料（施肥库 diy，非外部来源）"
     },
-    "verification": "tools/uitest/verify-purchase-guide.js（结构 / 字段 / 覆盖率 / household 引用 / 合规 / 缺口标记 / 出处）",
-    "purchase_requirements_policy": "46 条药剂都带 purchase_requirements，按药剂档案的 toxicity 生成：所有药剂 = 认准登记证号 / 家庭买最小包装 / 孩子宠物拿不到；毒性是「中等毒」的再加 家长下单保管 / 配手套口罩 / 不要分装到饮料瓶；带「对蜂高毒」「对鱼高毒」「强碱腐蚀」标记的各加一条对应提醒。用户 2026-09-21 的要求是「有毒的药品一定要加以说明，无论是购买要求还是规格认准还是其他的」，所以这部分宁可写细。改药剂档案的 toxicity 之后要重跑 tools/uitest/improve-purchase-guide.js。",
+    "verification": "工具/uitest/verify-purchase-guide.js（结构 / 字段 / 覆盖率 / household 引用 / 合规 / 缺口标记 / 出处）",
+    "purchase_requirements_policy": "46 条药剂都带 purchase_requirements，按药剂档案的 toxicity 生成：所有药剂 = 认准登记证号 / 家庭买最小包装 / 孩子宠物拿不到；毒性是「中等毒」的再加 家长下单保管 / 配手套口罩 / 不要分装到饮料瓶；带「对蜂高毒」「对鱼高毒」「强碱腐蚀」标记的各加一条对应提醒。用户 2026-09-21 的要求是「有毒的药品一定要加以说明，无论是购买要求还是规格认准还是其他的」，所以这部分宁可写细。改药剂档案的 toxicity 之后要重跑 工具/uitest/improve-purchase-guide.js。",
     "where_policy": "2026-09-21 用户拍板「购买还是更倾向于淘宝店」，所以药剂/肥料/器械的 where 一律把「淘宝/天猫」放在第一项。农药必须跟一句「认准登记证号」。平台名是渠道类型，不是具体店铺，合规检查已放开；具体店铺名、链接、价格仍然不许写。",
     "principles": [
       "宁少不编：不确定的购买建议不写，写了的要能追到来源。",
@@ -156,7 +156,7 @@
       "status": "2026-09-21 已补：7 个药剂都建了档案（D40 硫磺悬浮剂、D41 氯虫苯甲酰胺、D42 乙基多杀菌素、D43 联苯菊酯、D44 嘧霉胺、D45 氟菌·霜霉威、D46 氨基寡糖素）",
       "how": "浓度/间隔/靶标全部取自本库自己的品种速查表与病害档案（不是外部检索来的），toxicity 一律写「未核实」并带 data_pending，等查到登记信息再补。",
       "history": "补之前：这 7 个被推荐使用但药剂档案里没有（硫磺悬浮剂被引用 23 次）。",
-      "verify": "tools/uitest/verify-knowledge-coverage.js 的 ⑤ 组与 ⑦ 组"
+      "verify": "工具/uitest/verify-knowledge-coverage.js 的 ⑤ 组与 ⑦ 组"
     },
     "drug_resolution": {
       "bug": "knowledge.findDrug() 用双向 includes 匹配，存在子串误配。",
@@ -234,7 +234,7 @@
         "给每个品种的 targets/common_pests 名做一次全量断言，防止以后加品种时悄悄断链"
       ]
     },
-    "coverage_script": "tools/uitest/verify-knowledge-coverage.js（已建，7 组：病虫害名解析 / 别名一致性与冲突 / 三档方案齐全 / 药剂自洽 / 药名解析 / 字段完整 / 缺口标记一致）",
+    "coverage_script": "工具/uitest/verify-knowledge-coverage.js（已建，7 组：病虫害名解析 / 别名一致性与冲突 / 三档方案齐全 / 药剂自洽 / 药名解析 / 字段完整 / 缺口标记一致）",
     "search_term_verified": {
       "platform": "苏宁易购（站内搜索页，headless Chrome 实抓商品标题）",
       "date": "2026-09-20",
@@ -293,7 +293,7 @@
     "search_term_verified_taobao": {
       "platform": "淘宝（s.taobao.com 站内搜索，已登录账号，实抓首屏商品标题）",
       "date": "2026-09-20",
-      "method": "Chrome + CDP（--remote-debugging-port）在独立标签页逐个搜索，每词取首屏前 8 条标题；原始数据 tools/gen/taobao-probe.json，脚本 tools/uitest/taobao-probe.js",
+      "method": "Chrome + CDP（--remote-debugging-port）在独立标签页逐个搜索，每词取首屏前 8 条标题；原始数据 工具/gen/taobao-probe.json，脚本 工具/uitest/taobao-probe.js",
       "cover": "18 个词：12 个农药 + 磷酸二氢钾 / 花多多 1 号 / 腐熟羊粪 + 园艺修枝剪，其中矿物油、吡虫啉、腐熟羊粪用库里原搜索词复测",
       "caveat": "只判断首屏标题，没有逐条点进详情页核对农药登记证号；这里回答的是「这个词能不能搜到对路的商品」，不是「这个商品是不是正品」。",
       "headline": "淘宝有完整的农资类目，苏宁那条「农药在综合电商买不到」在淘宝不成立：搜索结果里都是正规农药厂家的登记产品，带低毒/中毒/微毒与剂型标签，还有面向家庭园艺的小包装（小白药颗粒剂、免稀释直喷装）。这条只对淘宝成立，不能外推到拼多多，也不能反过来用苏宁的结果代表综合电商。",
@@ -389,7 +389,7 @@
       "full_pass": {
         "date": "2026-09-21",
         "scope": "购买指南库里全部 81 条物品的 search 词，逐个在淘宝站内实搜（82 个词，含 1 个备选词）",
-        "raw": "tools/gen/taobao-probe-all.json（3682 条首屏标题）｜脚本 tools/uitest/taobao-probe.js｜分析 tools/uitest/analyze-purchase-probe.js",
+        "raw": "工具/gen/taobao-probe-all.json（3682 条首屏标题）｜脚本 工具/uitest/taobao-probe.js｜分析 工具/uitest/analyze-purchase-probe.js",
         "coverage": "82 个词全部出结果，最少 38 条、最多 47 条；没有「搜不到」的词",
         "method_caveat": "只读首屏标题，没有逐条进详情页核对登记证号；也遇到过 4 个词因为页面异步渲染没在等待窗口内挂出来（重跑后正常，脚本里的等待已从 7 秒提到 15 秒）",
         "improvements": [
@@ -407,7 +407,7 @@
       "what": "给 pesticide_diseases.json 的 13 条档案加了 44 个 aliases，并让 buildDiseaseIndex() 索引别名。",
       "before": "859 个（品种 × 病虫害名）组合里 95 次查不到档案，涉及 38/101 个品种。",
       "after": "0 次查不到，受影响品种 0/101（月季本来就没问题，其它品种现在补齐了）。",
-      "verify": "tools/uitest/verify-knowledge-coverage.js 的 ①② 组"
+      "verify": "工具/uitest/verify-knowledge-coverage.js 的 ①② 组"
     }
   },
   "open_questions": [

@@ -1,11 +1,11 @@
 > **公开仓说明**：本文件是这份图标/插画清单的原始记录，下面附录里的重新生成步骤依赖
-> 未随仓库分发的美术母版（`插画素材/`）与本地 Windows 工具链，仅作方法说明。
+> 未随仓库分发的美术母版（`素材/`）与本地 Windows 工具链，仅作方法说明。
 > 图标清单与用途部分（前半篇）与仓库内容一一对应。
 # Treyni 静态资源目录说明
 
 更新日期：2026-09-16
 
-本目录按照《界面图标清单与规格.md》§2.4 与《小程序插画清单与AI提示词.md》§七两份文档的分类建立，
+本目录按照《../../文档/素材规格/界面图标清单与规格.md》§2.4 与《../../文档/素材规格/小程序插画清单与AI提示词.md》§七两份文档的分类建立，
 把两者的方案合并为「icons/ 下按模块分子目录 + illustrations/ 独立存放」。
 
 ---
@@ -40,10 +40,10 @@ Treyni/assets/
 | --- | --- | --- | --- |
 | `share-cover.png` | 800×640（5:4） | 74KB | 转发卡片封面：花园页 / 植物详情 / 提醒详情三个页面的 `onShareAppMessage` |
 
-- 源图与备选底色在 `插画素材\brand\`，**量化进包用 `python tools/quantize-brand.py`**（可重跑，改底色只改脚本里的 palette）。
+- 源图与备选底色在 `素材\brand\`，**量化进包用 `python 素材/工具/quantize-brand.py`**（可重跑，改底色只改脚本里的 palette）。
   原图 196KB 直接进包会让主包逼近上限（当时打进包 1.75MB / 上限 2MB），量化到 192 色后 74KB，视觉核对无色带。
 - **Logo 不在包里**：它的用途是小程序后台头像（mp.weixin.qq.com 手动上传），包内没有引用方
-  （「关于托蕾妮」是 `wx.showModal` 纯文字弹窗）。量化版留档在 `插画素材\brand\logo-512.png`；
+  （「关于托蕾妮」是 `wx.showModal` 纯文字弹窗）。量化版留档在 `素材\brand\logo-512.png`；
   后台头像建议传**原图** `logo-512-cream.png`（180KB，不占包体积、质量更好）。
 - **默认头像 `avatar.png` 不做**：「我的」页在用 `illustrations/profile-avatar.png`，小程序也没有取微信头像，
   "默认头像"就是"唯一头像"，再做一张是重复文件。
@@ -110,10 +110,10 @@ WXML 里的尺寸档（`icon-xs` 32rpx / `icon-sm` 40rpx / `icon-md` 48rpx / `ic
 ## 源文件在哪
 
 本目录只存放**处理好的成品**。生成出来的原始大图、母版、试稿都放在
-`插画素材\`，需要改尺寸或重新裁剪时从母版出发。
+`素材\`，需要改尺寸或重新裁剪时从母版出发。
 
 生图环境（通义万相 / wan2.7-image-pro）的配置说明见
-`生图环境配置说明.md`。
+`文档\素材规格\生图环境配置说明.md`。
 
 ## 已完成素材
 
@@ -121,14 +121,14 @@ WXML 里的尺寸档（`icon-xs` 32rpx / `icon-sm` 40rpx / `icon-md` 48rpx / `ic
 
 | 清单序号 | 文件 | 尺寸 | 体积 | 透明底 | 母版来源 | 用在哪 |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1 | `illustrations/elf-avatar.png` | 512×512 | 243KB | ✅ | `插画素材\elf-green-1.png`（角色原图 → 卡通化 → 调色 → 提亮深绿） | **对话页标题「托蕾妮」左侧** |
-| 2 | `illustrations/profile-avatar.png` | 256×256 | 80KB | ✅ | `插画素材\profile-avatar-test-2.png` | **「我的」页头像卡（微信用户侧）** |
-| 3 | `illustrations/empty-garden.png` | 512×512 | 122KB | ✅ | `插画素材\empty-garden-edit.png`（花盆已改为空盆） | 花园页「还没有添加植物」 |
-| 4 | `illustrations/plant-default.png` | 256×256 | 42KB | ✅ | `插画素材\Wan_Agent_现在生成以下要求图片…png` | 花园卡片与档案的默认图 |
-| 5 | `illustrations/plant-form-header.png` | 1024×512 | 266KB | ✅ | `插画素材\plant-form-header-v2.png` | ❌ 未引用（见下面的包体积说明） |
+| 1 | `illustrations/elf-avatar.png` | 512×512 | 243KB | ✅ | `素材\elf-green-1.png`（角色原图 → 卡通化 → 调色 → 提亮深绿） | **对话页标题「托蕾妮」左侧** |
+| 2 | `illustrations/profile-avatar.png` | 256×256 | 80KB | ✅ | `素材\profile-avatar-test-2.png` | **「我的」页头像卡（微信用户侧）** |
+| 3 | `illustrations/empty-garden.png` | 512×512 | 122KB | ✅ | `素材\empty-garden-edit.png`（花盆已改为空盆） | 花园页「还没有添加植物」 |
+| 4 | `illustrations/plant-default.png` | 256×256 | 42KB | ✅ | `素材\Wan_Agent_现在生成以下要求图片…png` | 花园卡片与档案的默认图 |
+| 5 | `illustrations/plant-form-header.png` | 1024×512 | 266KB | ✅ | `素材\plant-form-header-v2.png` | ❌ 未引用（见下面的包体积说明） |
 | 5 | `illustrations/plant-form-header.webp` | 1024×512 | 21KB | ✅ | 同上 | 添加植物页顶部横幅 |
-| 6 | `illustrations/plant-detail-empty.png` | 512×512 | 179KB | ✅ | `插画素材\plant-detail-B.png`（场景版，含合上的带锁日记） | **植物养护历程「还没有记录」** |
-| 14 | `illustrations/welcome.png` | 1024×1024 | 1.4MB | ❌ 白底 | `插画素材\welcome.png` | ❌ 未引用（见下面的包体积说明） |
+| 6 | `illustrations/plant-detail-empty.png` | 512×512 | 179KB | ✅ | `素材\plant-detail-B.png`（场景版，含合上的带锁日记） | **植物养护历程「还没有记录」** |
+| 14 | `illustrations/welcome.png` | 1024×1024 | 1.4MB | ❌ 白底 | `素材\welcome.png` | ❌ 未引用（见下面的包体积说明） |
 | 14 | `illustrations/welcome.webp` | 1024×1024 | 72KB | ❌ 白底 | 同上 | ❌ 还没有欢迎页 |
 
 > **谁是谁（2026-09-16 定稿）**
@@ -153,7 +153,7 @@ WXML 里的尺寸档（`icon-xs` 32rpx / `icon-sm` 40rpx / `icon-md` 48rpx / `ic
 > ```
 >
 > 文件本身还在原处，不影响随时取用；如果想彻底从 `assets/` 挪走，删掉这两条 ignore 再把
-> 文件移到 `插画素材\` 即可。排除后主包约 1.6MB。
+> 文件移到 `素材\` 即可。排除后主包约 1.6MB。
 >
 > 其余插画（`elf-avatar.png` 243KB、`plant-detail-empty.png` 179KB、`profile-avatar.png` 79KB）
 > 2026-09-16 都已接到页面上，不再有"只占体积不露面"的素材——只有 `welcome.webp`
@@ -325,11 +325,11 @@ WXML 里的尺寸档（`icon-xs` 32rpx / `icon-sm` 40rpx / `icon-md` 48rpx / `ic
 **1. 缩放**：母版是 2048×2048，按**整数比**缩到目标尺寸（2048→512 是 1/4，2048→256 是 1/8），
 避免非整数比把像素边缘插值糊掉。缩放已包含在下面的抠图脚本里。
 
-**2. 抠图**：用 `tools/cutout-image.ps1`（**必须用 PowerShell 7 / pwsh 运行**）。
+**2. 抠图**：用 `素材/工具/cutout-image.ps1`（**必须用 PowerShell 7 / pwsh 运行**）。
 
 ```powershell
-pwsh -File "tools\cutout-image.ps1" `
-  -Source "插画素材\<母版>.png" `
+pwsh -File "素材\工具\cutout-image.ps1" `
+  -Source "素材\<母版>.png" `
   -Output "Treyni\assets\illustrations\<清单文件名>.png" `
   -Size 512
 ```
@@ -350,33 +350,33 @@ pwsh -File "tools\cutout-image.ps1" `
 图标不能靠 AI 一张张直出到最终尺寸，否则风格、留白、体积都会飘。实际走的是
 **「AI 出母版 → 确定性后处理」** 三步，每一步都有脚本：
 
-**1. 生成母版**（`tools/gen/*.json` + baoyu-imagine）
+**1. 生成母版**（`工具/gen/*.json` + baoyu-imagine）
 
 每个图标一条任务，共用同一段风格前缀，保证和已有的 18 张插画同源：
 
 ```powershell
 bun "D:\ClaudeCode\.agents\skills\baoyu-imagine\scripts\main.ts" `
-  --batchfile "tools\gen\icons-wave1.json" --jobs 2
+  --batchfile "工具\gen\icons-wave1.json" --jobs 2
 ```
 
-母版统一落在 `插画素材\icon-masters\`，1024×1024、纯白底。提示词里必须写明
+母版统一落在 `素材\icon-masters\`，1024×1024、纯白底。提示词里必须写明
 **「不出现任何文字、字母、数字、水印、标签」**——书页、瓶身、袋面这些位置
 最容易长出假字，生成后要逐个核对（这次 42 张用视觉模型过了一遍，全部干净）。
 
-**2. 抠图 + 缩放**（`tools/build-icons.ps1`）
+**2. 抠图 + 缩放**（`素材/工具/build-icons.ps1`）
 
 ```powershell
-pwsh -File "tools\build-icons.ps1"          # 全量
-pwsh -File "tools\build-icons.ps1" -Only weather   # 只补天气
+pwsh -File "素材\工具\build-icons.ps1"          # 全量
+pwsh -File "素材\工具\build-icons.ps1" -Only weather   # 只补天气
 ```
 
 脚本内置「母版名 → 成品路径 + 尺寸」的对照表，调 `cutout-image.ps1` 完成抠图。
 1024→128 是 1/8、1024→256 是 1/4，都是整数比，像素边缘不会被插值糊掉。
 
-**3. 压体积**（`tools/quantize-icons.py`）
+**3. 压体积**（`素材/工具/quantize-icons.py`）
 
 ```powershell
-python "tools\quantize-icons.py"
+python "素材\工具\quantize-icons.py"
 ```
 
 AI 直出的 PNG 是全彩存储，但像素画本来就只有几十种颜色。脚本只对超出预算的
@@ -389,15 +389,15 @@ tabBar 要求「同一图形、两种品牌色、81×81、纯色稿」，AI 直�
 所以拆成「AI 出一个单色母版 + 脚本染色」：
 
 ```powershell
-# 2a. 先生成母版（tools/gen/tabbar.json，只出图形，颜色后面覆盖）
+# 2a. 先生成母版（工具/gen/tabbar.json，只出图形，颜色后面覆盖）
 # 2b. 抠图
-pwsh -File "tools\cutout-image.ps1" `
-  -Source "插画素材\icon-masters\tab-garden.png" `
-  -Output "插画素材\icon-masters\tab-garden-cutout.png" -Size 512
+pwsh -File "素材\工具\cutout-image.ps1" `
+  -Source "素材\icon-masters\tab-garden.png" `
+  -Output "素材\icon-masters\tab-garden-cutout.png" -Size 512
 
 # 2c. 染色：同一张母版跑两次，得到未选中/选中两版
-pwsh -File "tools\colorize-pixel-icon.ps1" `
-  -Source "插画素材\icon-masters\tab-garden-cutout.png" `
+pwsh -File "素材\工具\colorize-pixel-icon.ps1" `
+  -Source "素材\icon-masters\tab-garden-cutout.png" `
   -Output "Treyni\assets\icons\tabbar\tab-garden.png" `
   -Color "#6b7d6b"
 ```
@@ -416,13 +416,13 @@ pwsh -File "tools\colorize-pixel-icon.ps1" `
 
 ```powershell
 # 1) 渲染层核对：直接问模拟器每个 <image> 用的是哪个文件
-node "tools\uitest\art-render-check.js"
+node "工具\uitest\art-render-check.js"
 
-# 2) 截图 + 视觉核对：截 9 张关键页面到 tools\uitest\shots-art\
-node "tools\uitest\art-check.js"
+# 2) 截图 + 视觉核对：截 9 张关键页面到 工具\uitest\shots-art\
+node "工具\uitest\art-check.js"
 
 # 3) 拼「改动前 / 改动后」并排对比图，用于交付演示
-pwsh -File "tools\uitest\make-compare.ps1" `
+pwsh -File "工具\uitest\make-compare.ps1" `
   -Pair 'AI花农对话页|shots\full-07-chat-open.png|shots-art\05a-chat-open.png' `
   -Out 'shots-art\compare-chat.png'
 ```

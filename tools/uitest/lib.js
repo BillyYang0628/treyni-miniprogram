@@ -7,8 +7,44 @@ const { createToken } = require('../../server/src/services/token')
 
 const BASE = 'http://127.0.0.1:3000'
 
+/**
+ * 造测试 token 要用**真实存在**的 user id。
+ *
+ * 2026-10-12 踩到：这里原来写死 createToken(1)，而本地库清过之后根本没有 id=1 的用户，
+ * 于是 auth_tokens 的 user_id 外键直接把脚本打挂（报 `FOREIGN KEY constraint failed`），
+ * verify-reminder-timing.js 这类脚本全跑不完。现在改成自动挑一个可用账号，
+ * 也可以用 `--user=<id>` 指定。（和 2026-09-21 清掉 PLANT_ID=6 那批是同一类问题。）
+ */
+function resolveTestUserId() {
+  const explicit = Number((process.argv.find((item) => item.indexOf('--user=') === 0) || '').slice(7))
+  if (explicit) return explicit
+
+  const db = new DatabaseSync(config.dbPath)
+  try {
+    const row = db
+      .prepare("SELECT id FROM users WHERE COALESCE(status, 'active') != 'disabled' ORDER BY id LIMIT 1")
+      .get()
+    if (!row) {
+      throw new Error('本地库里没有可用账号：先跑一次 工具/uitest 的登录，或 工具/admin/create-account.js')
+    }
+    return row.id
+  } finally {
+    db.close()
+  }
+}
+
 function getToken() {
-  return createToken(1)
+  return createToken(resolveTestUserId())
+}
+
+/**
+ * 小程序没有热登录：自动化脚本连上模拟器后，要把测试 token 塞进本地缓存，
+ * 否则 reLaunch 会落到 pages/login/login，后续导航全部超时。
+ */
+async function setMiniProgramToken(miniProgram, token) {
+  await miniProgram.evaluate((value) => {
+    wx.setStorageSync('token', value)
+  }, token)
 }
 
 async function api(pathname, options = {}, token) {
@@ -191,6 +227,7 @@ function latestDiagnosisImage() {
 module.exports = {
   BASE,
   getToken,
+  setMiniProgramToken,
   api,
   check,
   openDb,

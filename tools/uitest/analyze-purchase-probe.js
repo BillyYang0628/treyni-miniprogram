@@ -76,7 +76,7 @@ function main() {
   fs.writeFileSync(path.join(GEN, 'purchase-probe-analysis.json'),
     JSON.stringify({ problems, ok }, null, 1), 'utf8')
   console.log('')
-  console.log('分析写到 tools/gen/purchase-probe-analysis.json')
+  console.log('分析写到 工具/gen/purchase-probe-analysis.json')
 }
 
 main()

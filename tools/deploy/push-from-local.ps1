@@ -8,27 +8,43 @@
     "本地直推"的路：只传代码目录，不碰服务器上的 .env、数据库、账号台账。
 
 .EXAMPLE
-    pwsh -File tools\deploy\push-from-local.ps1
-    pwsh -File tools\deploy\push-from-local.ps1 -DryRun
+    pwsh -File 运维\push-from-local.ps1
+    pwsh -File 运维\push-from-local.ps1 -DryRun
 #>
 param(
   [string]$Target = 'ubuntu@82.157.175.155',
-  [string]$Key = 'D:\托蕾妮小程序\tools\gen\treyni_deploy_ed25519',
+  [string]$Key = 'D:\托蕾妮小程序\工具\gen\treyni_deploy_ed25519',
   [string]$AppDir = '/srv/treyni/app',
   [switch]$DryRun
 )
 
 $ErrorActionPreference = 'Stop'
-$root = (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path
+# 本脚本现在放在 <根目录>\运维\ 下，根目录就是上一层。
+# 2026-10-12 目录全面归类时这里没跟着改（还是 '..\..'，指到了 D:\），
+# 结果每个条目都判成"本地缺失"直接跳过——**静默什么都没推**。
+$root = (Resolve-Path (Join-Path $PSScriptRoot '..')).Path
+if (-not (Test-Path (Join-Path $root 'server\src'))) {
+  throw "根目录判定失败：$root 下没有 server\src"
+}
 $sshOpts = @('-i', $Key, '-o', 'StrictHostKeyChecking=accept-new', '-o', 'IdentitiesOnly=yes', '-o', 'BatchMode=yes')
 
-# 只推这些：代码与脚本。绝不推 server/.env、server/data、tools/gen（账号台账在服务器本地）
+# 只推这些：代码与脚本 + 少量**只读的**数据文件。
+# 绝不推 server/.env、server/data/treyni.db、server/data/uploads、server/data/admin-backups、工具/gen
+# （数据库、上传件、账号台账都在服务器本地，覆盖会丢数据）
 $items = @(
   @{ Local = 'server\src';            Remote = 'server/src' },
   @{ Local = 'server\knowledge';      Remote = 'server/knowledge' },
   @{ Local = 'server\data\knowledge'; Remote = 'server/data/knowledge' },
-  @{ Local = 'tools\admin';           Remote = 'tools/admin' },
-  @{ Local = 'tools\deploy';          Remote = 'tools/deploy' },
+  # 浇水模型的种植条件参数。2026-10-12 漏了这个文件：线上 /knowledge/planting-options 返回空数组，
+  # 添加植物页「摆放环境」是必填却没有可选项，用户直接卡死；浇水提醒也因此报 TypeError。
+  @{ Local = 'server\data\planting_options.json'; Remote = 'server/data/planting_options.json' },
+  # 症状示例图（只读、带许可/署名）；不是用户上传件
+  @{ Local = 'server\data\reference';    Remote = 'server/data/reference' },
+  # 本地已按 2026-10-12 的归类改名，服务器上同步成同样的名字（旧的 app/tools/ 会在下次推送后成为空壳，可手工清）
+  @{ Local = '工具\admin';            Remote = '工具/admin' },
+  # 图片识别库外来源：同步脚本要在服务器执行，把 ICAMA 数据落到本地镜像表
+  @{ Local = '工具\知识库构建';       Remote = '工具/知识库构建' },
+  @{ Local = '运维';                  Remote = '运维' },
   @{ Local = 'server\package.json';   Remote = 'server/package.json' }
 )
 

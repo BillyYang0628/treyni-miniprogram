@@ -2,7 +2,7 @@
 const path = require('node:path')
 const fs = require('node:fs')
 const automator = require('miniprogram-automator')
-const { getToken, openDb, resolvePlantId, deletePlant } = require('./lib')
+const { getToken, setMiniProgramToken, openDb, resolvePlantId, deletePlant } = require('./lib')
 
 const SHOT_DIR = path.resolve(__dirname, 'shots')
 
@@ -12,6 +12,7 @@ async function main() {
   const miniProgram = await automator.connect({ wsEndpoint: 'ws://127.0.0.1:9420' })
   // 植物 id 不再写死（原来是 6）
   const token = getToken()
+  await setMiniProgramToken(miniProgram, token)
   const db = openDb()
   const picked = await resolvePlantId(token, { db })
   console.log('用植物 id=' + picked.id)
@@ -68,7 +69,11 @@ async function main() {
   console.log(failures === 0 ? '全部检查通过' : failures + ' 项检查未通过')
   if (picked.temp) await deletePlant(token, picked.id).catch(() => {})
   db.close()
-  await miniProgram.close()
+  try {
+    await miniProgram.disconnect()
+  } catch (e) {
+    // 断开失败不影响截图结果
+  }
   process.exit(failures === 0 ? 0 : 1)
 }
 

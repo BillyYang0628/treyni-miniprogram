@@ -19,7 +19,9 @@ Page({
     subscribeStatus: '',
     // 调试用：只在本机 / 真机调试 / 体验版显示，正式版自动隐藏
     devMode: false,
-    serverUrl: ''
+    serverUrl: '',
+    // vConsole 开关的"上次设置结果"。微信没给读取接口，只能记我们自己设过什么
+    debugEnabled: false
   },
 
   onShow() {
@@ -27,7 +29,8 @@ Page({
     this.setData({
       userInfo: userInfo || null,
       devMode: config.isDevEnv(),
-      serverUrl: config.getBaseUrl()
+      serverUrl: config.getBaseUrl(),
+      debugEnabled: Boolean(wx.getStorageSync('debugEnabled'))
     })
     this.fetchLocationWeather()
     this.fetchSubscribeStatus()
@@ -42,6 +45,35 @@ Page({
     editServerAddress({
       onDone: (next) => {
         this.setData({ serverUrl: next })
+      }
+    })
+  },
+
+  /**
+   * vConsole 浮窗开关（只在非正式版显示）。
+   *
+   * 为什么手动开：wx.setEnableDebug 是**按小程序记在手机微信里的持久开关**，
+   * 以前在体验版里自动开过一次，之后打开正式版也会带着 vConsole（2026-10-12 反馈）。
+   * 现在改成不自动开，谁要看日志谁在这里点一下。
+   * 微信没提供"读取当前开关状态"的接口，所以这里显示的是我们上次设过的值。
+   */
+  onToggleDebug() {
+    const next = !this.data.debugEnabled
+    wx.setEnableDebug({
+      enableDebug: next,
+      success: () => {
+        wx.setStorageSync('debugEnabled', next)
+        this.setData({ debugEnabled: next })
+        wx.showToast({
+          title: next ? '已打开调试浮窗' : '已关闭调试浮窗',
+          icon: 'none'
+        })
+      },
+      fail: (err) => {
+        wx.showToast({
+          title: '设置失败：' + ((err && err.errMsg) || '未知原因'),
+          icon: 'none'
+        })
       }
     })
   },

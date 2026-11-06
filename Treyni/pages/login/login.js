@@ -5,7 +5,7 @@ const session = require('../../utils/session')
  * 登录页：账号 + 口令。
  *
  * 账号不在这里注册，只能由管理员在服务端生成后私下发放
- * （tools/admin/create-account.js）。所以这一页只做一件事：把凭据换成 token。
+ * （工具/admin/create-account.js）。所以这一页只做一件事：把凭据换成 token。
  */
 Page({
   data: {
